@@ -1,7 +1,8 @@
 package com.fun.fitune.db.domain;
+
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor

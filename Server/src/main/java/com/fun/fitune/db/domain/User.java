@@ -1,8 +1,8 @@
 package com.fun.fitune.db.domain;
 
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
-import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,7 +15,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //기본키 자동생성
     @Column(name = "user_seq", nullable = false)
-    private int user;
+    private int userSeq;
 
     @Column(name = "email", nullable = false)
     private String email;

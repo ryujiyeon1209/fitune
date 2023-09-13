@@ -1,9 +1,7 @@
 package com.fun.fitune.db.domain;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.*;
+
 import java.sql.Timestamp;
 
 public class ExerciseRecord {
