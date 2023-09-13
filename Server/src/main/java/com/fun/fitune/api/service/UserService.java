@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
     private final UserRepository userRepository;
 
-    public User getUserInfo(Integer userId){
-        return userRepository.findByReq(userId)
+    public User getUserInfo(Integer userSeq){
+        return userRepository.findByUserSeq(userSeq)
                 .orElseThrow();
     }
 }
