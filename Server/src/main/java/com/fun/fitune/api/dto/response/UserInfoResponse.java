@@ -11,9 +11,7 @@ import lombok.ToString;
 public class UserInfoResponse {
     String nickname;
 
-    public UserInfoResponse(User user){
-        this.nickname=user.getNickname();
-    }
+    public UserInfoResponse(User user){ this.nickname=user.getNickname(); }
 
 
 }
