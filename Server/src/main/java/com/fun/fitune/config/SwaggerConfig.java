@@ -20,7 +20,7 @@
 //                .components(new Components())
 //                .info(apiInfo());
 //    }
-//
+
 //    private Info apiInfo() {
 //        return new Info()
 //                .title("GWH project swagger")
