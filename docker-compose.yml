@@ -3,6 +3,7 @@ version: '3'
 services:
   nginx:
     image: nginx:1.15-alpine
+    container_name: nginx-container
     ports:
       - "80:80"
       - "443:443"
@@ -11,6 +12,7 @@ services:
 
   certbot:
     image: certbot/certbot
+    container_name: certbot-container
     restart: unless-stopped
     volumes:
       - ./data/certbot/conf:/etc/letsencrypt
