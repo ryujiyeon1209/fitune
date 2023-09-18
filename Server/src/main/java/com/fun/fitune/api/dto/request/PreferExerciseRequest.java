@@ -17,11 +17,4 @@ import java.util.List;
 public class PreferExerciseRequest {
     private Integer userSeq;
     private List<Byte> exerciseListSeq;
-
-    public PreferExercise toEntity() {
-        PreferExercise preferExercise = PreferExercise.builder()
-                .build();
-
-        return preferExercise;
-    }
 }

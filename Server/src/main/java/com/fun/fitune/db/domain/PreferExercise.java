@@ -1,8 +1,10 @@
 package com.fun.fitune.db.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.ArrayList;
@@ -23,11 +25,13 @@ public class PreferExercise {
     @Column(name = "prefer_exercise_seq")
     private int preferExerciseSeq;
 
-    @ManyToOne
-    @JoinColumn(name = "exercise_seq")
+    @JsonIgnore
+    @ManyToOne(targetEntity = ExerciseList.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "exercise_list_seq", referencedColumnName = "exercise_list_seq")
     private ExerciseList exerciseList;
 
-    @ManyToOne
-    @JoinColumn(name = "user_seq")
+    @JsonIgnore
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_seq", referencedColumnName = "user_seq")
     private User user;
 }

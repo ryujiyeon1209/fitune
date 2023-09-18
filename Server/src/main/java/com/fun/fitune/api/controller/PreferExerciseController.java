@@ -19,7 +19,7 @@ public class PreferExerciseController {
     private final PreferExerciseService preferExerciseService;
 
     @PostMapping("/add")
-    public ResponseEntity<Void> addPreferExercise(PreferExerciseRequest preferExerciseRequest){
+    public ResponseEntity<Void> addPreferExercise(@RequestBody PreferExerciseRequest preferExerciseRequest){
         preferExerciseService.insertPreferExercise(preferExerciseRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -30,7 +30,7 @@ public class PreferExerciseController {
     }
 
     @DeleteMapping("/remove")
-    public ResponseEntity<Void> removePreferExercise(PreferExerciseRequest preferExerciseRequest){
+    public ResponseEntity<Void> removePreferExercise(@RequestBody PreferExerciseRequest preferExerciseRequest){
         preferExerciseService.deletePreferExercise(preferExerciseRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }

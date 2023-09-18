@@ -12,5 +12,5 @@ import java.util.Optional;
 @Repository
 public interface PreferExerciseRepository extends JpaRepository<PreferExercise, Integer> {
     Optional<List<PreferExercise>> findAllByUser(User user);
-    void deleteByExerciseListAndUser(Byte exerciseListSeq, Integer userSeq);
+    void deleteByExerciseListAndUser(ExerciseList exerciseList, User user);
 }

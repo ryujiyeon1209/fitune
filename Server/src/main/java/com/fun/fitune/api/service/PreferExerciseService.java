@@ -1,23 +1,21 @@
 package com.fun.fitune.api.service;
 
 import com.fun.fitune.api.dto.request.PreferExerciseRequest;
-import com.fun.fitune.api.dto.response.PreferExerciseResponse;
 import com.fun.fitune.db.domain.ExerciseList;
 import com.fun.fitune.db.domain.PreferExercise;
 import com.fun.fitune.db.domain.User;
 import com.fun.fitune.db.repository.ExerciseListRepository;
 import com.fun.fitune.db.repository.PreferExerciseRepository;
 import com.fun.fitune.db.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional(readOnly = true)
 public class PreferExerciseService {
     private final PreferExerciseRepository preferExerciseRepository;
     private final ExerciseListRepository exerciseListRepository;
@@ -32,6 +30,7 @@ public class PreferExerciseService {
     }
 
     // 사용자가 선호 운동을 추가한다.
+    @Transactional
     public void insertPreferExercise(PreferExerciseRequest preferExerciseRequest){
         for (Byte exerciseListSeq : preferExerciseRequest.getExerciseListSeq()) {
             ExerciseList exerciseList = exerciseListRepository.getReferenceById(exerciseListSeq);
@@ -50,9 +49,16 @@ public class PreferExerciseService {
     }
 
     // 사용자가 선호 운동을 삭제한다.
+    @Transactional
     public void deletePreferExercise(PreferExerciseRequest preferExerciseRequest){
+        User user = User.builder()
+                .userSeq(preferExerciseRequest.getUserSeq())
+                .build();
         for (Byte exerciseListSeq : preferExerciseRequest.getExerciseListSeq()) {
-            preferExerciseRepository.deleteByExerciseListAndUser(exerciseListSeq, preferExerciseRequest.getUserSeq());
+            ExerciseList exerciseList = ExerciseList.builder()
+                    .exerciseListSeq(exerciseListSeq)
+                    .build();
+            preferExerciseRepository.deleteByExerciseListAndUser(exerciseList, user);
         }
     }
 }

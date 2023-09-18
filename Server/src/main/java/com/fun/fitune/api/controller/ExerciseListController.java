@@ -19,7 +19,7 @@ import java.util.List;
 public class ExerciseListController {
     private final ExerciseListService exerciseListService;
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<ExerciseList>> list(){
         return new ResponseEntity<>(exerciseListService.showAll(), HttpStatus.OK);
     }

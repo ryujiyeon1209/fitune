@@ -12,6 +12,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @Setter
 @ToString
 @Table(name = "exercise_list")
+@Builder
 public class ExerciseList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
