@@ -7,6 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserInfoRequest {
+    int userSeq;
     int age;
     int height;
     int weight;

@@ -25,8 +25,7 @@ public class UserService {
 
     @Transactional(readOnly = false)
     public String changeNickname(NicknameRequest nicknameReq) {
-//        User user = userRepository.findById(nicknameReq.getUserSeq())
-        User user = userRepository.findById(1)
+        User user = userRepository.findById(nicknameReq.getUserSeq())
                 .orElseThrow(()-> new CustomException(CustomExceptionList.USER_NOT_FOUND_ERROR));
 
         user.setNickname(nicknameReq.getNickname());
@@ -36,8 +35,7 @@ public class UserService {
     }
 
     public User changeUserInfo(UserInfoRequest userInfoReq) {
-        //        User user = userRepository.findById(nicknameReq.getUserSeq())
-        User user = userRepository.findById(1)
+        User user = userRepository.findById(userInfoReq.getUserSeq())
                 .orElseThrow(()-> new CustomException(CustomExceptionList.USER_NOT_FOUND_ERROR));
 
         user.setAge(userInfoReq.getAge());
