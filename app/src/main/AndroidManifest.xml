@@ -13,9 +13,6 @@
         android:theme="@style/Theme.Fitune"
         tools:targetApi="31">
         <activity
-            android:name=".SplashActivity"
-            android:exported="false" />
-        <activity
             android:name=".FightActivity"
             android:exported="false" />
         <activity
@@ -46,17 +43,17 @@
             android:name=".TutorialsActivity"
             android:exported="false" />
         <activity
-            android:name=".tutorials.TutorialsIntroActivity"
-            android:exported="false" />
-        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
+        </activity>
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
