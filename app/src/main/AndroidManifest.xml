@@ -13,6 +13,45 @@
         android:theme="@style/Theme.Fitune"
         tools:targetApi="31">
         <activity
+            android:name=".SplashActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FightActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ExerciseSelectedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ExerciseHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ExerciseResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FightResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FightFindActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManualActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TutorialsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".tutorials.TutorialsIntroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
