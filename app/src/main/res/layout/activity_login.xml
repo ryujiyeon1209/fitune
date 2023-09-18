@@ -12,7 +12,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/fitune_favicon"
+        android:src="@drawable/ic_fitune_favicon"
         android:layout_gravity="center"
         android:layout_marginTop="80dp"
         />
@@ -28,7 +28,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="747dp"
-            android:background="@drawable/bottom_bg" />
+            android:background="@drawable/bg_bottom" />
 
         <TextView
             android:layout_width="wrap_content"
