@@ -24,7 +24,8 @@ public class CellService {
 
     @Transactional(readOnly = false)
     public Cell addCell(CellRequest cellReq) {
-        User user = userRepository.findByUserSeq(cellReq.getUserSeq())
+//        User user = userRepository.findByUserSeq(cellReq.getUserSeq())
+        User user = userRepository.findByUserSeq(1)
                 .orElseThrow(()-> new CustomException(CustomExceptionList.USER_NOT_FOUND_ERROR));
 
         String name = cellReq.getCellName();

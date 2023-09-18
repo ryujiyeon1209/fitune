@@ -1,6 +1,8 @@
 package com.fun.fitune.api.controller;
 
 import com.fun.fitune.api.dto.request.CellRequest;
+import com.fun.fitune.api.dto.request.NicknameRequest;
+import com.fun.fitune.api.dto.request.UserInfoRequest;
 import com.fun.fitune.api.dto.response.CellResponse;
 import com.fun.fitune.api.dto.response.CommonResponse;
 import com.fun.fitune.api.dto.response.UserInfoResponse;
@@ -21,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 @Tag(name="사용자 관리 API", description="사용자 정보 조회")
 @RestController
@@ -63,27 +66,33 @@ public class UserController {
 
     }
 
-    //사용자 선호 운동 저장
+    //사용자 이름 수정
+    @Operation(summary = "사용자 이름 변경", description = "파라미터로 받은 userSeq에 해당하는 사용자의 닉네임을 파라미터 nickname으로 변경하고" +
+            "변경한 닉네임을 반환한다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = "400", description = "bad request operation", content = @Content(schema = @Schema(implementation = ExceptionResponse.class)))
+    })
+    @PutMapping("/nickname/change")
+    public ResponseEntity<CommonResponse<String>> changeNickname (@RequestBody NicknameRequest nicknameReq) {
+        return new ResponseEntity<>(makeCommonResponse(SUCCESS, userService.changeNickname(nicknameReq)), HttpStatus.OK);
+    }
 
+    //사용자 운동세포 이름 수정
+    //cell db에 있는애 수정
 
+    //사용자 정보 수정 (키, 몸무게, 나이 )
+    @Operation(summary = "사용자 정보 수정", description = "파라미터로 받은 userSeq에 해당하는 사용자의 키,몸무게, 나이를 파라미터 nickname으로 변경하고" +
+            "변경한 닉네임을 반환한다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = "400", description = "bad request operation", content = @Content(schema = @Schema(implementation = ExceptionResponse.class)))
+    })
+    @PutMapping("/info/change")
+    public ResponseEntity<CommonResponse<UserInfoResponse>> changeUserInfo (@RequestBody UserInfoRequest userInfoReq) {
+        return new ResponseEntity<>(makeCommonResponse(SUCCESS, new UserInfoResponse(userService.changeUserInfo(userInfoReq))), HttpStatus.OK);
 
-    //사용자 이름 변경
-//    @Operation(summary = "사용자 닉네임 변경", description = "파라미터로 받은 userSeq에 해당하는 사용자의 닉네임을 파라미터 nickname으로 변경하고" +
-//            "변경한 닉네임을 반환한다.")
-//    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = String.class))),
-//            @ApiResponse(responseCode = "400", description = "bad request operation", content = @Content(schema = @Schema(implementation = ExceptionResponse.class)))
-//    })
-//    @PutMapping("/nickname")
-//    public ResponseEntity<CommonResponse<String>> changeUserNickname(){
-//        return new ResponseEntity<>(makeCommonResponse(SUCCESS, userService.changeNickname(nicknameReq)), HttpStatus.OK);
-//    }
-
-    //사용자 운동세포 이름 변경
-
-    //사용자 정보 변경 (키, 몸무게, 나이 )
-
-    //선호 운동 수정
+    }
 
 
 
