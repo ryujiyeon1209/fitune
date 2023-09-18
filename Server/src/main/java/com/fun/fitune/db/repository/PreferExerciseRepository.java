@@ -1,6 +1,5 @@
 package com.fun.fitune.db.repository;
 
-import com.fun.fitune.api.dto.response.PreferExerciseResponse;
 import com.fun.fitune.db.domain.ExerciseList;
 import com.fun.fitune.db.domain.PreferExercise;
 import com.fun.fitune.db.domain.User;
@@ -13,5 +12,6 @@ import java.util.Optional;
 @Repository
 public interface PreferExerciseRepository extends JpaRepository<PreferExercise, Integer> {
     Optional<List<PreferExercise>> findAllByUser(User user);
+
     void deleteByExerciseListAndUser(ExerciseList exerciseList, User user);
 }

@@ -20,7 +20,7 @@ public class ExerciseListController {
     private final ExerciseListService exerciseListService;
 
     @GetMapping
-    public ResponseEntity<List<ExerciseList>> list(){
+    public ResponseEntity<List<ExerciseList>> list() {
         return new ResponseEntity<>(exerciseListService.showAll(), HttpStatus.OK);
     }
 }
