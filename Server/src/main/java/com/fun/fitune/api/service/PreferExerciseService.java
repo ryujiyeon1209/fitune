@@ -1,6 +1,7 @@
 package com.fun.fitune.api.service;
 
 import com.fun.fitune.api.dto.request.PreferExerciseRequest;
+import com.fun.fitune.api.dto.response.PreferExerciseResponse;
 import com.fun.fitune.db.domain.ExerciseList;
 import com.fun.fitune.db.domain.PreferExercise;
 import com.fun.fitune.db.domain.User;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,16 +24,28 @@ public class PreferExerciseService {
     private final UserRepository userRepository;
 
     // 사용자의 선호 운동을 보여준다.
-    public List<PreferExercise> selectAll(Integer userSeq) {
+    public List<PreferExerciseResponse> selectAll(Integer userSeq) {
         User user = userRepository.findById(userSeq).orElseThrow();
+
         List<PreferExercise> preferExercises = preferExerciseRepository.findAllByUser(user)
                 .orElseThrow(() -> new IllegalArgumentException("user has not found"));
-        return preferExercises;
+
+        List<PreferExerciseResponse> responseDtoList = new ArrayList<>();
+        for (PreferExercise preferExercise : preferExercises) {
+            responseDtoList.add(
+                    PreferExerciseResponse.builder()
+                            .exerciseListSeq(preferExercise.getExerciseList().getExerciseListSeq())
+                            .exerciseName(preferExercise.getExerciseList().getExerciseName())
+                            .build()
+            );
+        }
+
+        return responseDtoList;
     }
 
     // 사용자가 선호 운동을 추가한다.
     @Transactional
-    public void insertPreferExercise(PreferExerciseRequest preferExerciseRequest){
+    public void insertPreferExercise(PreferExerciseRequest preferExerciseRequest) {
         for (Byte exerciseListSeq : preferExerciseRequest.getExerciseListSeq()) {
             ExerciseList exerciseList = exerciseListRepository.getReferenceById(exerciseListSeq);
 
@@ -50,7 +64,7 @@ public class PreferExerciseService {
 
     // 사용자가 선호 운동을 삭제한다.
     @Transactional
-    public void deletePreferExercise(PreferExerciseRequest preferExerciseRequest){
+    public void deletePreferExercise(PreferExerciseRequest preferExerciseRequest) {
         User user = User.builder()
                 .userSeq(preferExerciseRequest.getUserSeq())
                 .build();

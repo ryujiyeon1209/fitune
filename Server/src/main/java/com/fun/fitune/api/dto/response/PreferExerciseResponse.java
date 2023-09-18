@@ -13,4 +13,5 @@ import java.util.List;
 @Builder
 public class PreferExerciseResponse {
     private Byte exerciseListSeq;
+    private String exerciseName;
 }

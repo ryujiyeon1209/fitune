@@ -1,7 +1,9 @@
 package com.fun.fitune.api.controller;
 
 import com.fun.fitune.api.dto.request.PreferExerciseRequest;
+import com.fun.fitune.api.dto.response.PreferExerciseResponse;
 import com.fun.fitune.api.service.PreferExerciseService;
+import com.fun.fitune.db.domain.ExerciseList;
 import com.fun.fitune.db.domain.PreferExercise;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +27,7 @@ public class PreferExerciseController {
     }
 
     @GetMapping("/{userSeq}")
-    public ResponseEntity<List<PreferExercise>> showPreferExercise(@PathVariable("userSeq") Integer userSeq){
+    public ResponseEntity<List<PreferExerciseResponse>> showPreferExercise(@PathVariable("userSeq") Integer userSeq){
         return new ResponseEntity<>(preferExerciseService.selectAll(userSeq), HttpStatus.OK);
     }
 
