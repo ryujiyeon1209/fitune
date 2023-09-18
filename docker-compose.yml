@@ -4,6 +4,8 @@ services:
   nginx:
     image: nginx:1.15-alpine
     container_name: nginx-container
+    networks:
+      - fitunenetwork
     ports:
       - "80:80"
       - "443:443"
@@ -17,6 +19,8 @@ services:
   certbot:
     image: certbot/certbot
     container_name: certbot-container
+    networks:
+      - fitunenetwork
     restart: unless-stopped
     volumes:
       - ./data/certbot/conf:/etc/letsencrypt
@@ -26,6 +30,8 @@ services:
   mysql:
     image: mysql:8.0.34
     container_name: mysql-container
+    networks:
+      - fitunenetwork
     environment:
       MYSQL_ROOT_PASSWORD: dsildlfj
       MYSQL_DATABASE: B306
@@ -35,3 +41,6 @@ services:
       - "3306:3306"
     volumes:
       - ./mysql-data:/var/lib/mysql
+
+networks:
+  fitunenetwork:
