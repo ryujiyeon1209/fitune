@@ -50,6 +50,14 @@ dependencies {
     androidTestImplementation("android   x.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+    // GIF 사용을 위해 추가
     implementation("com.github.bumptech.glide:glide:4.11.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.11.0")
+
+    // ViewPager, 인디케이터를 위해 추가
+    implementation ("androidx.appcompat:appcompat:1.3.1")
+    implementation ("com.google.android.material:material:1.4.0")
+    implementation ("androidx.viewpager2:viewpager2:1.0.0-alpha05")
+    implementation("com.tbuonomo:dotsindicator:5.0")
+
 }
