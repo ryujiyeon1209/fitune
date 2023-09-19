@@ -6,6 +6,7 @@ services:
     container_name: nginx-container
     networks:
       - fitunenetwork
+    restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
