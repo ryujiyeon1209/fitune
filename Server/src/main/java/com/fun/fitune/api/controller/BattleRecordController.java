@@ -3,7 +3,6 @@ package com.fun.fitune.api.controller;
 import com.fun.fitune.api.dto.request.BattleRecordRequest;
 import com.fun.fitune.api.dto.response.BattleRecordResponse;
 import com.fun.fitune.api.service.BattleRecordService;
-import com.fun.fitune.db.domain.BattleRecord;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

@@ -21,7 +21,7 @@ public class BattleRecordService {
     private final BattleRecordRepository battleRecordRepository;
     private final UserRepository userRepository;
 
-    // 대결 신청을 했을 때
+    // TODO : 오늘 운동을 한 사람 중 랜덤매칭
     @Transactional
     public String insertBattleRecord(BattleRecordRequest battleRecordRequest) {
         int winnerSeq = Battle(battleRecordRequest.getUserSeq(), battleRecordRequest.getOtherSeq());
