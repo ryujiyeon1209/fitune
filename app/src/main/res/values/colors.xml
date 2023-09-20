@@ -3,6 +3,7 @@
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grey">#FF000030</color>
 
     <color name="gradation">#E6FFE8</color>
     <color name="main_color">#80ED99</color>
