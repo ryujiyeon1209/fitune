@@ -22,8 +22,6 @@ services:
       MYSQL_DATABASE: B306
       MYSQL_USER: developer
       MYSQL_PASSWORD: fjksdg
-    volumes:
-      - mysql-data:/var/lib/mysql
 
 networks:
   mynetwork:
