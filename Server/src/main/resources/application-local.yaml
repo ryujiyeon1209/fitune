@@ -30,6 +30,10 @@ oauth:
 
 logging:
   level:
+    root: INFO
+    org.springframework: INFO
+    com.example.myapp: DEBUG
+
     org:
       hibernate:
         SQL: debug
