@@ -23,36 +23,36 @@ public class ExerciseRecordService {
     private final ExerciseRecordRepository exerciseRecordRepository;
     private final ExerciseListRepository exerciseListRepository;
     private final UserRepository userRepository;
-    private final CellRepositoryCustomImpl cellRepositoryCustom;
-    private final CellRepository cellRepository;
+//    private final CellRepositoryCustomImpl cellRepositoryCustom;
+//    private final CellRepository cellRepository;
 
 
-//    @Transactional
-//    public CellResponse insertRecord(Integer userSeq, ExerciseRecordRequest exerciseRecordRequest) {
-//        User user = userRepository.findByUserSeq(userSeq).orElseThrow();
-//        boolean isRecommended = exerciseRecordRequest.isRecommended();
-//        ExerciseList exerciseList = exerciseListRepository.findByExerciseListSeq(exerciseRecordRequest.getExerciseListSeq());
-//
-//        ExerciseRecord exerciseRecord = ExerciseRecord.builder()
-//                .user(user)
-//                .exerciseReco(isRecommended)
-//                .exerciseList(exerciseList)
-//                .exerciseStart(exerciseRecordRequest.getExerciseStart())
-//                .exerciseEnd(exerciseRecordRequest.getExerciseEnd())
-//                .exerciseAvgBpm(exerciseRecordRequest.getExerciseAvgBpm())
-//                .exerciseMaxBpm(exerciseRecordRequest.getExerciseMaxBpm())
-//                .exerciseReview(exerciseRecordRequest.getReview())
-//                .exerciseWeather(exerciseRecordRequest.getWeather())
-//                .build();
-//
-//        exerciseRecordRepository.save(exerciseRecord);
+    @Transactional
+    public Integer insertRecord(Integer userSeq, ExerciseRecordRequest exerciseRecordRequest) {
+        User user = userRepository.findByUserSeq(userSeq).orElseThrow();
+        boolean isRecommended = exerciseRecordRequest.isRecommended();
+        ExerciseList exerciseList = exerciseListRepository.findByExerciseListSeq(exerciseRecordRequest.getExerciseListSeq());
+
+        ExerciseRecord exerciseRecord = ExerciseRecord.builder()
+                .user(user)
+                .exerciseReco(isRecommended)
+                .exerciseList(exerciseList)
+                .exerciseStart(exerciseRecordRequest.getExerciseStart())
+                .exerciseEnd(exerciseRecordRequest.getExerciseEnd())
+                .exerciseAvgBpm(exerciseRecordRequest.getExerciseAvgBpm())
+                .exerciseMaxBpm(exerciseRecordRequest.getExerciseMaxBpm())
+                .exerciseReview(exerciseRecordRequest.getReview())
+                .exerciseWeather(exerciseRecordRequest.getWeather())
+                .build();
+
+        exerciseRecordRepository.save(exerciseRecord);
 //
 //        cellRepositoryCustom.increaseCellExp(user, 123);
 //
 //        CellResponse cellResponse = CellRepository(cellRepository.findByUser(user).orElseThrow());
 //
-//        return ;
-//    }
+        return 1;
+    }
 
 
     public List<ExerciseRecordResponse> selectAll(int userSeq) {

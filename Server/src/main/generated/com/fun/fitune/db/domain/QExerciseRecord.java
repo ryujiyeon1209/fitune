@@ -40,6 +40,8 @@ public class QExerciseRecord extends EntityPathBase<ExerciseRecord> {
 
     public final DateTimePath<java.time.LocalDateTime> exerciseStart = createDateTime("exerciseStart", java.time.LocalDateTime.class);
 
+    public final NumberPath<Integer> exerciseWeather = createNumber("exerciseWeather", Integer.class);
+
     public final QUser user;
 
     public QExerciseRecord(String variable) {
