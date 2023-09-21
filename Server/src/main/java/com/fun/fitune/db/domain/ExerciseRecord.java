@@ -42,8 +42,13 @@ public class ExerciseRecord {
     @Column(name = "exercise_distance")
     private int exerciseDistance;
 
+    @Nullable
     @Column(name = "exercise_review")
     private int exerciseReview;
+
+    @Nullable
+    @Column(name = "exercise_weather")
+    private int exerciseWeather;
 
     @JsonIgnore
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)

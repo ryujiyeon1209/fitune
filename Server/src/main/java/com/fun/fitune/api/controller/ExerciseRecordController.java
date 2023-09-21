@@ -18,27 +18,15 @@ public class ExerciseRecordController {
     final String SUCCESS = "SUCCESS";
 
 
-    @PostMapping("/start/{userSeq}")
-    public ResponseEntity<CommonResponse> createRecord(@PathVariable("userSeq") int userSeq, @RequestBody ExerciseRecordRequest exerciseRecordRequest) {
-        return new ResponseEntity<>(makeCommonResponse(SUCCESS, exerciseRecordService.insertRecord(userSeq, exerciseRecordRequest)), HttpStatus.OK);
-    }
-
-
     @GetMapping("/{userSeq}")
     public ResponseEntity<CommonResponse> showAll(@PathVariable("userSeq") int userSeq) {
         return new ResponseEntity<>(makeCommonResponse(SUCCESS, exerciseRecordService.selectAll(userSeq)), HttpStatus.OK);
     }
 
 
-    @PatchMapping("/end/{userSeq}")
-    public ResponseEntity<CommonResponse> modifyRecord(@PathVariable("userSeq") int userSeq, @RequestBody ExerciseRecordRequest exerciseRecordRequest) {
-        return new ResponseEntity<>(makeCommonResponse(SUCCESS, exerciseRecordService.updateRecord(userSeq, exerciseRecordRequest)), HttpStatus.OK);
-    }
-
-
     @PatchMapping("/review/{userSeq}")
-    public ResponseEntity<CommonResponse> modifyReview(@PathVariable("userSeq") int userSeq, @RequestBody ExerciseRecordRequest exerciseRecordRequest) {
-        return new ResponseEntity<>(makeCommonResponse(SUCCESS, exerciseRecordService.updateReview(userSeq, exerciseRecordRequest)), HttpStatus.OK);
+    public ResponseEntity<CommonResponse> createRecord(@PathVariable("userSeq") int userSeq, @RequestBody ExerciseRecordRequest exerciseRecordRequest) {
+        return new ResponseEntity<>(makeCommonResponse(SUCCESS, exerciseRecordService.insertRecord(userSeq, exerciseRecordRequest)), HttpStatus.OK);
     }
 
 

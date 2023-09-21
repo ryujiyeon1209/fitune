@@ -1,14 +1,13 @@
 package com.fun.fitune.api.service;
 
 import com.fun.fitune.api.dto.request.ExerciseRecordRequest;
+import com.fun.fitune.api.dto.response.CellResponse;
 import com.fun.fitune.api.dto.response.ExerciseRecordResponse;
+import com.fun.fitune.db.domain.Cell;
 import com.fun.fitune.db.domain.ExerciseList;
 import com.fun.fitune.db.domain.ExerciseRecord;
 import com.fun.fitune.db.domain.User;
-import com.fun.fitune.db.repository.ExerciseListRepository;
-import com.fun.fitune.db.repository.ExerciseRecordRepository;
-import com.fun.fitune.db.repository.ExerciseRecordRepositoryCustomImpl;
-import com.fun.fitune.db.repository.UserRepository;
+import com.fun.fitune.db.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,48 +21,38 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class ExerciseRecordService {
     private final ExerciseRecordRepository exerciseRecordRepository;
-    private final ExerciseRecordRepositoryCustomImpl exerciseRecordRepositoryCustom;
     private final ExerciseListRepository exerciseListRepository;
     private final UserRepository userRepository;
-    
-
-    @Transactional
-    public ExerciseRecordResponse insertRecord(Integer userSeq, ExerciseRecordRequest exerciseRecordRequest) {
-        Byte exerciseListSeq = exerciseRecordRequest.getExerciseListSeq();
-        boolean isRecommended = exerciseRecordRequest.isRecommended();
-        User user = userRepository.findByUserSeq(userSeq).orElseThrow();
-        ExerciseList exerciseList = exerciseListRepository.findByExerciseListSeq(exerciseListSeq);
-
-        ExerciseRecord exerciseRecord = ExerciseRecord.builder()
-                .exerciseStart(LocalDateTime.now())
-                .exerciseReco(isRecommended)
-                .user(user)
-                .exerciseList(exerciseList)
-                .build();
-
-        exerciseRecordRepository.save(exerciseRecord);
-
-        return new ExerciseRecordResponse(exerciseList.getExerciseName(), LocalDateTime.now(), isRecommended);
-    }
+    private final CellRepositoryCustomImpl cellRepositoryCustom;
+    private final CellRepository cellRepository;
 
 
-    @Transactional
-    public ExerciseRecordResponse updateRecord(int userSeq, ExerciseRecordRequest exerciseRecordRequest) {
-        int avg = exerciseRecordRequest.getExerciseAvgBpm();
-        int max = exerciseRecordRequest.getExerciseMaxBpm();
-        exerciseRecordRepositoryCustom.updateExerciseRecord(userSeq, avg, max);
-        // TODO : 심박수 기반으로 점수 받아서 유저 경험치에도 저장해야되고
-        return new ExerciseRecordResponse(LocalDateTime.now(), avg, max);
-    }
-
-
-    @Transactional
-    public ExerciseRecordResponse updateReview(int userSeq, ExerciseRecordRequest exerciseRecordRequest) {
-        int review = exerciseRecordRequest.getReview();
-        exerciseRecordRepositoryCustom.updateExerciseReview(userSeq, review);
-        // TODO : 심박수 기반으로 점수 받아서 유저 경험치에도 저장해야되고
-        return new ExerciseRecordResponse(review);
-    }
+//    @Transactional
+//    public CellResponse insertRecord(Integer userSeq, ExerciseRecordRequest exerciseRecordRequest) {
+//        User user = userRepository.findByUserSeq(userSeq).orElseThrow();
+//        boolean isRecommended = exerciseRecordRequest.isRecommended();
+//        ExerciseList exerciseList = exerciseListRepository.findByExerciseListSeq(exerciseRecordRequest.getExerciseListSeq());
+//
+//        ExerciseRecord exerciseRecord = ExerciseRecord.builder()
+//                .user(user)
+//                .exerciseReco(isRecommended)
+//                .exerciseList(exerciseList)
+//                .exerciseStart(exerciseRecordRequest.getExerciseStart())
+//                .exerciseEnd(exerciseRecordRequest.getExerciseEnd())
+//                .exerciseAvgBpm(exerciseRecordRequest.getExerciseAvgBpm())
+//                .exerciseMaxBpm(exerciseRecordRequest.getExerciseMaxBpm())
+//                .exerciseReview(exerciseRecordRequest.getReview())
+//                .exerciseWeather(exerciseRecordRequest.getWeather())
+//                .build();
+//
+//        exerciseRecordRepository.save(exerciseRecord);
+//
+//        cellRepositoryCustom.increaseCellExp(user, 123);
+//
+//        CellResponse cellResponse = CellRepository(cellRepository.findByUser(user).orElseThrow());
+//
+//        return ;
+//    }
 
 
     public List<ExerciseRecordResponse> selectAll(int userSeq) {
