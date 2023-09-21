@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface ExerciseListRepository extends JpaRepository<ExerciseList, Byte> {
-
+    public ExerciseList findByExerciseListSeq(Byte exerciseList);
 }
