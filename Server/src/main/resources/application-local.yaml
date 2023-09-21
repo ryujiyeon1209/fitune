@@ -6,7 +6,6 @@ spring:
     password: fjksdg
 
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5Dialect
     hibernate:
       ddl-auto: create
     properties:
@@ -31,12 +30,7 @@ oauth:
 
 logging:
   level:
-    root: INFO
-    org.springframework: INFO
-    com.example.myapp: DEBUG
-
     org:
       hibernate:
         SQL: debug
         type: trace
-
