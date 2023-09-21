@@ -1,6 +1,6 @@
 package io.b306.fitune
 
-data class CalendarDay(
+data class CalendarDayModel(
     val day: Int,
     val isCurrentMonth: Boolean,
     val date: String,

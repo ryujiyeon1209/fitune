@@ -7,7 +7,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CalendarAdapter(private val days: List<CalendarDay>) : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
+
+interface OnDayClickListener {
+    fun onDayClick(calendarDayModel: CalendarDayModel)
+}
+class CalendarAdapter(
+    private val days: List<CalendarDayModel>,
+    private val onDayClickListener: OnDayClickListener
+) : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
 
     private val exerciseMap = hashMapOf(
         "2023-09-01" to true,
@@ -39,6 +46,10 @@ class CalendarAdapter(private val days: List<CalendarDay>) : RecyclerView.Adapte
 
         } else {
             holder.tvDay.text = "" // 빈 문자열로 설정
+        }
+
+        holder.itemView.setOnClickListener {
+            onDayClickListener.onDayClick(day)
         }
     }
 
