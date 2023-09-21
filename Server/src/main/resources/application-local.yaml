@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/ftdb?serverTimezone=Asia/Seoul
-    username: root
-    password: 1234
+    url: jdbc:mysql://j9b306.p.ssafy.io:3306/B306?serverTimezone=Asia/Seoul
+    username: developer
+    password: fjksdg
 
   jpa:
     hibernate:
@@ -18,20 +18,22 @@ spring:
       mode: always
 
 oauth:
-  kakao:
-    client-id: 17a1b4d9fcc605cecc82fd7399c0717f
-    url:
-      auth: https://kauth.kakao.com
-      api: https://kapi.kakao.com
-  naver:
-    secret: W_2DmcLfYU
-    client-id: Y2i4SlApP7A1KZsUoott
-    url:
-      auth: https://nid.naver.com
-      api: https://openapi.naver.com
+#  google:
+#    client-id: 17a1b4d9fcc605cecc82fd7399c0717f
+#    url:
+#      auth: https://kauth.kakao.com
+#      api: https://kapi.kakao.com
+#      client-id:
+#      client-secret:
+#      scopre:
+
 
 logging:
   level:
+    root: INFO
+    org.springframework: INFO
+    com.example.myapp: DEBUG
+
     org:
       hibernate:
         SQL: debug
