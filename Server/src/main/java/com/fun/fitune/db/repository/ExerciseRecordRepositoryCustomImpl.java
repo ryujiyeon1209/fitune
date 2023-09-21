@@ -42,4 +42,21 @@ public class ExerciseRecordRepositoryCustomImpl extends QuerydslRepositorySuppor
 
         entityManager.persist(recentRecord);
     }
+
+    @Override
+    public void updateExerciseReview(int userSeq, int review) {
+        User user = User.builder()
+                .userSeq(userSeq)
+                .build();
+
+        ExerciseRecord recentRecord = queryFactory
+                .selectFrom(exerciseRecord)
+                .where(exerciseRecord.user.eq(user))
+                .orderBy(exerciseRecord.exerciseStart.desc())
+                .fetchFirst();
+
+        recentRecord.setExerciseReview(review);
+
+        entityManager.persist(recentRecord);
+    }
 }

@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ExerciseRecordRequest {
     Byte exerciseListSeq;
-    boolean isRecommended;
+    boolean recommended;
     int exerciseAvgBpm;
     int exerciseMaxBpm;
-    Integer distance;
+    int review;
 }

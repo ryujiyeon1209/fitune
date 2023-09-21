@@ -25,9 +25,10 @@ public class ExerciseRecordService {
     private final ExerciseRecordRepositoryCustomImpl exerciseRecordRepositoryCustom;
     private final ExerciseListRepository exerciseListRepository;
     private final UserRepository userRepository;
+    
 
     @Transactional
-    public Integer insertRecord(Integer userSeq, ExerciseRecordRequest exerciseRecordRequest){
+    public ExerciseRecordResponse insertRecord(Integer userSeq, ExerciseRecordRequest exerciseRecordRequest) {
         Byte exerciseListSeq = exerciseRecordRequest.getExerciseListSeq();
         boolean isRecommended = exerciseRecordRequest.isRecommended();
         User user = userRepository.findByUserSeq(userSeq).orElseThrow();
@@ -42,27 +43,37 @@ public class ExerciseRecordService {
 
         exerciseRecordRepository.save(exerciseRecord);
 
-        return 1;
+        return new ExerciseRecordResponse(exerciseList.getExerciseName(), LocalDateTime.now(), isRecommended);
     }
+
 
     @Transactional
-    public String updateRecord(int userSeq, ExerciseRecordRequest exerciseRecordRequest){
+    public ExerciseRecordResponse updateRecord(int userSeq, ExerciseRecordRequest exerciseRecordRequest) {
         int avg = exerciseRecordRequest.getExerciseAvgBpm();
         int max = exerciseRecordRequest.getExerciseMaxBpm();
-        Integer distance = exerciseRecordRequest.getDistance();
         exerciseRecordRepositoryCustom.updateExerciseRecord(userSeq, avg, max);
         // TODO : 심박수 기반으로 점수 받아서 유저 경험치에도 저장해야되고
-        return null;
+        return new ExerciseRecordResponse(LocalDateTime.now(), avg, max);
     }
 
-    public List<ExerciseRecordResponse> selectAll(int userSeq){
+
+    @Transactional
+    public ExerciseRecordResponse updateReview(int userSeq, ExerciseRecordRequest exerciseRecordRequest) {
+        int review = exerciseRecordRequest.getReview();
+        exerciseRecordRepositoryCustom.updateExerciseReview(userSeq, review);
+        // TODO : 심박수 기반으로 점수 받아서 유저 경험치에도 저장해야되고
+        return new ExerciseRecordResponse(review);
+    }
+
+
+    public List<ExerciseRecordResponse> selectAll(int userSeq) {
         List<ExerciseRecordResponse> exerciseRecordResponseList = new ArrayList<>();
 
         User user = userRepository.findByUserSeq(userSeq).orElseThrow();
 
         List<ExerciseRecord> exerciseRecordList = exerciseRecordRepository.findAllByUserOrderByExerciseEndDesc(user).orElseThrow();
 
-        for (ExerciseRecord exerciseRecord : exerciseRecordList){
+        for (ExerciseRecord exerciseRecord : exerciseRecordList) {
             ExerciseList exerciseList = exerciseListRepository.findByExerciseListSeq(exerciseRecord.getExerciseList().getExerciseListSeq());
 
             ExerciseRecordResponse exerciseRecordResponse = ExerciseRecordResponse.builder()

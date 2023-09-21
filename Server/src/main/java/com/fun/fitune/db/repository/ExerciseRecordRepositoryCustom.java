@@ -4,4 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ExerciseRecordRepositoryCustom{
     void updateExerciseRecord(int userSeq, int avg, int max);
+    void updateExerciseReview(int userSeq, int review);
 }
