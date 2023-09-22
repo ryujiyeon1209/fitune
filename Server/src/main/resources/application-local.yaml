@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://j9b306.p.ssafy.io:3306?serverTimezone=Asia/Seoul
-    username: developer
-    password: fjksdg
+    url: jdbc:mysql://j9306.p.ssafy.io:3306/B306?serverTimezone=Asia/Seoul
+    username: root
+    password: 1234
 
   jpa:
     hibernate:

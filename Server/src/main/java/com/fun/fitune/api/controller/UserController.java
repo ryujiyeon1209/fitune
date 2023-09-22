@@ -24,6 +24,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 
 @Tag(name="사용자 관리 API", description="사용자 정보 조회")
 @RestController
@@ -94,7 +98,31 @@ public class UserController {
 
     }
 
+    @GetMapping("/run-python-script")
+    public String runPythonScript() {
+        try {
+            String pythonScript = "python3 /path/to/your/python/script.py";
+            Process process = new ProcessBuilder(pythonScript).start();
 
+            // Python 스크립트의 출력을 읽기 위한 BufferedReader 생성
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            StringBuilder scriptOutput = new StringBuilder();
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                scriptOutput.append(line).append("\n");
+            }
+
+            // 프로세스가 종료될 때까지 대기
+            int exitCode = process.waitFor();
+            System.out.println("Python 스크립트 실행 완료, 종료 코드: " + exitCode);
+
+            return scriptOutput.toString();
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+            return "Python 스크립트 실행 중 오류 발생";
+        }
+    }
 
     private <T> CommonResponse<T> makeCommonResponse(String message, T data) {
         return CommonResponse.<T>builder()
