@@ -17,6 +17,9 @@ spring:
     data.rest:
       base-path: /api
       detection-strategy: annotated
+  sql:
+    init:
+      mode: never
 
 oauth:
 #  google:
@@ -35,3 +38,4 @@ logging:
       hibernate:
         SQL: debug
         type: trace
+
