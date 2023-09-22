@@ -1,18 +1,8 @@
 version: '3'
 
 services:
-  spring:
-    image: zhdwldus/spring:latest
-    container_name: spring-container
-    networks:
-      - mynetwork
-    restart: always
-    ports:
-      - 5000:5000
-
-  mysql:
+  mysql-container:
     image: mysql:8.0.34
-    container_name: mysql-container
     networks:
       - mynetwork
     ports:
@@ -23,6 +13,17 @@ services:
       TZ: Asia/Seoul
       MYSQL_USER: developer
       MYSQL_PASSWORD: fjksdg
+      
+  spring:
+    image: zhdwldus/spring:latest
+    container_name: spring-container
+    networks:
+      - mynetwork
+    restart: always
+    ports:
+      - 5000:5000
+
+
 
 networks:
   mynetwork:
