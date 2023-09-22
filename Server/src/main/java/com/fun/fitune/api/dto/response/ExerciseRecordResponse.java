@@ -17,6 +17,7 @@ public class ExerciseRecordResponse {
     int avgBpm;
     int maxBpm;
     int review;
+    int weather;
 
     public ExerciseRecordResponse(String exerciseName, LocalDateTime exerciseStart, boolean isRecommended){
         this.exerciseName = exerciseName;

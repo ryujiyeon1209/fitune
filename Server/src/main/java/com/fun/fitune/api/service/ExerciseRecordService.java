@@ -72,6 +72,7 @@ public class ExerciseRecordService {
                     .avgBpm(exerciseRecord.getExerciseAvgBpm())
                     .maxBpm(exerciseRecord.getExerciseMaxBpm())
                     .review(exerciseRecord.getExerciseReview())
+                    .weather(exerciseRecord.getExerciseWeather())
                     .build();
 
             exerciseRecordResponseList.add(exerciseRecordResponse);

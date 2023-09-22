@@ -6,9 +6,9 @@ import com.fun.fitune.api.dto.request.UserInfoRequest;
 import com.fun.fitune.api.dto.response.CellResponse;
 import com.fun.fitune.api.dto.response.CommonResponse;
 import com.fun.fitune.api.dto.response.UserInfoResponse;
+import com.fun.fitune.api.dto.response.UserSuperResponse;
 import com.fun.fitune.api.service.CellService;
 import com.fun.fitune.api.service.UserService;
-import com.fun.fitune.db.domain.Cell;
 import com.fun.fitune.db.domain.User;
 import com.fun.fitune.exception.ExceptionResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -96,6 +96,17 @@ public class UserController {
     public ResponseEntity<CommonResponse<UserInfoResponse>> changeUserInfo (@RequestBody UserInfoRequest userInfoReq) {
         return new ResponseEntity<>(makeCommonResponse(SUCCESS, new UserInfoResponse(userService.changeUserInfo(userInfoReq))), HttpStatus.OK);
 
+    }
+
+
+    @Operation(summary = "사용자의 모든 정보", description = "파라미터로 받은 userSeq에 해당하는 모든 엔티티를 반환한다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = "400", description = "bad request operation", content = @Content(schema = @Schema(implementation = ExceptionResponse.class)))
+    })
+    @GetMapping("/super/{userSeq}")
+    public ResponseEntity<CommonResponse<UserSuperResponse>> getAllUserInfo (@PathVariable("userSeq") int userSeq){
+        return new ResponseEntity<>(makeCommonResponse(SUCCESS, userService.selectAllUserInfo(userSeq)), HttpStatus.OK);
     }
 
 

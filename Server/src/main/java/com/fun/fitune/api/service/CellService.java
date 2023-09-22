@@ -12,20 +12,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
 @Service
 @Transactional
 @RequiredArgsConstructor
 @Slf4j
-
 public class CellService {
     private final UserRepository userRepository;
     private final CellRepository cellRepository;
 
     @Transactional(readOnly = false)
     public Cell addCell(CellRequest cellReq) {
-//        User user = userRepository.findByUserSeq(cellReq.getUserSeq())
-        User user = userRepository.findByUserSeq(1)
+        User user = userRepository.findByUserSeq(cellReq.getUserSeq())
                 .orElseThrow(()-> new CustomException(CustomExceptionList.USER_NOT_FOUND_ERROR));
 
         String name = cellReq.getCellName();
