@@ -73,4 +73,10 @@ public class BattleRecordService {
 
         return battleRecordResponses;
     }
+
+    //TODO : 오늘 운동한 사람 중 userSeq를 제외한 5명을 추출하는 서비스 로직 짜야됨
+    public Object selectOpponent(int userSeq) {
+
+        return null;
+    }
 }

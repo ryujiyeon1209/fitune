@@ -19,17 +19,24 @@ import java.util.List;
 public class BattleRecordController {
 
     private final BattleRecordService battleRecordService;
+    final String SUCCESS = "SUCCESS";
 
 
     @PostMapping("/add")
-    public ResponseEntity<String> addBattleRecord(@RequestBody BattleRecordRequest battleRecordRequest) {
-        return new ResponseEntity<>(battleRecordService.insertBattleRecord(battleRecordRequest), HttpStatus.OK);
+    public ResponseEntity<CommonResponse> addBattleRecord(@RequestBody BattleRecordRequest battleRecordRequest) {
+        return new ResponseEntity<>(makeCommonResponse(SUCCESS, battleRecordService.insertBattleRecord(battleRecordRequest)), HttpStatus.OK);
     }
 
 
     @GetMapping("/{userSeq}")
-    public ResponseEntity<List<BattleRecordResponse>> showBattleRecord(@PathVariable("userSeq") int userSeq) {
-        return new ResponseEntity<>(battleRecordService.selectAll(userSeq), HttpStatus.OK);
+    public ResponseEntity<CommonResponse> showOpponent(@PathVariable("userSeq") int userSeq){
+        return new ResponseEntity<>(makeCommonResponse(SUCCESS, battleRecordService.selectOpponent(userSeq)), HttpStatus.OK);
+    }
+
+
+    @GetMapping("/{userSeq}")
+    public ResponseEntity<CommonResponse> showBattleRecord(@PathVariable("userSeq") int userSeq) {
+        return new ResponseEntity<>(makeCommonResponse(SUCCESS, battleRecordService.selectAll(userSeq)), HttpStatus.OK);
     }
 
 

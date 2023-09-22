@@ -16,6 +16,6 @@ public class CellResponse {
     public CellResponse(Cell cell){
         this.cellName = cell.getCellName();
         this.cellExp = cell.getCellExp();
-        this.userSeq = cell.getCellSeq();
+        this.userSeq = cell.getUser().getUserSeq();
     }
 }
