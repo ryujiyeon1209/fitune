@@ -1,8 +1,8 @@
 package io.b306.fitune
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
 import io.b306.fitune.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         // 처음에 navbar의 home 버튼을 default 값으로 클릭된 상태 설정
         binding.navigation.selectedItemId = R.id.navigation_home
 
+        // 하단 navbar의 클릭에 따라 보여지는 페이지 달라짐
         binding.navigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.navigation_mypage -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fm_container, MypageFragment())
+                        .replace(R.id.fm_container, MyPageFragment())
                         .commitNow()
                     true
                 }
@@ -45,5 +46,9 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+
     }
+
+
 }

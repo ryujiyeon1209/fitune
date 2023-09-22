@@ -19,9 +19,7 @@
             android:name=".ExerciseSelectedActivity"
             android:exported="false" />
 
-        <activity
-            android:name=".ExerciseResultActivity"
-            android:exported="false" />
+
         <activity
             android:name=".FightResultActivity"
             android:exported="false" />

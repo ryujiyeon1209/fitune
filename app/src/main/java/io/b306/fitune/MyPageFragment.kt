@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import io.b306.fitune.databinding.FragmentMypageBinding
 
-class MypageFragment : Fragment() {
+class MyPageFragment : Fragment() {
 
     private var _binding: FragmentMypageBinding? = null
     private val binding get() = _binding!!
@@ -23,7 +23,21 @@ class MypageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 필요한 로직, binding 사용 코드 추가
+        // 내 정보 관리
+        binding.liMyInfo.setOnClickListener {
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fm_container, MyEditFragment())
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
+        // 내 대결 기록
+        binding.liMyFight.setOnClickListener {
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fm_container, FightResultFragment())
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
     }
 
     override fun onDestroyView() {
@@ -32,6 +46,6 @@ class MypageFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = MypageFragment()
+        fun newInstance() = MyPageFragment()
     }
 }
