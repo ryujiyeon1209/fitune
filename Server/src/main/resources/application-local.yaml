@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
@@ -17,9 +17,6 @@ spring:
     data.rest:
       base-path: /api
       detection-strategy: annotated
-  sql:
-    init:
-      mode: always
 
 oauth:
 #  google:
