@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  spring:
+    image: zhdwldus/spring:latest
+    container_name: spring-container
+    networks:
+      - mynetwork
+    restart: always
+    ports:
+      - 5000:5000
+
+networks:
+  mynetwork:
