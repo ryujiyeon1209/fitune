@@ -60,3 +60,7 @@ clean {
 tasks.withType(JavaCompile) {
     options.generatedSourceOutputDirectory = file(generated)
 }
+
+processResources {
+    exclude '**/data.sql'
+}
