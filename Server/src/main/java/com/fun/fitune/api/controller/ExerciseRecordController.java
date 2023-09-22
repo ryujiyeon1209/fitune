@@ -12,19 +12,20 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/record")
+@RequestMapping("/api/record")
 public class ExerciseRecordController {
+
     private final ExerciseRecordService exerciseRecordService;
     final String SUCCESS = "SUCCESS";
 
 
-    @GetMapping("/{userSeq}")
+    @GetMapping("/list/{userSeq}")
     public ResponseEntity<CommonResponse> showAll(@PathVariable("userSeq") int userSeq) {
         return new ResponseEntity<>(makeCommonResponse(SUCCESS, exerciseRecordService.selectAll(userSeq)), HttpStatus.OK);
     }
 
 
-    @PatchMapping("/review/{userSeq}")
+    @PostMapping("/{userSeq}")
     public ResponseEntity<CommonResponse> createRecord(@PathVariable("userSeq") int userSeq, @RequestBody ExerciseRecordRequest exerciseRecordRequest) {
         return new ResponseEntity<>(makeCommonResponse(SUCCESS, exerciseRecordService.insertRecord(userSeq, exerciseRecordRequest)), HttpStatus.OK);
     }
@@ -36,4 +37,5 @@ public class ExerciseRecordController {
                 .data(data)
                 .build();
     }
+
 }

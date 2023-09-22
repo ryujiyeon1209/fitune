@@ -1,14 +1,14 @@
 package com.fun.fitune.db.repository;
 
 import com.fun.fitune.db.domain.Cell;
-import com.fun.fitune.db.domain.ExerciseRecord;
 import com.fun.fitune.db.domain.User;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import jakarta.persistence.EntityManager;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
+import org.springframework.stereotype.Repository;
 
 import static com.fun.fitune.db.domain.QCell.cell;
 
+@Repository
 public class CellRepositoryCustomImpl extends QuerydslRepositorySupport implements CellRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 

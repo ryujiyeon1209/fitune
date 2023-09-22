@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +22,12 @@ public class ExerciseRecordService {
     private final ExerciseRecordRepository exerciseRecordRepository;
     private final ExerciseListRepository exerciseListRepository;
     private final UserRepository userRepository;
-//    private final CellRepositoryCustomImpl cellRepositoryCustom;
-//    private final CellRepository cellRepository;
+    private final CellRepositoryCustomImpl cellRepositoryCustom;
+    private final CellRepository cellRepository;
 
 
     @Transactional
-    public Integer insertRecord(Integer userSeq, ExerciseRecordRequest exerciseRecordRequest) {
+    public CellResponse insertRecord(Integer userSeq, ExerciseRecordRequest exerciseRecordRequest) {
         User user = userRepository.findByUserSeq(userSeq).orElseThrow();
         boolean isRecommended = exerciseRecordRequest.isRecommended();
         ExerciseList exerciseList = exerciseListRepository.findByExerciseListSeq(exerciseRecordRequest.getExerciseListSeq());
@@ -46,12 +45,13 @@ public class ExerciseRecordService {
                 .build();
 
         exerciseRecordRepository.save(exerciseRecord);
-//
-//        cellRepositoryCustom.increaseCellExp(user, 123);
-//
-//        CellResponse cellResponse = CellRepository(cellRepository.findByUser(user).orElseThrow());
-//
-        return 1;
+
+        //TODO : 경험치는 알고리즘에 의해 넣어야돼~
+        cellRepositoryCustom.increaseCellExp(user, 2);
+
+        Cell cell = cellRepository.findByUser(user).orElseThrow();
+
+        return new CellResponse(cell);
     }
 
 

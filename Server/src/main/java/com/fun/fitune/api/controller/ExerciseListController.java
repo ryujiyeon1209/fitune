@@ -1,5 +1,6 @@
 package com.fun.fitune.api.controller;
 
+import com.fun.fitune.api.dto.response.CommonResponse;
 import com.fun.fitune.api.service.ExerciseListService;
 import com.fun.fitune.db.domain.ExerciseList;
 import lombok.RequiredArgsConstructor;
@@ -17,10 +18,22 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/exerciseList")
 public class ExerciseListController {
+
     private final ExerciseListService exerciseListService;
+
 
     @GetMapping
     public ResponseEntity<List<ExerciseList>> list() {
         return new ResponseEntity<>(exerciseListService.showAll(), HttpStatus.OK);
     }
+
+
+
+    private <T> CommonResponse<T> makeCommonResponse(String message, T data) {
+        return CommonResponse.<T>builder()
+                .message(message)
+                .data(data)
+                .build();
+    }
+
 }
