@@ -20,6 +20,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: dsildlfj
       MYSQL_DATABASE: B306
+      TZ: Asia/Seoul
       MYSQL_USER: developer
       MYSQL_PASSWORD: fjksdg
 
