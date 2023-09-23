@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import io.b306.fitune.databinding.FragmentFightFindBinding
 
 class FightFindFragment : Fragment() {
@@ -25,16 +24,20 @@ class FightFindFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val userList = arrayListOf(
-            UserData("세포1", R.drawable.ic_check_mark),
-            UserData("세포2", R.drawable.ic_check_mark)
-            // 다른 사용자 데이터도 추가 가능
-        )
+        val userList = getUserList()
 
-        with(binding.rvUser) {
+        binding.rvUser.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = context?.let { UserAdapter(it, userList) }
+            adapter = UserAdapter(this@FightFindFragment, userList) { selectedUser ->
+                val dialogFragment = UserDetailDialogFragment().apply {
+                    arguments = Bundle().apply {
+                        putParcelable("user", selectedUser)
+                    }
+                }
+                dialogFragment.show(parentFragmentManager, "userDetail")
+            }
         }
+
     }
 
     override fun onDestroyView() {
@@ -45,5 +48,16 @@ class FightFindFragment : Fragment() {
     companion object {
         fun newInstance() = FightFindFragment()
     }
+
+    private fun getUserList() = arrayListOf(
+        UserData("세포3", R.drawable.ic_lv1, 1, 110),
+        UserData("세포4", R.drawable.ic_lv2, 2, 115),
+        UserData("세포5", R.drawable.ic_lv1, 1, 120),
+        UserData("세포6", R.drawable.ic_lv3, 3, 125),
+        UserData("세포7", R.drawable.ic_lv0, 0, 130),
+        UserData("세포8", R.drawable.ic_lv2, 2, 135),
+        UserData("세포9", R.drawable.ic_lv1, 1, 140),
+        UserData("세포10", R.drawable.ic_lv3, 3, 145)
+    )
 
 }

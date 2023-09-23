@@ -14,6 +14,8 @@
 
     <!--  아이콘 colors  -->
     <color name="crown">#F4B249</color>
-    
+    <color name="exp">#22577A</color>
+    <color name="bpm">#F05C5C</color>
+
 
 </resources>

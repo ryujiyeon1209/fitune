@@ -13,21 +13,20 @@
         android:theme="@style/Theme.Fitune"
         tools:targetApi="31">
         <activity
+            android:name=".SignUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".FightActivity"
             android:exported="false" />
         <activity
             android:name=".ExerciseSelectedActivity"
             android:exported="false" />
-
-
         <activity
             android:name=".FightResultActivity"
             android:exported="false" />
         <activity
             android:name=".FightFindActivity"
-            android:exported="true" >
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".MyEditActivity"
             android:exported="false" />
@@ -36,11 +35,7 @@
             android:exported="false" />
         <activity
             android:name=".ManualActivity"
-            android:exported="true" >
-
-
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".TutorialsActivity"
             android:exported="false" />
@@ -50,19 +45,15 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".SplashActivity"
-            android:exported="true">
-
-
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>
