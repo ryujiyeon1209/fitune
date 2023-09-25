@@ -1,8 +1,6 @@
 server:
   port: 5000
 
-server.ssl.enabled: false
-
 spring:
   profiles:
     active: local

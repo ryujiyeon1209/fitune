@@ -11,6 +11,7 @@ import jakarta.persistence.*;
 @Getter
 @Setter
 @ToString
+@Builder
 @Table(name = "cell")
 public class Cell {
     @Id

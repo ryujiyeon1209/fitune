@@ -11,6 +11,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @Getter
 @Setter
 @Table(name = "user")
+@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //기본키 자동생성
