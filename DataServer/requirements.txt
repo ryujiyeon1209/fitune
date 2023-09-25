@@ -256,7 +256,7 @@ python-lsp-black
 python-lsp-jsonrpc==1.0.0
 python-lsp-server 
 python-slugify 
-python-snappy 
+# python-snappy 
 pytoolconfig 
 pytz 
 pyviz-comms 
@@ -336,7 +336,7 @@ tqdm
 traitlets 
 transformers 
 Twisted 
-twisted-iocpsupport 
+# twisted-iocpsupport 
 typing_extensions 
 tzdata
 uc-micro-py 
