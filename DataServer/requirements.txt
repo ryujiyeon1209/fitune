@@ -354,7 +354,7 @@ websocket-client
 Werkzeug 
 whatthepatch
 widgetsnbextension 
-win-inet-pton 
+# win-inet-pton 
 wrapt 
 xarray
 xlwings 
