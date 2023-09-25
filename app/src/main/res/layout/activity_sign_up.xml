@@ -71,6 +71,9 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_edittext"
+            android:paddingHorizontal="10dp"
+            android:gravity="center"
+            android:maxLength="20"
             />
 
     </LinearLayout>
@@ -124,6 +127,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_edittext"
                 android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:maxLength="3"
+                android:inputType="number"
                 />
 
             <TextView
@@ -162,6 +168,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_edittext"
                 android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:maxLength="3"
+                android:inputType="number"
                 />
 
             <TextView
@@ -200,6 +209,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_edittext"
                 android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:maxLength="3"
+                android:inputType="number"
                 />
 
             <TextView
@@ -218,7 +230,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_fight_result_close"
+        android:id="@+id/btn_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="가입 하기"
