@@ -10,16 +10,19 @@ services:
     ports:
       - 5000:5000
 
-  Django:
-    image: zhdwldus/django:latest
-    container_name: django-container
-    networks:
-      - mynetwork
-    restart: always
-    ports:
-      - 8000:8000
-    depends_on:
-      - spring
+#  Django:
+#    image: zhdwldus/django:latest
+#    container_name: django-container
+#    networks:
+#      - mynetwork
+#    restart: always
+#    ports:
+#      - 8000:8000
+#    depends_on:
+#      - spring
 
 networks:
   mynetwork:
+
+volumes:
+  mysql-data:
