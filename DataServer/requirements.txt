@@ -286,7 +286,7 @@ pyasn1-modules==0.2.8
 # sacremoses @ file:///tmp/build/80754af9/sacremoses_1633107328213/work
 # scikit-image @ file:///C:/b/abs_2075zg1pia/croot/scikit-image_1682528361447/work
 # scikit-learn @ file:///C:/b/abs_55olq_4gzc/croot/scikit-learn_1690978955123/work
-scikit-learn-intelex==20230426.121932
+# scikit-learn-intelex==20230426.121932
 # scipy==1.10.1
 # Scrapy @ file:///C:/ci_311/scrapy_1678502587780/work
 # seaborn @ file:///C:/ci_311/seaborn_1676446547861/work
