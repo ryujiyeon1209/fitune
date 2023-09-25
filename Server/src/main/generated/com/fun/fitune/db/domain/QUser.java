@@ -31,6 +31,8 @@ public class QUser extends EntityPathBase<User> {
 
     public final NumberPath<Integer> userSeq = createNumber("userSeq", Integer.class);
 
+    public final NumberPath<Integer> walkingBpm = createNumber("walkingBpm", Integer.class);
+
     public final NumberPath<Integer> weight = createNumber("weight", Integer.class);
 
     public QUser(String variable) {

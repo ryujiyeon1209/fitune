@@ -36,4 +36,6 @@ public class User {
     @Column(name = "bpm")
     private int bpm;
 
+    @Column(name = "walking_bpm")
+    private int walkingBpm;
 }

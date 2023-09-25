@@ -9,6 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface BattleRecordRepository extends JpaRepository<BattleRecord, Integer> {
-//    Optional<List<BattleRecord>> findAllByBattleUserSeqOrBattleOtherSeqOrderByBattleDateDesc(int userSeq);
     Optional<List<BattleRecord>> findAllByBattleUserSeqOrderByBattleDateDesc(int userSeq);
 }

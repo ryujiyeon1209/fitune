@@ -34,7 +34,7 @@ public class BattleRecordController {
     }
 
 
-    @GetMapping("/{userSeq}")
+    @GetMapping("/record/{userSeq}")
     public ResponseEntity<CommonResponse> showBattleRecord(@PathVariable("userSeq") int userSeq) {
         return new ResponseEntity<>(makeCommonResponse(SUCCESS, battleRecordService.selectAll(userSeq)), HttpStatus.OK);
     }

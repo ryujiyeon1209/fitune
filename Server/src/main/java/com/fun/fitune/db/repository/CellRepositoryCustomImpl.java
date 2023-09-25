@@ -21,6 +21,7 @@ public class CellRepositoryCustomImpl extends QuerydslRepositorySupport implemen
     public void increaseCellExp(User user, int cellExp) {
         queryFactory.update(cell)
                 .set(cell.cellExp, cell.cellExp.add(cellExp))
+                .set(cell.cellLatestExp, cellExp)
                 .where(cell.user.eq(user))
                 .execute();
     }

@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,32 +24,42 @@ public class ExerciseRecordService {
     private final ExerciseRecordRepository exerciseRecordRepository;
     private final ExerciseListRepository exerciseListRepository;
     private final UserRepository userRepository;
-    private final CellRepositoryCustomImpl cellRepositoryCustom;
     private final CellRepository cellRepository;
 
 
     @Transactional
     public CellResponse insertRecord(Integer userSeq, ExerciseRecordRequest exerciseRecordRequest) {
         User user = userRepository.findByUserSeq(userSeq).orElseThrow();
+        int bpm = user.getBpm();
         boolean isRecommended = exerciseRecordRequest.isRecommended();
         ExerciseList exerciseList = exerciseListRepository.findByExerciseListSeq(exerciseRecordRequest.getExerciseListSeq());
+        LocalDateTime start = exerciseRecordRequest.getExerciseStart();
+        LocalDateTime end = exerciseRecordRequest.getExerciseEnd();
+        int avg = exerciseRecordRequest.getExerciseAvgBpm();
+        int max = exerciseRecordRequest.getExerciseMaxBpm();
 
         ExerciseRecord exerciseRecord = ExerciseRecord.builder()
                 .user(user)
                 .exerciseReco(isRecommended)
                 .exerciseList(exerciseList)
-                .exerciseStart(exerciseRecordRequest.getExerciseStart())
-                .exerciseEnd(exerciseRecordRequest.getExerciseEnd())
-                .exerciseAvgBpm(exerciseRecordRequest.getExerciseAvgBpm())
-                .exerciseMaxBpm(exerciseRecordRequest.getExerciseMaxBpm())
+                .exerciseStart(start)
+                .exerciseEnd(end)
+                .exerciseAvgBpm(avg)
+                .exerciseMaxBpm(max)
                 .exerciseReview(exerciseRecordRequest.getReview())
                 .exerciseWeather(exerciseRecordRequest.getWeather())
                 .build();
 
         exerciseRecordRepository.save(exerciseRecord);
 
-        //TODO : 경험치는 알고리즘에 의해 넣어야돼~
-        cellRepositoryCustom.increaseCellExp(user, 2);
+        long cellExp = ((max - bpm) - (avg - bpm)) * Duration.between(start, end).getSeconds() / 60;
+
+        if (!isRecommended) cellExp = cellExp * 9 / 10;
+
+        if (cellExp < 0) cellExp = 0;
+        else if (cellExp > Integer.MAX_VALUE) cellExp = Integer.MAX_VALUE;
+
+        cellRepository.increaseCellExp(user, (int) cellExp);
 
         Cell cell = cellRepository.findByUser(user).orElseThrow();
 

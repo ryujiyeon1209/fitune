@@ -22,7 +22,9 @@ public class QCell extends EntityPathBase<Cell> {
 
     public static final QCell cell = new QCell("cell");
 
-    public final NumberPath<Integer> cellExp = createNumber("cellExp", Integer.class);
+    public final NumberPath<Long> cellExp = createNumber("cellExp", Long.class);
+
+    public final NumberPath<Integer> cellLatestExp = createNumber("cellLatestExp", Integer.class);
 
     public final StringPath cellName = createString("cellName");
 
