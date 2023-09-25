@@ -8,6 +8,7 @@ WORKDIR /app
 RUN pip install --upgrade pip
 
 COPY requirements.txt /app/requirements.txt
+RUN pip install djangorestframework
 RUN pip install -r /app/requirements.txt
 
 # 소스 코드를 복사합니다.
