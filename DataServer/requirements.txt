@@ -263,7 +263,7 @@ pyviz-comms
 PyWavelets 
 # pywin32==305.1
 pywin32-ctypes 
-pywinpty 
+# pywinpty 
 PyYAML
 pyzmq 
 QDarkStyle
