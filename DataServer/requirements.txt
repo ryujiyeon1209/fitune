@@ -45,7 +45,7 @@ chardet
 charset-normalizer 
 click 
 cloudpickle 
-clyent==1.2.2
+clyent
 colorama
 colorcet
 comm
@@ -166,18 +166,18 @@ mdit-py-plugins
 mdurl 
 menuinst 
 mistune 
-mkl-fft==1.3.6
+mkl-fft
 mkl-random 
-mkl-service==2.4.0
+mkl-service
 more-itertools 
 mpmath 
 msgpack 
 multidict 
 multipledispatch 
-munkres==1.1.4
+munkres
 mypy-extensions==0.4.3
 mysqlclient==2.2.0
-navigator-updater==0.4.0
+# navigator-updater==0.4.0
 nbclassic 
 nbclient 
 nbconvert 
@@ -191,7 +191,7 @@ numba
 numexpr 
 numpy 
 numpydoc 
-openpyxl==3.0.10
+openpyxl
 packaging 
 pandas 
 pandocfilters 
@@ -213,7 +213,7 @@ pkginfo
 platformdirs==3.10.0
 plotly 
 pluggy 
-ply==3.11
+ply
 pooch 
 poyo 
 prometheus-client 
@@ -230,7 +230,7 @@ pycodestyle
 pycosat 
 pycparser 
 pyct 
-pycurl==7.45.2
+pycurl
 PyDispatcher==2.0.5
 pydocstyle 
 pyerfa 
@@ -239,14 +239,14 @@ Pygments
 PyJWT 
 pylint 
 pylint-venv 
-pyls-spyder==0.4.0
+pyls-spyder
 PyNaCl 
 pyodbc 
 pyOpenSSL 
 pyparsing 
-PyQt5==5.15.7
+PyQt5
 PyQt5-sip
-PyQtWebEngine==5.15.4
+PyQtWebEngine
 pyrsistent 
 PySocks 
 pytest 
@@ -280,15 +280,15 @@ rfc3339-validator
 rfc3986-validator 
 rope
 Rtree
-ruamel-yaml-conda 
+# ruamel-yaml-conda 
 ruamel.yaml
 s3fs 
 s3transfer 
 sacremoses
 scikit-image
 scikit-learn
-scikit-learn-intelex==20230426.121932
-scipy==1.10.1
+# scikit-learn-intelex==20230426.121932
+scipy
 Scrapy
 seaborn
 Send2Trash
