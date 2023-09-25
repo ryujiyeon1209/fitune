@@ -79,6 +79,7 @@ daal4py==2023.1.1
 # distlib==0.3.7
 # distributed @ file:///C:/b/abs_7509xfv227/croot/distributed_1686866088894/work
 Django==4.2.5
+djangorestframework==3.13.1
 # docstring-to-markdown @ file:///C:/ci_311/docstring-to-markdown_1677742566583/work
 # docutils @ file:///C:/ci_311/docutils_1676428078664/work
 # entrypoints @ file:///C:/ci_311/entrypoints_1676423328987/work
