@@ -5,6 +5,8 @@ FROM python:3.11
 WORKDIR /app
 
 # 필요한 패키지를 직접 설치합니다.
+RUN pip install --upgrade pip
+
 COPY requirements.txt /app/requirements.txt
 RUN pip install -r /app/requirements.txt
 
