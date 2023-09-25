@@ -4,7 +4,7 @@ FROM python:3.11
 # 작업 디렉토리를 설정합니다.
 WORKDIR /app
 
-# 필요한 패키지를 직접 설치합니다. (requestments.txt파일 없음)
+# 필요한 패키지를 직접 설치합니다.
 RUN pip install -r requirements.txt
 
 # 소스 코드를 복사합니다.
