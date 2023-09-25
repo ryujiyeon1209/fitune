@@ -79,7 +79,7 @@ dill
 distlib==0.3.7
 distributed 
 Django==4.2.5
-djangorestframework==3.13.1
+djangorestframework
 docstring-to-markdown 
 docutils 
 entrypoints 
@@ -164,7 +164,7 @@ matplotlib-inline
 mccabe 
 mdit-py-plugins 
 mdurl 
-menuinst 
+# menuinst 
 mistune 
 mkl-fft
 mkl-random 
