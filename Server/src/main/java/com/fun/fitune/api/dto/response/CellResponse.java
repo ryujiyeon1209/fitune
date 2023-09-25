@@ -12,6 +12,7 @@ public class CellResponse {
     String cellName;
     int cellExp;
     int userSeq;
+
     public CellResponse(Cell cell){
         this.cellName = cell.getCellName();
         this.cellExp = cell.getCellExp();
