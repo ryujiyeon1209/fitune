@@ -5,7 +5,7 @@ FROM python:3.11
 WORKDIR /app
 
 # 필요한 패키지를 직접 설치합니다. (requestments.txt파일 없음)
-RUN pip install django rest_framework
+RUN pip install -r requirements.txt
 
 # 소스 코드를 복사합니다.
 COPY . /app/
