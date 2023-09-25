@@ -21,13 +21,13 @@ object ExerciseList {
         Exercise("볼링", R.drawable.ic_Bowling),
         Exercise("탁구", R.drawable.ic_TableTennis),
         Exercise("등산", R.drawable.ic_Hiking),
-        Exercise("태보", R.drawable.ic_swim),
-        Exercise("암벽등반", R.drawable.ic_Rock Climbing),
-        Exercise("헬스", R.drawable.ic_swim),
-        Exercise("승마", R.drawable.ic_swim),
-        Exercise("자전거", R.drawable.ic_swim),
-        Exercise("캐치볼", R.drawable.ic_swim),
-        Exercise("풋살", R.drawable.ic_swim),
+        Exercise("태보", R.drawable.ic_TaiBo),
+        Exercise("암벽등반", R.drawable.ic_RockClimbing),
+        Exercise("헬스", R.drawable.ic_Weightlifting),
+        Exercise("승마", R.drawable.ic_HorsebackRiding),
+        Exercise("자전거", R.drawable.ic_Cycling),
+        Exercise("캐치볼", R.drawable.ic_Dodgeball),
+        Exercise("풋살", R.drawable.ic_Football),
 
     )
 }
