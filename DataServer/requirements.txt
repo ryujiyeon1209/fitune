@@ -6,8 +6,8 @@
 # aiosqlite @ file:///C:/b/abs_9djc_0pyi3/croot/aiosqlite_1683773915844/work
 # alabaster @ file:///home/ktietz/src/ci/alabaster_1611921544520/work
 # anaconda-catalogs @ file:///C:/b/abs_8btyy0o8s8/croot/anaconda-catalogs_1685727315626/work
-# anaconda-client==1.12.0
-# anaconda-navigator==2.4.2
+anaconda-client==1.12.0
+anaconda-navigator==2.4.2
 # anaconda-project @ file:///C:/ci_311/anaconda-project_1676458365912/work
 # anyio @ file:///C:/ci_311/anyio_1676425491996/work/dist
 appdirs==1.4.4
@@ -45,7 +45,7 @@ brotlipy==0.7.0
 # charset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work
 # click @ file:///C:/ci_311/click_1676433091657/work
 # cloudpickle @ file:///C:/b/abs_3796yxesic/croot/cloudpickle_1683040098851/work
-clyent==1.2.2
+# clyent==1.2.2
 # colorama @ file:///C:/ci_311/colorama_1676422310965/work
 # colorcet @ file:///C:/ci_311/colorcet_1676440389947/work
 # comm @ file:///C:/ci_311/comm_1678376562840/work
