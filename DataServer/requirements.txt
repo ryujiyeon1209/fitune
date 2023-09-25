@@ -166,9 +166,9 @@ mdit-py-plugins
 mdurl 
 # menuinst 
 mistune 
-mkl-fft
-mkl-random 
-mkl-service
+# mkl-fft
+# mkl-random 
+# mkl-service
 more-itertools 
 mpmath 
 msgpack 
@@ -176,7 +176,7 @@ multidict
 multipledispatch 
 munkres
 mypy-extensions==0.4.3
-mysqlclient==2.2.0
+mysqlclient
 # navigator-updater==0.4.0
 nbclassic 
 nbclient 
@@ -186,7 +186,7 @@ nest-asyncio
 networkx
 nltk 
 notebook 
-notebook_shim 
+# notebook_shim 
 numba 
 numexpr 
 numpy 
@@ -204,11 +204,11 @@ partd
 pathlib 
 pathspec 
 patsy==0.5.3
-pbr==5.11.1
-pep8==1.7.1
+pbr
+pep8
 pexpect 
 pickleshare 
-Pillow==9.4.0
+Pillow
 pkginfo 
 platformdirs==3.10.0
 plotly 
@@ -239,7 +239,7 @@ Pygments
 PyJWT 
 pylint 
 pylint-venv 
-pyls-spyder
+# pyls-spyder
 PyNaCl 
 pyodbc 
 pyOpenSSL 
