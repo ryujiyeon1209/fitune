@@ -1,36 +1,58 @@
 import pandas as pd
-from django.shortcuts import render
+import json
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from sklearn.metrics.pairwise import cosine_similarity
+import random
 
-
-# Create your views here.
+@csrf_exempt
 def recommend_view(request):
     if request.method == 'POST':
         # POST 요청에서 데이터를 추출하고 처리
-        user_data = request.POST  # 혹은 request.body를 사용하여 JSON 데이터 파싱
+        user_data = {
+            'age': int(request.POST['age']),
+            'height': int(request.POST['height']),
+            'weight': int(request.POST['weight']),
+            'body_fat_percentage': int(request.POST['body_fat_percentage']),
+            'Resting_BPM': int(request.POST['Resting_BPM']),
+            'Target_BPM': int(request.POST['Target_BPM']),
+            'active_BPM': int(request.POST['active_BPM']),
+        }
 
         # 추천 로직을 구현하여 응답 데이터 생성
         recommended_data = {}  # 추천 결과 데이터
-        df = pd.read_csv('dataset.csv')
+        df = pd.read_csv('dataset.csv', encoding='euc-kr')
+
+        # 문자열 열을 제외한 수치형 열만 선택
+        numeric_columns = df[
+            ['age', 'height', 'weight', 'body_fat_percentage', 'Resting_BPM', 'Target_BPM', 'active_BPM']]
+
+        # 결측값을 제거
+        numeric_columns = numeric_columns.dropna()
 
         # 유사도 계산
-        similarities = cosine_similarity([user_data], df)
+        similarities = cosine_similarity([list(user_data.values())], numeric_columns.values)
 
-        # 유사도가 가장 높은 컬럼 인덱스 찾기
-        most_similar_column_index = similarities.argmax()
+        # 코사인 유사도를 기준으로 상위 10명 추출
+        similar_indices = similarities.argsort()[0][::-1][:50]
 
-        most_similar_column = df.columns[most_similar_column_index]
+        # 랜덤하게 3개의 추천 운동 선택
+        random_users = random.sample(list(similar_indices), 10)  # similar_indices를 리스트로 변환
 
-        # 결과 반환
+        recommended_exercises = set()
+        for user_index in random_users:
+            recommended_exercise = df.loc[user_index, 'Exercise']
+            recommended_exercises.add(recommended_exercise)
+            if len(recommended_exercises) >= 3 :
+                break
+        recommended_exercises = list(recommended_exercises)
+
+        # 결과 데이터 생성
         recommended_data = {
-            'most_similar_column': most_similar_column,
-            'similarity_score': similarities[0][most_similar_column_index]
+            'recommended_exercises': recommended_exercises
         }
 
-        print(recommended_data)
-        # 결과 반환
-        recommended_data = {}  # 추천 결과 데이터
+        # JSON 형태로 응답
         return JsonResponse(recommended_data)
     else:
         return JsonResponse({'error': 'Invalid request method'})

@@ -48,8 +48,10 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-]
+    'django.middleware.csrf.CsrfViewMiddleware',  # 이 미들웨어를 비활성화
 
+]
+CSRF_COOKIE_SECURE = False
 ROOT_URLCONF = "DataServer.urls"
 
 TEMPLATES = [
