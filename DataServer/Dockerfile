@@ -5,7 +5,8 @@ FROM python:3.11
 WORKDIR /app
 
 # 필요한 패키지를 직접 설치합니다.
-RUN pip install -r requirements.txt
+COPY DataServer/requirements.txt /app/requirements.txt
+RUN pip install -r /app/requirements.txt
 
 # 소스 코드를 복사합니다.
 COPY . /app/
