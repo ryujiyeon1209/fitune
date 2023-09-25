@@ -175,7 +175,7 @@ Django==4.2.5
 # multipledispatch @ file:///C:/ci_311/multipledispatch_1676442767760/work
 # munkres==1.1.4
 # mypy-extensions==0.4.3
-# mysqlclient==2.2.0
+mysqlclient==2.2.0
 # navigator-updater==0.4.0
 # nbclassic @ file:///C:/b/abs_c8_rs7b3zw/croot/nbclassic_1681756186106/work
 # nbclient @ file:///C:/ci_311/nbclient_1676425195918/work
