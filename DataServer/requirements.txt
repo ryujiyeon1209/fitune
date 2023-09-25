@@ -310,10 +310,10 @@ sphinxcontrib-serializinghtml
 spyder 
 spyder-kernels 
 SQLAlchemy
-sqlparse==0.4.4
+sqlparse
 stack-data 
 statsmodels 
-stevedore==5.1.0
+stevedore
 sympy
 tables 
 tabulate 
@@ -338,14 +338,14 @@ transformers
 Twisted 
 twisted-iocpsupport 
 typing_extensions 
-tzdata==2023.3
+tzdata
 uc-micro-py 
 ujson
 Unidecode 
 urllib3 
-virtualenv==20.24.3
-virtualenv-clone==0.5.7
-virtualenvwrapper==4.8.4
+virtualenv
+virtualenv-clone
+virtualenvwrapper
 w3lib
 watchdog 
 wcwidth 
@@ -366,4 +366,4 @@ ypy-websocket
 zict 
 zipp 
 zope.interface
-zstandard==0.19.0
+zstandard
