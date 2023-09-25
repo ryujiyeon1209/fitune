@@ -7,7 +7,6 @@ aiosqlite
 alabaster
 anaconda-catalogs 
 anaconda-client
-anaconda-navigator
 anaconda-project 
 anyio 
 appdirs==1.4.4
