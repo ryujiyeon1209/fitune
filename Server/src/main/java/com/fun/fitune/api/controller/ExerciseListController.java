@@ -20,11 +20,12 @@ import java.util.List;
 public class ExerciseListController {
 
     private final ExerciseListService exerciseListService;
+    private final String SUCCESS = "SUCCESS";
 
 
     @GetMapping
-    public ResponseEntity<List<ExerciseList>> list() {
-        return new ResponseEntity<>(exerciseListService.showAll(), HttpStatus.OK);
+    public ResponseEntity<CommonResponse> list() {
+        return new ResponseEntity<>(makeCommonResponse(SUCCESS, exerciseListService.showAll()), HttpStatus.OK);
     }
 
 

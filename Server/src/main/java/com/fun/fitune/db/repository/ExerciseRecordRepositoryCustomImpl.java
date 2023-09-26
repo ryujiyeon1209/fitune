@@ -2,13 +2,14 @@ package com.fun.fitune.db.repository;
 
 import com.fun.fitune.db.domain.ExerciseRecord;
 import com.fun.fitune.db.domain.User;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static com.fun.fitune.db.domain.QExerciseRecord.exerciseRecord;
 
@@ -16,47 +17,53 @@ import static com.fun.fitune.db.domain.QExerciseRecord.exerciseRecord;
 @Repository
 public class ExerciseRecordRepositoryCustomImpl extends QuerydslRepositorySupport implements ExerciseRecordRepositoryCustom {
     private final JPAQueryFactory queryFactory;
-    private final EntityManager entityManager;
 
-    public ExerciseRecordRepositoryCustomImpl(JPAQueryFactory jpaQueryFactory, EntityManager entityManager) {
+    public ExerciseRecordRepositoryCustomImpl(JPAQueryFactory jpaQueryFactory) {
         super(ExerciseRecord.class);
-        this.entityManager = entityManager;
         this.queryFactory = jpaQueryFactory;
     }
 
     @Override
-    public void updateExerciseRecord(int userSeq, int avg, int max) {
-        User user = User.builder()
-                .userSeq(userSeq)
-                .build();
+    public ExerciseRecord selectTodayRecord(User user) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime today = LocalDateTime.of(
+                now.getYear(),
+                now.getMonth(),
+                now.getDayOfMonth(),
+                0,
+                0,
+                0
+        );
 
-        ExerciseRecord recentRecord = queryFactory
+        ExerciseRecord record = queryFactory
                 .selectFrom(exerciseRecord)
-                .where(exerciseRecord.user.eq(user))
-                .orderBy(exerciseRecord.exerciseStart.desc())
-                .fetchFirst();
+                .where(exerciseRecord.user.eq(user), exerciseRecord.exerciseEnd.after(today))
+                .fetchOne();
 
-        recentRecord.setExerciseAvgBpm(avg);
-        recentRecord.setExerciseMaxBpm(max);
-        recentRecord.setExerciseEnd(LocalDateTime.now());
-
-        entityManager.persist(recentRecord);
+        return record;
     }
 
     @Override
-    public void updateExerciseReview(int userSeq, int review) {
-        User user = User.builder()
-                .userSeq(userSeq)
-                .build();
+    public List<Integer> selectTodayRandom(User user) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime today = LocalDateTime.of(
+                now.getYear(),
+                now.getMonth(),
+                now.getDayOfMonth(),
+                0,
+                0,
+                0
+        );
+        System.out.println(today.toString());
 
-        ExerciseRecord recentRecord = queryFactory
-                .selectFrom(exerciseRecord)
-                .where(exerciseRecord.user.eq(user))
-                .orderBy(exerciseRecord.exerciseStart.desc())
-                .fetchFirst();
+        List<Integer> records = queryFactory
+                .select(exerciseRecord.user.userSeq)
+                .from(exerciseRecord)
+                .orderBy(Expressions.numberTemplate(Double.class, "function('rand')").asc())
+                .where(exerciseRecord.user.ne(user), exerciseRecord.exerciseEnd.after(today))
+                .limit(5)
+                .fetch();
 
-        recentRecord.setExerciseReview(review);
-
-        entityManager.persist(recentRecord);
+        return records;
     }
 }
