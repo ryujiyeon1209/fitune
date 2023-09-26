@@ -42,9 +42,4 @@ public class User {
     @Column(name = "active_BPM")
     private int activeBPM;
 
-    @Column(name = "Resting_BPM")
-    private int RestingBPM;
-
-    @Column(name = "active_BPM")
-    private int activeBPM;
 }
