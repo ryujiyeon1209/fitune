@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    kotlin("android")
+    id("org.jetbrains.kotlin.plugin.parcelize")
 }
 
 android {
@@ -51,8 +52,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     // GIF 사용을 위해 추가
-    implementation("com.github.bumptech.glide:glide:4.11.0")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.11.0")
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
 
     // ViewPager, 인디케이터를 위해 추가
     implementation ("androidx.appcompat:appcompat:1.3.1")
