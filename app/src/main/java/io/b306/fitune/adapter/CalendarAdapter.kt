@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import io.b306.fitune.model.CalendarDayModel
 import io.b306.fitune.R
 
-
 interface OnDayClickListener {
     fun onDayClick(calendarDayModel: CalendarDayModel)
 }
@@ -22,6 +21,7 @@ class CalendarAdapter(
         "2023-09-01" to true,
         "2023-09-02" to false,
         "2023-09-03" to true,
+        "2023-09-04" to true,
         // ... 추가 날짜 및 상태
     )
 
@@ -30,7 +30,7 @@ class CalendarAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.calendar_day_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_calendar_day, parent, false)
         return CalendarViewHolder(view)
     }
 
@@ -42,8 +42,10 @@ class CalendarAdapter(
 
             if (exerciseMap[day.date] == true) { // date는 CalendarDay의 멤버 변수, String 타입으로 "yyyy-MM-dd" 형태
                 holder.tvDay.setTextColor(Color.BLACK)
+                holder.itemView.setBackgroundResource(R.drawable.item_circle_green_bg)
             } else {
                 holder.tvDay.setTextColor(Color.GRAY)
+                holder.itemView.background = null
             }
 
         } else {

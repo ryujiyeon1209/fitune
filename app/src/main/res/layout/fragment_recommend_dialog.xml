@@ -13,16 +13,41 @@
         android:layout_gravity="center"
         >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="오늘의 운동 추천"
-        android:fontFamily="@font/gmarketbold"
-        android:gravity="center"
-        android:textSize="22sp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="18dp"
+            >
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+
+            <Button
+                android:id="@+id/btn_recommend_dialog_close"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:text="X"
+                android:textSize="15dp"
+                android:padding="0dp"
+                android:backgroundTint="#EF5F5F"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="오늘의 운동 추천"
+            android:fontFamily="@font/gmarketbold"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            />
 
         <LinearLayout
             android:layout_width="wrap_content"

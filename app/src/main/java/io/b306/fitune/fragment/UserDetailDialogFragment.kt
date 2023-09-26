@@ -32,6 +32,10 @@ class UserDetailDialogFragment : DialogFragment() {
             binding.tvUserBpm.text = "심박수 : ${it.userBpm}"
         }
 
+        binding.btnUserDetailDialogClose.setOnClickListener{
+            dismiss() // DialogFragment 닫기
+        }
+
         return activity?.let {
             AlertDialog.Builder(it)
                 .setView(binding.root)

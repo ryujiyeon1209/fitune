@@ -4,21 +4,32 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import androidx.fragment.app.DialogFragment
 import io.b306.fitune.R
+import io.b306.fitune.databinding.FragmentRecommendDialogBinding
 
 class RecommendDialogFragment : DialogFragment() {
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(R.layout.fragment_recommend_dialog, null)
 
-        // 여기에서 view의 요소를 조작할 수 있습니다.
-        // 예: val button = view.findViewById<Button>(R.id.some_button_id)
+    private var _binding: FragmentRecommendDialogBinding? = null
+    private val binding get() = _binding!!
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        _binding = FragmentRecommendDialogBinding.inflate(LayoutInflater.from(context))
+
+        // 닫기 버튼 btn_recommend_dialog_close
+        binding.btnRecommendDialogClose.setOnClickListener {
+            dismiss() // DialogFragment를 닫습니다.
+        }
 
         return activity?.let {
             val builder = AlertDialog.Builder(it)
-                .setView(view)
+                .setView(binding.root)
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null // ViewBinding 참조를 해제합니다.
     }
 }
