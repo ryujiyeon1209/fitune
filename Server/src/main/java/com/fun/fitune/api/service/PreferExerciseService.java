@@ -53,7 +53,7 @@ public class PreferExerciseService {
                 .user(user)
                 .build();
 
-        if (preferExerciseRepository.findByUser(user).orElseThrow() != null){
+        if (preferExerciseRepository.findByUser(user).orElseThrow() == null){
             preferExerciseRepository.save(preferExercise);
         }
         else {
@@ -68,6 +68,6 @@ public class PreferExerciseService {
     public void deletePreferExercise(int userSeq) {
         User user = userRepository.findByUserSeq(userSeq).orElseThrow();
 
-        preferExerciseRepository.deleteByExerciseListAndUser(user);
+        preferExerciseRepository.deleteByUser(user);
     }
 }
