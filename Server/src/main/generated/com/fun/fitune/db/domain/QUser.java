@@ -19,7 +19,11 @@ public class QUser extends EntityPathBase<User> {
 
     public static final QUser user = new QUser("user");
 
+    public final NumberPath<Integer> activeBPM = createNumber("activeBPM", Integer.class);
+
     public final NumberPath<Integer> age = createNumber("age", Integer.class);
+
+    public final NumberPath<Integer> bodyFatPercentage = createNumber("bodyFatPercentage", Integer.class);
 
     public final NumberPath<Integer> bpm = createNumber("bpm", Integer.class);
 
@@ -30,8 +34,6 @@ public class QUser extends EntityPathBase<User> {
     public final StringPath nickname = createString("nickname");
 
     public final NumberPath<Integer> userSeq = createNumber("userSeq", Integer.class);
-
-    public final NumberPath<Integer> walkingBpm = createNumber("walkingBpm", Integer.class);
 
     public final NumberPath<Integer> weight = createNumber("weight", Integer.class);
 

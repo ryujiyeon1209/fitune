@@ -33,9 +33,12 @@ public class User {
     @Column(name = "weight", nullable = false)
     private int weight;
 
+    @Column(name = "body_fat_percentage")
+    private int bodyFatPercentage;
+
     @Column(name = "bpm")
     private int bpm;
 
-    @Column(name = "walking_bpm")
-    private int walkingBpm;
+    @Column(name = "active_BPM")
+    private int activeBPM;
 }

@@ -54,12 +54,13 @@ public class ExerciseRecordRepositoryCustomImpl extends QuerydslRepositorySuppor
                 0,
                 0
         );
+        System.out.println(today.toString());
 
         List<Integer> records = queryFactory
                 .select(exerciseRecord.user.userSeq)
                 .from(exerciseRecord)
                 .orderBy(Expressions.numberTemplate(Double.class, "function('rand')").asc())
-                .where(exerciseRecord.user.ne(user))
+                .where(exerciseRecord.user.ne(user), exerciseRecord.exerciseEnd.after(today))
                 .limit(5)
                 .fetch();
 

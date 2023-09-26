@@ -52,7 +52,7 @@ public class ExerciseRecordService {
 
         exerciseRecordRepository.save(exerciseRecord);
 
-        long cellExp = ((max - bpm) - (avg - bpm)) * Duration.between(start, end).getSeconds() / 60;
+        long cellExp = ((max - bpm) + (avg - bpm)) * Duration.between(start, end).getSeconds() / 60;
 
         if (!isRecommended) cellExp = cellExp * 9 / 10;
 
