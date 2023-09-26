@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public interface ExerciseRecordRepository extends JpaRepository<ExerciseRecord, Integer> {
+public interface ExerciseRecordRepository extends JpaRepository<ExerciseRecord, Integer>, ExerciseRecordRepositoryCustom {
     Optional<List<ExerciseRecord>> findAllByUserOrderByExerciseEndDesc(User user);
 }

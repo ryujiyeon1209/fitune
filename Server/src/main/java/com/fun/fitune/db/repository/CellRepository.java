@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CellRepository extends JpaRepository<Cell, Integer> {
+public interface CellRepository extends JpaRepository<Cell, Integer>, CellRepositoryCustom {
     Optional<Cell> findByUser(User user);
 }

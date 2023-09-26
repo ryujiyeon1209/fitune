@@ -3,6 +3,7 @@ package com.fun.fitune.api.service;
 import com.fun.fitune.api.dto.request.PreferExerciseRequest;
 import com.fun.fitune.api.dto.response.PreferExerciseResponse;
 import com.fun.fitune.db.domain.ExerciseList;
+import com.fun.fitune.db.domain.ExerciseRecord;
 import com.fun.fitune.db.domain.PreferExercise;
 import com.fun.fitune.db.domain.User;
 import com.fun.fitune.db.repository.ExerciseListRepository;
@@ -24,39 +25,39 @@ public class PreferExerciseService {
     private final UserRepository userRepository;
 
     // 사용자의 선호 운동을 보여준다.
-    public List<PreferExerciseResponse> selectAll(Integer userSeq) {
+    public PreferExerciseResponse select(Integer userSeq) {
         User user = userRepository.findById(userSeq).orElseThrow();
 
-        List<PreferExercise> preferExercises = preferExerciseRepository.findAllByUser(user)
+        PreferExercise preferExercise = preferExerciseRepository.findByUser(user)
                 .orElseThrow(() -> new IllegalArgumentException("user has not found"));
 
-        List<PreferExerciseResponse> responseDtoList = new ArrayList<>();
-        for (PreferExercise preferExercise : preferExercises) {
-            responseDtoList.add(
-                    PreferExerciseResponse.builder()
-                            .exerciseListSeq(preferExercise.getExerciseList().getExerciseListSeq())
-                            .exerciseName(preferExercise.getExerciseList().getExerciseName())
-                            .build()
-            );
-        }
+        PreferExerciseResponse preferExerciseResponse = PreferExerciseResponse.builder()
+                .exerciseName(exerciseListRepository.findByExerciseListSeq(preferExercise.getExerciseList().getExerciseListSeq()).getExerciseName())
+                .exerciseListSeq(preferExercise.getExerciseList().getExerciseListSeq())
+                .build();
 
-        return responseDtoList;
+        return preferExerciseResponse;
     }
 
     // 사용자가 선호 운동을 추가한다.
     @Transactional
     public void insertPreferExercise(PreferExerciseRequest preferExerciseRequest) {
-        for (Byte exerciseListSeq : preferExerciseRequest.getExerciseListSeq()) {
-            ExerciseList exerciseList = exerciseListRepository.getReferenceById(exerciseListSeq);
-
-            User user = userRepository
+        User user = userRepository
                     .findById(preferExerciseRequest.getUserSeq())
                     .orElseThrow(() -> new IllegalArgumentException("user has not found"));
 
-            PreferExercise preferExercise = PreferExercise.builder()
-                    .exerciseList(exerciseList)
-                    .user(user)
-                    .build();
+        ExerciseList exerciseList = exerciseListRepository.findByExerciseListSeq(preferExerciseRequest.getExerciseListSeq());
+
+        PreferExercise preferExercise = PreferExercise.builder()
+                .exerciseList(exerciseList)
+                .user(user)
+                .build();
+
+        if (preferExerciseRepository.findByUser(user).orElseThrow() == null){
+            preferExerciseRepository.save(preferExercise);
+        }
+        else {
+            deletePreferExercise(preferExerciseRequest.getUserSeq());
 
             preferExerciseRepository.save(preferExercise);
         }
@@ -64,15 +65,9 @@ public class PreferExerciseService {
 
     // 사용자가 선호 운동을 삭제한다.
     @Transactional
-    public void deletePreferExercise(PreferExerciseRequest preferExerciseRequest) {
-        User user = User.builder()
-                .userSeq(preferExerciseRequest.getUserSeq())
-                .build();
-        for (Byte exerciseListSeq : preferExerciseRequest.getExerciseListSeq()) {
-            ExerciseList exerciseList = ExerciseList.builder()
-                    .exerciseListSeq(exerciseListSeq)
-                    .build();
-            preferExerciseRepository.deleteByExerciseListAndUser(exerciseList, user);
-        }
+    public void deletePreferExercise(int userSeq) {
+        User user = userRepository.findByUserSeq(userSeq).orElseThrow();
+
+        preferExerciseRepository.deleteByUser(user);
     }
 }

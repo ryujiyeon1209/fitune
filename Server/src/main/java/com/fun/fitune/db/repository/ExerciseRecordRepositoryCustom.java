@@ -1,8 +1,12 @@
 package com.fun.fitune.db.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.fun.fitune.db.domain.ExerciseRecord;
+import com.fun.fitune.db.domain.User;
+
+import java.util.List;
 
 public interface ExerciseRecordRepositoryCustom{
-    void updateExerciseRecord(int userSeq, int avg, int max);
-    void updateExerciseReview(int userSeq, int review);
+    ExerciseRecord selectTodayRecord(User user);
+
+    List<Integer> selectTodayRandom(User user);
 }
