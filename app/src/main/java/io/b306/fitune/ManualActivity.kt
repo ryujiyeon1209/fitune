@@ -8,14 +8,20 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import io.b306.fitune.databinding.ActivityManualBinding
 
 class ManualActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityManualBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manual)
 
-        val viewPager = findViewById<ViewPager2>(R.id.viewPager)
-        val indicator = findViewById<TabLayout>(R.id.indicator)
+        binding = ActivityManualBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val viewPager = binding.viewPager
+        val indicator = binding.indicator
 
         val fragments = arrayListOf<Fragment>(
             Manual1Fragment(),
