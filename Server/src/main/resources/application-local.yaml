@@ -55,4 +55,4 @@ spring:
 
 django:
   server:
-    url: "http://j9b306.p.ssafy.io"  # Django 서버
+    url: "http://j9b306.p.ssafy.io:8000"  # Django 서버
