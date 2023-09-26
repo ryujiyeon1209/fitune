@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -26,38 +26,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:layout_margin="100dp"
             >
 
-            <ImageView
-                android:id="@+id/iv_tutorial_heart"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
-                android:src="@drawable/ic_lv0"
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_gravity="center"
-                android:layout_marginTop="80dp"
-                android:layout_marginBottom="40dp"
-                />
-
-            <TextView
+                android:id="@+id/rv_exercise_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="
-스마트 워치를\n
-착용해주세요"
-                android:fontFamily="@font/gmarketlight"
-                android:textStyle="bold"
-                android:lineSpacingExtra="17sp"
-                android:textSize="25sp"
-                android:layout_marginBottom="70dp"
-                android:textColor="@color/none_selected_button"
+                tools:listitem="@layout/item_exercise"
                 />
 
             <Button
                 android:id="@+id/btn_tutorial2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="다음 (2/3)"
+                android:text="다음 (2/4)"
                 android:backgroundTint="@color/button_bg"
                 android:textColor="@color/black"
                 android:fontFamily="@font/gmarketmedium"
@@ -71,4 +55,4 @@
 
     </FrameLayout>
 
-</LinearLayout>
+</ScrollView>

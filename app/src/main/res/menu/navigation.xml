@@ -5,11 +5,11 @@
         android:title="운동 기록" />
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_swim"
+        android:icon="@drawable/ic_swimming"
         android:title="홈"
         />
     <item
         android:id="@+id/navigation_mypage"
-        android:icon="@drawable/ic_run"
+        android:icon="@drawable/ic_jogging"
         android:title="마이페이지" />
 </menu>

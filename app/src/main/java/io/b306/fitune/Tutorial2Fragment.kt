@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import io.b306.fitune.databinding.FragmentTutorial2Binding
 
 class Tutorial2Fragment : Fragment() {
@@ -39,8 +40,12 @@ class Tutorial2Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnTutorial2.setOnClickListener{
-            // 버튼이 클릭되면 다음 페이지로 이동
+        binding.rvExerciseList.apply {
+            layoutManager = GridLayoutManager(context, 2) // 2개의 컬럼을 가진 그리드 레이아웃
+            adapter = ExerciseAdapter(ExerciseList.list) // ExerciseAdapter는 별도로 정의해야 함
+        }
+
+        binding.btnTutorial2.setOnClickListener {
             pageNavigator?.moveToNextPage()
         }
     }
@@ -50,6 +55,7 @@ class Tutorial2Fragment : Fragment() {
         // 뷰가 파괴될 때 바인딩 참조를 정리합니다.
         _binding = null
     }
+
     companion object {
         fun newInstance() = Tutorial2Fragment()
     }

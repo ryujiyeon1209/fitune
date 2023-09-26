@@ -46,7 +46,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_swim"
+                android:src="@drawable/ic_jogging"
                 android:layout_marginBottom="15dp"
                 />
 
@@ -115,7 +115,7 @@
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_run"
+                    android:src="@drawable/ic_cycling"
                     android:layout_marginBottom="15dp"
                     />
 
@@ -176,7 +176,7 @@
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_bicycle"
+                    android:src="@drawable/ic_swimming"
                     android:layout_marginBottom="15dp"
                     />
 

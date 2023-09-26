@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -29,18 +29,81 @@
             android:layout_margin="100dp"
             >
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_exercise_list"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/item_layout_fight_result"
-                />
+                android:orientation="horizontal"
+                android:padding="20dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/long_button_border"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="50M"
+                        android:fontFamily="@font/gmarketbold"
+                        android:textColor="@color/default_text"
+                        android:textSize="35sp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="50M"
+                        android:fontFamily="@font/gmarketbold"
+                        android:textColor="@color/default_text"
+                        android:textSize="35sp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/long_button_border"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="50M"
+                        android:fontFamily="@font/gmarketbold"
+                        android:textColor="@color/default_text"
+                        android:textSize="35sp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="50M"
+                        android:fontFamily="@font/gmarketbold"
+                        android:textColor="@color/default_text"
+                        android:textSize="35sp"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
 
             <Button
-                android:id="@+id/btn_tutorial1"
+                android:id="@+id/btn_tutorial3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="다음 (2/3)"
+                android:text="다음 (3/4)"
                 android:backgroundTint="@color/button_bg"
                 android:textColor="@color/black"
                 android:fontFamily="@font/gmarketmedium"
@@ -54,4 +117,4 @@
 
     </FrameLayout>
 
-</ScrollView>
+</LinearLayout>

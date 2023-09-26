@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import io.b306.fitune.databinding.ActivityTutorialsBinding
 
-class TutorialsActivity : AppCompatActivity(), Tutorial1Fragment.TutorialPageNavigator, Tutorial2Fragment.TutorialPageNavigator  {
+class TutorialsActivity : AppCompatActivity(),
+    Tutorial1Fragment.TutorialPageNavigator, Tutorial2Fragment.TutorialPageNavigator,
+    Tutorial3Fragment.TutorialPageNavigator, Tutorial4Fragment.TutorialPageNavigator {
 
     private lateinit var binding: ActivityTutorialsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
