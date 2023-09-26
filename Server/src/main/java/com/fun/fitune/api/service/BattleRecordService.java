@@ -55,8 +55,8 @@ public class BattleRecordService {
         if (userScore > otherScore) return userSeq;
         else if (otherScore > userScore) return otherSeq;
         else {
-            if (todayOtherRecord.getExerciseMaxBpm() - other.getBpm()
-                    > todayUserRecord.getExerciseMaxBpm() - user.getBpm())
+            if (todayOtherRecord.getExerciseMaxBpm() - other.getRestingBPM()
+                    > todayUserRecord.getExerciseMaxBpm() - user.getRestingBPM())
                 return otherSeq;
             else return userSeq;
         }

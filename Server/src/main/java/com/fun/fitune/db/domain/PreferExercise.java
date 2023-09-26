@@ -26,7 +26,7 @@ public class PreferExercise {
     private ExerciseList exerciseList;
 
     @JsonIgnore
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    @OneToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_seq", referencedColumnName = "user_seq")
     private User user;
 }

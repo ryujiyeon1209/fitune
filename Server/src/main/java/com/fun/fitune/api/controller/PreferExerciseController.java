@@ -29,14 +29,14 @@ public class PreferExerciseController {
 
 
     @GetMapping("/{userSeq}")
-    public ResponseEntity<List<PreferExerciseResponse>> showPreferExercise(@PathVariable("userSeq") Integer userSeq) {
-        return new ResponseEntity<>(preferExerciseService.selectAll(userSeq), HttpStatus.OK);
+    public ResponseEntity<PreferExerciseResponse> showPreferExercise(@PathVariable("userSeq") Integer userSeq) {
+        return new ResponseEntity<>(preferExerciseService.select(userSeq), HttpStatus.OK);
     }
 
 
-    @DeleteMapping("/remove")
-    public ResponseEntity<Void> removePreferExercise(@RequestBody PreferExerciseRequest preferExerciseRequest) {
-        preferExerciseService.deletePreferExercise(preferExerciseRequest);
+    @DeleteMapping("/remove/{userSeq}")
+    public ResponseEntity<Void> removePreferExercise(@PathVariable("userSeq") Integer userSeq) {
+        preferExerciseService.deletePreferExercise(userSeq);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -30,7 +30,7 @@ public class ExerciseRecordService {
     @Transactional
     public CellResponse insertRecord(Integer userSeq, ExerciseRecordRequest exerciseRecordRequest) {
         User user = userRepository.findByUserSeq(userSeq).orElseThrow();
-        int bpm = user.getBpm();
+        int bpm = user.getRestingBPM();
         boolean isRecommended = exerciseRecordRequest.isRecommended();
         ExerciseList exerciseList = exerciseListRepository.findByExerciseListSeq(exerciseRecordRequest.getExerciseListSeq());
         LocalDateTime start = exerciseRecordRequest.getExerciseStart();

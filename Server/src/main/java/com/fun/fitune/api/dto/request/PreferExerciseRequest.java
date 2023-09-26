@@ -13,5 +13,5 @@ import java.util.List;
 @Builder
 public class PreferExerciseRequest {
     private Integer userSeq;
-    private List<Byte> exerciseListSeq;
+    private Byte exerciseListSeq;
 }

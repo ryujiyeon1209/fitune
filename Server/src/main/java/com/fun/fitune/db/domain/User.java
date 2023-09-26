@@ -36,8 +36,8 @@ public class User {
     @Column(name = "body_fat_percentage")
     private int bodyFatPercentage;
 
-    @Column(name = "bpm")
-    private int bpm;
+    @Column(name = "Resting_BPM")
+    private int RestingBPM;
 
     @Column(name = "active_BPM")
     private int activeBPM;
