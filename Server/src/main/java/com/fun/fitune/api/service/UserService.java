@@ -4,6 +4,7 @@ package com.fun.fitune.api.service;
 import com.fun.fitune.api.dto.request.NicknameRequest;
 import com.fun.fitune.api.dto.request.UserCreateRequest;
 import com.fun.fitune.api.dto.request.UserInfoRequest;
+import com.fun.fitune.api.dto.request.UserLoginRequest;
 import com.fun.fitune.api.dto.response.UserInfoResponse;
 import com.fun.fitune.api.dto.response.UserSuperResponse;
 import com.fun.fitune.db.domain.*;
@@ -87,6 +88,13 @@ public class UserService {
         return "hi";
     }
 
+    public Boolean selectUser(UserLoginRequest loginRequest){
+        User user = userRepository.findByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword()).orElseThrow();
+
+        if (user != null) return true;
+        else return false;
+    }
+
     @Transactional(readOnly = false)
     public String changeNickname(NicknameRequest nicknameReq) {
         User user = userRepository.findById(nicknameReq.getUserSeq())
@@ -102,7 +110,7 @@ public class UserService {
         User user = userRepository.findById(userInfoReq.getUserSeq())
                 .orElseThrow(() -> new CustomException(CustomExceptionList.USER_NOT_FOUND_ERROR));
 
-        user.setAge(LocalDateTime.now().getYear() - userInfoReq.getYear());
+        user.setAge(userInfoReq.getAge());
         user.setHeight(userInfoReq.getHeight());
         user.setWeight(userInfoReq.getWeight());
 
