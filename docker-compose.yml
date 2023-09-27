@@ -18,8 +18,8 @@ services:
     networks:
       - mynetwork
     restart: always
-    # ports:
-    #   - 8000:8000
+    ports:
+      - 8000:8000
     depends_on:
       - spring
 
