@@ -88,11 +88,11 @@ class FightFindFragment : Fragment() {
         UserData("세포3", R.drawable.ic_lv1, 1, 110),
         UserData("세포4", R.drawable.ic_lv2, 2, 115),
         UserData("세포5", R.drawable.ic_lv1, 1, 120),
-        UserData("세포6", R.drawable.ic_lv3, 3, 125),
-        UserData("세포7", R.drawable.ic_lv0, 0, 130),
-        UserData("세포8", R.drawable.ic_lv2, 2, 135),
-        UserData("세포9", R.drawable.ic_lv1, 1, 140),
-        UserData("세포10", R.drawable.ic_lv3, 3, 145)
+//        UserData("세포6", R.drawable.ic_lv3, 3, 125),
+//        UserData("세포7", R.drawable.ic_lv0, 0, 130),
+//        UserData("세포8", R.drawable.ic_lv2, 2, 135),
+//        UserData("세포9", R.drawable.ic_lv1, 1, 140),
+//        UserData("세포10", R.drawable.ic_lv3, 3, 145)
     )
 
 }
