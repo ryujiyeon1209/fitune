@@ -21,4 +21,5 @@ public class UserCreateRequest {
     private int activeBpm;
     private Byte preferExerciseSeq;
     private String cellName;
+    private Integer tension;
 }

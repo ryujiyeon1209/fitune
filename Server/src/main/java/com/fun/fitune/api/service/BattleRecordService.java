@@ -107,14 +107,15 @@ public class BattleRecordService {
 
             Cell cell = cellRepository.findByUser(other).orElseThrow();
 
-            BattleOpponentResponse.builder()
+            opponents.add(BattleOpponentResponse.builder()
                     .userSeq(other.getUserSeq())
                     .cellExp(cell.getCellExp())
                     .cellName(cell.getCellName())
                     .height(other.getHeight())
                     .weight(other.getWeight())
                     .bpm(other.getRestingBPM())
-                    .build();
+                    .build()
+            );
         }
 
         return opponents;

@@ -67,9 +67,8 @@ public class UserService {
                 .bodyFatPercentage(userCreateRequest.getBodyFatPer())
                 .activeBPM(userCreateRequest.getActiveBpm())
                 .RestingBPM(userCreateRequest.getRestingBpm())
+                .tension(userCreateRequest.getTension())
                 .build());
-
-        System.out.println("왜 안됨");
 
         User user = userRepository.findByEmail(userCreateRequest.getEmail()).orElseThrow();
 
@@ -91,7 +90,7 @@ public class UserService {
         return "hi";
     }
 
-    public Boolean selectUser(UserLoginRequest loginRequest){
+    public Boolean selectUser(UserLoginRequest loginRequest) {
         User user = userRepository.findByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword()).orElseThrow();
 
         if (user != null) return true;
@@ -120,7 +119,19 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public List<User> findRandomUsers(int userSeq){
+    public List<User> findRandomUsers(int userSeq) {
         return userRepository.findRandomUsers(userSeq);
+    }
+
+    public String updateCellName(int userSeq, String cellName) {
+        User user = userRepository.findByUserSeq(userSeq).orElseThrow();
+
+        Cell cell = cellRepository.findByUser(user).orElseThrow();
+
+        cell.setCellName(cellName);
+
+        cellRepository.save(cell);
+
+        return cellName;
     }
 }

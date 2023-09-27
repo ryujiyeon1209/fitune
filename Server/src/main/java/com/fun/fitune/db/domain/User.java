@@ -48,4 +48,7 @@ public class User {
     @Column(name = "active_BPM" , nullable = true)
     private Integer activeBPM;
 
+    @Column(name = "tension", nullable = true)
+    private Integer tension;
+
 }

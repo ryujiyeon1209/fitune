@@ -55,14 +55,16 @@ public class UserController {
                 makeCommonResponse(SUCCESS, new UserInfoResponse(userInfo)), HttpStatus.OK);
     }
 
-    //사용자 생성
-    @Operation(summary = "사용자 생성", description = "사용자를 생성한다.")
+
+    // 사용자 생성
+    @Operation(summary = "회원가입", description = "사용자를 생성한다.")
     @PostMapping("/create")
     public ResponseEntity<CommonResponse<String>> addUser(@RequestBody UserCreateRequest userCreateRequest){
         System.out.println("사용자 생성");
         return new ResponseEntity<>(
                 makeCommonResponse(SUCCESS, userService.insertUser(userCreateRequest)), HttpStatus.OK);
     }
+
 
     @Operation(summary = "로그인", description = "로그인한다.")
     @PostMapping("/login")
@@ -118,6 +120,7 @@ public class UserController {
 
     }
 
+
     @Operation(summary = "사용자의 모든 정보", description = "파라미터로 받은 userSeq에 해당하는 모든 엔티티를 반환한다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = String.class))),
@@ -128,6 +131,7 @@ public class UserController {
         return new ResponseEntity<>(makeCommonResponse(SUCCESS, userService.selectAllUserInfo(userSeq)), HttpStatus.OK);
     }
 
+
     @Operation(summary = "랜덤 유저 5명 받기", description = "파라미터로 받은 userSeq 제외 나머지 유저들을 랜덤 5명 반환")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = String.class))),
@@ -137,6 +141,13 @@ public class UserController {
     public ResponseEntity<List<User>> getRandomMatchList(@PathVariable("userSeq") int userSeq) {
         List<User> randomUsers = userService.findRandomUsers(userSeq);
         return new ResponseEntity<>(randomUsers, HttpStatus.OK);
+    }
+
+
+    @Operation(summary = "세포 이름 수정")
+    @PatchMapping("/edit/cell/{userSeq}/{cellName}")
+    public ResponseEntity<CommonResponse<String>> modifyCellName(@PathVariable("userSeq") int userSeq, @PathVariable("cellName") String cellName){
+        return new ResponseEntity<>(makeCommonResponse(SUCCESS, userService.updateCellName(userSeq, cellName)), HttpStatus.OK);
     }
 
 
