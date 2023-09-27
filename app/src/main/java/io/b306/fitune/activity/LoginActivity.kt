@@ -43,5 +43,6 @@ class LoginActivity : AppCompatActivity() {
 //        } else {
 //            Toast.makeText(applicationContext, "빈 칸이 있음", Toast.LENGTH_LONG).show()
 //        }
-    }
+//    }
+
 }
