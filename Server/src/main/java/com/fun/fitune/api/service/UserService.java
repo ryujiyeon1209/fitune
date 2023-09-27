@@ -119,4 +119,8 @@ public class UserService {
 
         return userRepository.save(user);
     }
+
+    public List<User> findRandomUsers(int userSeq){
+        return userRepository.findRandomUsers(userSeq);
+    }
 }
