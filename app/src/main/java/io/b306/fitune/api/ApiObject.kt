@@ -14,12 +14,14 @@ object ApiObject {
         }
     }
 
+    // API 요청시 log 띄우기
     private val httpClient by lazy {
         OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
             .build()
     }
 
+    // API 요청
     private val getRetrofit by lazy{
         Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -28,6 +30,7 @@ object ApiObject {
             .build()
     }
 
+    // UserAPI 사용
     val getRetrofitService : UserAPI by lazy {
         getRetrofit.create(UserAPI::class.java)
     }
