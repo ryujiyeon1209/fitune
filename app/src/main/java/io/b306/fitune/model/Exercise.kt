@@ -12,7 +12,7 @@ object ExerciseList {
         Exercise("사이클링", R.drawable.ic_cycling),
         Exercise("수영", R.drawable.ic_swimming),
         Exercise("걷기", R.drawable.ic_walking),
-        Exercise("조깅", R.drawable.ic_jogging),
+        Exercise("런닝", R.drawable.ic_jogging),
         Exercise("런닝머신", R.drawable.ic_treadmill_running),
         Exercise("댄스", R.drawable.ic_dancing),
         Exercise("에어로빅", R.drawable.ic_aerobics),
