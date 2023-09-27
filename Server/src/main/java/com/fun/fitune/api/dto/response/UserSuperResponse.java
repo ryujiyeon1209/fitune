@@ -12,7 +12,7 @@ import java.util.List;
 public class UserSuperResponse {
     User user;
     Cell cell;
-    PreferExercise preferExercise;
+    PreferExerciseResponse preferExerciseResponse;
     List<ExerciseRecord> exerciseRecord;
     List<BattleRecord> battleRecord;
 }

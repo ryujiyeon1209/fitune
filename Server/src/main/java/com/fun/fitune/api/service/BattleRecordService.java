@@ -1,8 +1,10 @@
 package com.fun.fitune.api.service;
 
 import com.fun.fitune.api.dto.request.BattleRecordRequest;
+import com.fun.fitune.api.dto.response.BattleOpponentResponse;
 import com.fun.fitune.api.dto.response.BattleRecordResponse;
 import com.fun.fitune.db.domain.BattleRecord;
+import com.fun.fitune.db.domain.Cell;
 import com.fun.fitune.db.domain.ExerciseRecord;
 import com.fun.fitune.db.domain.User;
 import com.fun.fitune.db.repository.*;
@@ -93,15 +95,26 @@ public class BattleRecordService {
     }
 
     //TODO : 오늘 운동한 사람 중 userSeq를 제외한 5명을 추출하는 서비스 로직 짜야됨
-    public List<User> selectOpponent(int userSeq) {
+    public List<BattleOpponentResponse> selectOpponent(int userSeq) {
         User user = User.builder().userSeq(userSeq).build();
 
-        List<User> opponents = new ArrayList<>();
+        List<BattleOpponentResponse> opponents = new ArrayList<>();
 
         List<Integer> opponentSeqs = exerciseRecordRepository.selectTodayRandom(user);
 
         for (Integer opponentSeq : opponentSeqs) {
-            opponents.add(userRepository.findByUserSeq(opponentSeq).orElseThrow());
+            User other = userRepository.findByUserSeq(opponentSeq).orElseThrow();
+
+            Cell cell = cellRepository.findByUser(other).orElseThrow();
+
+            BattleOpponentResponse.builder()
+                    .userSeq(other.getUserSeq())
+                    .cellExp(cell.getCellExp())
+                    .cellName(cell.getCellName())
+                    .height(other.getHeight())
+                    .weight(other.getWeight())
+                    .bpm(other.getRestingBPM())
+                    .build();
         }
 
         return opponents;

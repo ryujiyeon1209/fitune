@@ -5,6 +5,7 @@ import com.fun.fitune.api.dto.request.NicknameRequest;
 import com.fun.fitune.api.dto.request.UserCreateRequest;
 import com.fun.fitune.api.dto.request.UserInfoRequest;
 import com.fun.fitune.api.dto.request.UserLoginRequest;
+import com.fun.fitune.api.dto.response.PreferExerciseResponse;
 import com.fun.fitune.api.dto.response.UserSuperResponse;
 import com.fun.fitune.db.domain.*;
 import com.fun.fitune.db.repository.*;
@@ -38,7 +39,10 @@ public class UserService {
         UserSuperResponse userSuperResponse = UserSuperResponse.builder()
                 .user(user)
                 .cell(cell)
-                .preferExercise(preferExercise)
+                .preferExerciseResponse(PreferExerciseResponse.builder()
+                        .exerciseListSeq(preferExercise.getExerciseList().getExerciseListSeq())
+                        .exerciseName(preferExercise.getExerciseList().getExerciseName())
+                        .build())
                 .exerciseRecord(exerciseRecordList)
                 .battleRecord(battleRecordList)
                 .build();
