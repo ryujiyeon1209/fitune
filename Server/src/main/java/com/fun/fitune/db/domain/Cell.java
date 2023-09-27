@@ -28,7 +28,7 @@ public class Cell {
     @Column(name = "cell_latest_exp")
     private int cellLatestExp;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_seq")
     private User user;
 }

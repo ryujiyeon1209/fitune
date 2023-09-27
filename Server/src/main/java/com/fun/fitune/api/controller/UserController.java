@@ -126,9 +126,9 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = String.class))),
             @ApiResponse(responseCode = "400", description = "bad request operation", content = @Content(schema = @Schema(implementation = ExceptionResponse.class)))
     })
-    @GetMapping("/super/{userSeq}")
-    public ResponseEntity<CommonResponse<UserSuperResponse>> getAllUserInfo (@PathVariable("userSeq") int userSeq){
-        return new ResponseEntity<>(makeCommonResponse(SUCCESS, userService.selectAllUserInfo(userSeq)), HttpStatus.OK);
+    @GetMapping("/super/{email}")
+    public ResponseEntity<CommonResponse<UserSuperResponse>> getAllUserInfo (@PathVariable("email") String email){
+        return new ResponseEntity<>(makeCommonResponse(SUCCESS, userService.selectAllUserInfo(email)), HttpStatus.OK);
     }
 
 

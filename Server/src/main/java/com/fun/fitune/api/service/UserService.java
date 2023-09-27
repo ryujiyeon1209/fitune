@@ -29,12 +29,12 @@ public class UserService {
     private final ExerciseRecordRepository exerciseRecordRepository;
     private final BattleRecordRepository battleRecordRepository;
 
-    public UserSuperResponse selectAllUserInfo(int userSeq) {
-        User user = userRepository.findByUserSeq(userSeq).orElseThrow();
+    public UserSuperResponse selectAllUserInfo(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow();
         Cell cell = cellRepository.findByUser(user).orElseThrow();
         PreferExercise preferExercise = preferExerciseRepository.findByUser(user).orElseThrow();
         List<ExerciseRecord> exerciseRecordList = exerciseRecordRepository.findAllByUserOrderByExerciseEndDesc(user).orElseThrow();
-        List<BattleRecord> battleRecordList = battleRecordRepository.findAllByBattleUserSeqOrderByBattleDateDesc(userSeq).orElseThrow();
+        List<BattleRecord> battleRecordList = battleRecordRepository.findAllByBattleUserSeqOrderByBattleDateDesc(user.getUserSeq()).orElseThrow();
 
         UserSuperResponse userSuperResponse = UserSuperResponse.builder()
                 .user(user)
