@@ -22,6 +22,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+
 
 @Tag(name="사용자 관리 API", description="사용자 정보 조회")
 @RestController
@@ -113,7 +118,6 @@ public class UserController {
 
     }
 
-
     @Operation(summary = "사용자의 모든 정보", description = "파라미터로 받은 userSeq에 해당하는 모든 엔티티를 반환한다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = String.class))),
@@ -124,6 +128,16 @@ public class UserController {
         return new ResponseEntity<>(makeCommonResponse(SUCCESS, userService.selectAllUserInfo(userSeq)), HttpStatus.OK);
     }
 
+    @Operation(summary = "랜덤 유저 5명 받기", description = "파라미터로 받은 userSeq 제외 나머지 유저들을 랜덤 5명 반환")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = "400", description = "bad request operation", content = @Content(schema = @Schema(implementation = ExceptionResponse.class)))
+    })
+    @GetMapping("/random/{userSeq}")
+    public ResponseEntity<List<User>> getRandomMatchList(@PathVariable("userSeq") int userSeq) {
+        List<User> randomUsers = userService.findRandomUsers(userSeq);
+        return new ResponseEntity<>(randomUsers, HttpStatus.OK);
+    }
 
 
     private <T> CommonResponse<T> makeCommonResponse(String message, T data) {
