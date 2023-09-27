@@ -77,4 +77,5 @@ dependencies {
     implementation ("androidx.viewpager2:viewpager2:1.0.0-alpha05")
     implementation("com.tbuonomo:dotsindicator:5.0")
 
+    implementation("com.google.android.gms:play-services-wearable:18.0.0")
 }
