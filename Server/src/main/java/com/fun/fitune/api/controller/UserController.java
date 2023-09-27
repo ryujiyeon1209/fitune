@@ -1,8 +1,6 @@
 package com.fun.fitune.api.controller;
 
-import com.fun.fitune.api.dto.request.CellRequest;
-import com.fun.fitune.api.dto.request.NicknameRequest;
-import com.fun.fitune.api.dto.request.UserInfoRequest;
+import com.fun.fitune.api.dto.request.*;
 import com.fun.fitune.api.dto.response.CellResponse;
 import com.fun.fitune.api.dto.response.CommonResponse;
 import com.fun.fitune.api.dto.response.UserInfoResponse;
@@ -54,6 +52,23 @@ public class UserController {
         User userInfo = userService.getUserInfo(userSeq);
         return new ResponseEntity<>(
                 makeCommonResponse(SUCCESS, new UserInfoResponse(userInfo)), HttpStatus.OK);
+    }
+
+    //사용자 생성
+    @Operation(summary = "사용자 생성", description = "사용자를 생성한다.")
+    @PostMapping("/create")
+    public ResponseEntity<CommonResponse<String>> addUser(@RequestBody UserCreateRequest userCreateRequest){
+        System.out.println("사용자 생성");
+        return new ResponseEntity<>(
+                makeCommonResponse(SUCCESS, userService.insertUser(userCreateRequest)), HttpStatus.OK);
+    }
+
+    @Operation(summary = "로그인", description = "로그인한다.")
+    @PostMapping("/login")
+    public ResponseEntity<CommonResponse<Boolean>> loginUser(@RequestBody UserLoginRequest loginRequest){
+        System.out.println("로그인");
+        return new ResponseEntity<>(
+                makeCommonResponse(SUCCESS, userService.selectUser(loginRequest)), HttpStatus.OK);
     }
 
 

@@ -3,6 +3,9 @@ package com.fun.fitune.db.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.validator.constraints.UniqueElements;
+
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,8 +21,11 @@ public class User {
     @Column(name = "user_seq", nullable = false)
     private int userSeq;
 
-    @Column(name = "email", nullable = false)
+    @Column(unique = true, name = "email", nullable = false)
     private String email;
+
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @Column(name = "nickname", nullable = false)
     private String nickname;

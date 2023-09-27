@@ -31,6 +31,8 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath nickname = createString("nickname");
 
+    public final StringPath password = createString("password");
+
     public final NumberPath<Integer> RestingBPM = createNumber("RestingBPM", Integer.class);
 
     public final NumberPath<Integer> userSeq = createNumber("userSeq", Integer.class);
