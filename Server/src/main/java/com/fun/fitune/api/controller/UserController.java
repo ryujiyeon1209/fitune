@@ -112,7 +112,22 @@ public class UserController {
         return new ResponseEntity<>(makeCommonResponse(SUCCESS, userService.selectAllUserInfo(userSeq)), HttpStatus.OK);
     }
 
+<<<<<<< HEAD
     
+=======
+    @Operation(summary = "사용자의 모든 정보", description = "파라미터로 받은 userSeq에 해당하는 모든 엔티티를 반환한다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = "400", description = "bad request operation", content = @Content(schema = @Schema(implementation = ExceptionResponse.class)))
+    })
+    @GetMapping("/super/{userSeq}")
+    public ResponseEntity<CommonResponse<UserSuperResponse>> getAllUserInfo (@PathVariable("userSeq") int userSeq){
+        return new ResponseEntity<>(makeCommonResponse(SUCCESS, userService.selectAllUserInfo(userSeq)), HttpStatus.OK);
+    }
+
+
+
+>>>>>>> 5097b61f9375ab5e5763abf80338cee3293a2a64
     private <T> CommonResponse<T> makeCommonResponse(String message, T data) {
         return CommonResponse.<T>builder()
                 .message(message)
