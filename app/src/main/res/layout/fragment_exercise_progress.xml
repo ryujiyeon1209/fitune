@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ExerciseResultFragment">
+
+    <!-- 상단 제목  -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="오늘의 운동"
+        android:textSize="30sp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:fontFamily="@font/gmarketbold"
+        android:textColor="@color/default_text"
+        />
+
+    <!-- 배경 -->
+    <!-- android:layout_height="370dp"에서 바꿈!   -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@drawable/bg_middle">
+
+        <!-- 오늘의 운동 이미지 커버 -->
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:padding="10dp">
+
+            <!-- 하얀색 이미지 커버 설정 -->
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_row="0"
+                android:layout_rowWeight="1"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:background="@drawable/item_circular_white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/gmarketmedium"
+                    android:gravity="center"
+                    android:text="런닝"
+                    android:textColor="@color/none_selected_button"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_jogging"
+                    app:tint="@color/none_selected_button" />
+            </LinearLayout>
+        </GridLayout>
+    </FrameLayout>
+
+    <!-- 심박수 -->
+    <GridLayout
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:columnCount="3"
+        android:padding="10dp"
+        android:rowCount="2"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="120dp"
+            android:fontFamily="@font/gmarketmedium"
+            android:gravity="center"
+            android:text="현재 심박수"
+            android:textColor="@color/none_selected_button"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_column="1"
+            android:fontFamily="@font/gmarketmedium"
+            android:gravity="center"
+            android:text="평균 심박수"
+            android:textColor="@color/none_selected_button"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:fontFamily="@font/gmarketmedium"
+            android:gravity="center"
+            android:text="최대 심박수"
+            android:textColor="@color/none_selected_button"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/gmarketmedium"
+            android:gravity="center"
+            android:text="현재 심박수"
+            android:textColor="@color/none_selected_button"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/gmarketmedium"
+            android:gravity="center"
+            android:text="평균 심박수"
+            android:textColor="@color/none_selected_button"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_row="1"
+            android:layout_column="2"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/gmarketmedium"
+            android:gravity="center"
+            android:text="최대 심박수"
+            android:textColor="@color/none_selected_button"
+            android:textSize="18sp" />
+    </GridLayout>
+
+
+    <!-- 남은 시간   -->
+    <GridLayout
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:columnCount="2"
+        android:padding="10dp"
+        android:rowCount="2"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="180dp"
+            android:fontFamily="@font/gmarketmedium"
+            android:gravity="center"
+            android:text="남은 시간"
+            android:textColor="@color/none_selected_button"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="180dp"
+            android:layout_column="1"
+            android:fontFamily="@font/gmarketmedium"
+            android:gravity="center"
+            android:text="목표 시간"
+            android:textColor="@color/none_selected_button"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- 시간 결과 -->
+        <TextView
+            android:layout_width="180dp"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/gmarketmedium"
+            android:gravity="center"
+            android:text="남은 시간"
+            android:textColor="@color/none_selected_button"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="180dp"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/gmarketmedium"
+            android:gravity="center"
+            android:text="목표 시간"
+            android:textColor="@color/none_selected_button"
+            android:textSize="18sp" />
+    </GridLayout>
+
+    <!-- 운동 종료하기 버튼 활성화   -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        >
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="운동 종료"
+            android:textColor="@color/default_text"
+            android:fontFamily="@font/gmarketmedium"
+            android:backgroundTint="@color/button_bg" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

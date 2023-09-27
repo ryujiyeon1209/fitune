@@ -5,10 +5,21 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#FF000030</color>
 
+    <!--    -->
+    <color name="my_statusbar_color">#FF000000</color>
+    <color name="my_surface_color">#FF0000</color>
+
+    <!--  앱 main colors  -->
     <color name="gradation">#E6FFE8</color>
     <color name="main_color">#80ED99</color>
     <color name="button_bg">#C7F9CC</color>
     <color name="default_text">#22577A</color>
     <color name="none_selected_button">#CAD4C8</color>
-    
+
+    <!--  아이콘 colors  -->
+    <color name="crown">#F4B249</color>
+    <color name="exp">#22577A</color>
+    <color name="bpm">#F05C5C</color>
+
+
 </resources>
