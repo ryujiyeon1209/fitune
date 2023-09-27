@@ -1,6 +1,7 @@
 package io.b306.fitune.fragment
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +16,9 @@ import com.bumptech.glide.Glide
 import io.b306.fitune.R
 import io.b306.fitune.activity.TutorialsActivity
 import io.b306.fitune.databinding.FragmentTutorial1Binding
+import io.b306.fitune.room.MyInfoDao
+import io.b306.fitune.room.MyInfoDao_Impl
+import io.b306.fitune.room.MyInfoEntity
 import kotlin.math.log
 
 class Tutorial1Fragment : Fragment() {
@@ -59,8 +63,22 @@ class Tutorial1Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnTutorial1.setOnClickListener{
-            // 버튼이 클릭되면 다음 페이지로 이동
-            pageNavigator?.moveToNextPage()
+            // 버튼이 클릭되면 다이얼로그를 띄웁니다.
+            AlertDialog.Builder(context).apply {
+                setTitle("심박수 설정")
+                var restingBPM = heartRateTextView.text
+                // room 에다가 이거 넣어야 대
+                val myInfo =  MyInfoDao. ?: MyInfoEntity()
+                myInfo.bpm = bpm
+
+                my_info_dao.insert(my_info)
+                setMessage("안정 심박수를 ${restingBPM}로 설정하시겠습니까?")
+                setPositiveButton("예") { _, _ ->
+                    // "예" 버튼을 누르면 다음 페이지로 이동
+                    pageNavigator?.moveToNextPage()
+                }
+                setNegativeButton("아니오", null)
+            }.show()
         }
     }
 

@@ -16,7 +16,7 @@ data class MyInfoEntity (
     var activeBpm: Int = 0,
     var height: Int = 0,
     var weight: Int = 0,
-    // 유저의 세포 정보
+    // 유저의 세포
     var cellSeq: Int = 0,
     var cellExp: Int = 0,
     var cellName: String = "",
