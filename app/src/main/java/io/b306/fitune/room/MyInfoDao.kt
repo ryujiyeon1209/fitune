@@ -34,5 +34,5 @@ interface MyInfoDao {
     // @Query("Select * from `myinfo_table` where id=:id")
     // fun fetchEmployeeById(id: Int): Flow<MyInfoEntity>
     @Query("Select * from `myinfo_table` where id=1")
-    suspend fun fetchMyInfo(): Flow<MyInfoEntity>
+    fun fetchMyInfo(): Flow<MyInfoEntity>
 }

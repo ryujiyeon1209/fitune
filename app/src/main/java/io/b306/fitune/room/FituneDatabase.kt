@@ -32,7 +32,7 @@ abstract class FituneDatabase: RoomDatabase() {
                         // 데이터베이스를 구축
                         context.applicationContext,
                         FituneDatabase::class.java,
-                        "employee_database"
+                        "fitune_database"
                     ).fallbackToDestructiveMigration()
                         .build()
                     // 이제 INSTANCE 객체에 instance를 할당 가능
