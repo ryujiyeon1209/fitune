@@ -2,6 +2,7 @@ package com.fun.fitune.api.controller;
 
 import com.fun.fitune.api.dto.request.CellRequest;
 import com.fun.fitune.api.dto.request.NicknameRequest;
+import com.fun.fitune.api.dto.request.UserCreateRequest;
 import com.fun.fitune.api.dto.request.UserInfoRequest;
 import com.fun.fitune.api.dto.response.CellResponse;
 import com.fun.fitune.api.dto.response.CommonResponse;
@@ -50,6 +51,19 @@ public class UserController {
         User userInfo = userService.getUserInfo(userSeq);
         return new ResponseEntity<>(
                 makeCommonResponse(SUCCESS, new UserInfoResponse(userInfo)), HttpStatus.OK);
+    }
+
+    //사용자 생성
+    @Operation(summary = "사용자 생성", description = "사용자를 생성한다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = UserInfoResponse.class))),
+            @ApiResponse(responseCode = "400", description = "bad request operation", content = @Content(schema = @Schema(implementation = ExceptionResponse.class)))
+    })
+    @PostMapping("/create")
+    public ResponseEntity<CommonResponse<String>> addUser(@RequestBody UserCreateRequest userCreateRequest){
+        System.out.println("사용자 생성");
+        return new ResponseEntity<>(
+                makeCommonResponse(SUCCESS, userService.insertUser(userCreateRequest)), HttpStatus.OK);
     }
 
 
