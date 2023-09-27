@@ -5,7 +5,6 @@ import com.fun.fitune.api.dto.request.NicknameRequest;
 import com.fun.fitune.api.dto.request.UserCreateRequest;
 import com.fun.fitune.api.dto.request.UserInfoRequest;
 import com.fun.fitune.api.dto.request.UserLoginRequest;
-import com.fun.fitune.api.dto.response.UserInfoResponse;
 import com.fun.fitune.api.dto.response.UserSuperResponse;
 import com.fun.fitune.db.domain.*;
 import com.fun.fitune.db.repository.*;

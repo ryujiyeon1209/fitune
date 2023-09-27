@@ -52,10 +52,6 @@ public class UserController {
 
     //사용자 생성
     @Operation(summary = "사용자 생성", description = "사용자를 생성한다.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = UserInfoResponse.class))),
-            @ApiResponse(responseCode = "400", description = "bad request operation", content = @Content(schema = @Schema(implementation = ExceptionResponse.class)))
-    })
     @PostMapping("/create")
     public ResponseEntity<CommonResponse<String>> addUser(@RequestBody UserCreateRequest userCreateRequest){
         System.out.println("사용자 생성");
@@ -64,11 +60,7 @@ public class UserController {
     }
 
     @Operation(summary = "로그인", description = "로그인한다.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = UserInfoResponse.class))),
-            @ApiResponse(responseCode = "400", description = "bad request operation", content = @Content(schema = @Schema(implementation = ExceptionResponse.class)))
-    })
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<CommonResponse<Boolean>> loginUser(@RequestBody UserLoginRequest loginRequest){
         System.out.println("로그인");
         return new ResponseEntity<>(
