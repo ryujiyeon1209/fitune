@@ -43,6 +43,13 @@ android {
 
 dependencies {
 
+    // retrofit 사용
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    // Gson 변환기
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    // 로깅을 위해
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")

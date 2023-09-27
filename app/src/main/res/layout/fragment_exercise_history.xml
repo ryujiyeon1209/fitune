@@ -7,16 +7,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="운동 기록"
+        android:fontFamily="@font/gmarketbold"
+        android:textSize="30sp"
+        android:textColor="@color/default_text"
+        android:layout_marginVertical="20dp"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp"
+        android:paddingHorizontal="35dp"
+        >
 
         <ImageButton
             android:id="@+id/btn_previousMonth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_left"/>
+            android:src="@drawable/ic_arrow_left"
+            android:layout_gravity="center"
+            />
 
         <TextView
             android:id="@+id/tv_currentMonthYear"
@@ -24,21 +40,103 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="24sp"/>
+            android:textSize="24sp"
+            android:text="2023년 9월"
+            android:fontFamily="@font/gmarketmedium"
+            android:layout_gravity="center"
+            />
 
         <ImageButton
             android:id="@+id/btn_nextMonth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_right"/>
+            android:src="@drawable/ic_arrow_right"
+            android:layout_gravity="center"
+            />
+
+    </LinearLayout>
+
+    <!-- 요일 헤더 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginVertical="10dp"
+        android:paddingHorizontal="10dp"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="S"
+            android:gravity="center"
+            android:fontFamily="@font/gmarketmedium"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="M"
+            android:gravity="center"
+            android:fontFamily="@font/gmarketmedium"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="T"
+            android:gravity="center"
+            android:fontFamily="@font/gmarketmedium"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="W"
+            android:gravity="center"
+            android:fontFamily="@font/gmarketmedium"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="T"
+            android:gravity="center"
+            android:fontFamily="@font/gmarketmedium"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="F"
+            android:gravity="center"
+            android:fontFamily="@font/gmarketmedium"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="S"
+            android:gravity="center"
+            android:fontFamily="@font/gmarketmedium"
+            />
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_calendar"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:numColumns="7"
-        android:layout_marginBottom="15dp"
+        tools:listitem="@layout/item_calendar_day"
+        android:paddingHorizontal="10dp"
         />
 
     <LinearLayout
@@ -63,6 +161,7 @@
                 android:textSize="18sp"
                 app:layout_constraintTop_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:fontFamily="@font/gmarketmedium"
                 />
 
             <View
@@ -78,6 +177,7 @@
                 android:textSize="18sp"
                 app:layout_constraintTop_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/gmarketmedium"
                 />
 
         </LinearLayout>
@@ -95,22 +195,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
             >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="20dp"
+                android:paddingHorizontal="60dp"
                 >
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="종목"
-                    />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/gmarketbold"
+                        android:text="런닝"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/gmarketmedium"
+                        android:text="종목"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
 
                 <View
                     android:layout_width="wrap_content"
@@ -118,11 +234,30 @@
                     android:layout_weight="1"
                     />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="달리기"
-                    />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:text="50분"
+                        android:fontFamily="@font/gmarketbold"
+                        android:textSize="25sp"
+                        android:layout_gravity="center"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="운동 시간"
+                        android:fontFamily="@font/gmarketmedium"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -130,14 +265,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="15dp"
                 >
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="운동 시간"
-                    />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:text="120"
+                        android:fontFamily="@font/gmarketbold"
+                        android:textSize="25sp"
+                        android:layout_gravity="center"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="평균 심박수"
+                        android:fontFamily="@font/gmarketmedium"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        />
+
+                </LinearLayout>
 
                 <View
                     android:layout_width="wrap_content"
@@ -145,26 +298,30 @@
                     android:layout_weight="1"
                     />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="00:34:02"
-                    />
+                    android:orientation="vertical">
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:text="150"
+                        android:fontFamily="@font/gmarketbold"
+                        android:textSize="25sp"
+                        android:layout_gravity="center"
+                        />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp"
-                >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="최고 심박수"
+                        android:fontFamily="@font/gmarketmedium"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="평균 심박수"
-                    />
+                </LinearLayout>
 
                 <View
                     android:layout_width="wrap_content"
@@ -172,67 +329,32 @@
                     android:layout_weight="1"
                     />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="120BPM"
-                    />
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_star_three"
+                        android:layout_marginBottom="5dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="후기"
+                        android:fontFamily="@font/gmarketmedium"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="최대 심박수"
-                    />
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="140BPM"
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="후기"
-                    />
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="4 / 5"
-                    />
-
-            </LinearLayout>
 
         </LinearLayout>
 
