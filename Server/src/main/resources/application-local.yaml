@@ -21,17 +21,17 @@
 #    init:
 #      mode: never
 #
-oauth:
-  google:
-    client-id: 17a1b4d9fcc605cecc82fd7399c0717f
-    url:
-      auth: https://kauth.kakao.com
-      api: https://kapi.kakao.com
-      client-id:
-      client-secret:
-
-jwt:
-  secret-key: Z29nby10bS1zZXJ2ZXItZGxyamVvYW9yb3JodG9kZ290c3Atam9vbmdhbmduaW0teWVvbHNpbWhpaGFsZ2VveW8K
+#oauth:
+#  google:
+#    client-id: 17a1b4d9fcc605cecc82fd7399c0717f
+#    url:
+#      auth: https://kauth.kakao.com
+#      api: https://kapi.kakao.com
+#      client-id:
+#      client-secret:
+#
+#jwt:
+#  secret-key: Z29nby10bS1zZXJ2ZXItZGxyamVvYW9yb3JodG9kZ290c3Atam9vbmdhbmduaW0teWVvbHNpbWhpaGFsZ2VveW8K
 #      scopre:
 #
 #
