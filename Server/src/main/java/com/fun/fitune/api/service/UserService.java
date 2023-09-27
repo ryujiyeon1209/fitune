@@ -134,4 +134,48 @@ public class UserService {
 
         return cellName;
     }
+
+    public int updateHeight(int userSeq, int height) {
+        User user = userRepository.findByUserSeq(userSeq).orElseThrow();
+
+        user.setHeight(height);
+
+        userRepository.save(user);
+
+        return height;
+    }
+
+    public int updateWeight(int userSeq, int weight) {
+        User user = userRepository.findByUserSeq(userSeq).orElseThrow();
+
+        user.setWeight(weight);
+
+        userRepository.save(user);
+
+        return weight;
+    }
+
+    public int updateTension(int userSeq, int tension) {
+        User user = userRepository.findByUserSeq(userSeq).orElseThrow();
+
+        user.setTension(tension);
+
+        userRepository.save(user);
+
+        return tension;
+    }
+
+    public String updatePrefer(int userSeq, Byte preferSeq){
+        User user = userRepository.findByUserSeq(userSeq).orElseThrow();
+
+        PreferExercise preferExercise = preferExerciseRepository.findByUser(user).orElseThrow();
+
+        ExerciseList exerciseList = exerciseListRepository.findByExerciseListSeq(preferSeq);
+
+        preferExercise.setExerciseList(exerciseList);
+
+        preferExerciseRepository.save(preferExercise);
+
+        return exerciseList.getExerciseName();
+    }
 }

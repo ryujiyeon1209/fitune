@@ -151,6 +151,34 @@ public class UserController {
     }
 
 
+    @Operation(summary = "키 수정")
+    @PatchMapping("/edit/height/{userSeq}/{height}")
+    public ResponseEntity<CommonResponse<Integer>> modifyHeight(@PathVariable("userSeq") int userSeq, @PathVariable("height") int height){
+        return new ResponseEntity<>(makeCommonResponse(SUCCESS, userService.updateHeight(userSeq, height)), HttpStatus.OK);
+    }
+
+
+    @Operation(summary = "몸무게 수정")
+    @PatchMapping("/edit/weight/{userSeq}/{weight}")
+    public ResponseEntity<CommonResponse<Integer>> modifyWeight(@PathVariable("userSeq") int userSeq, @PathVariable("weight") int weight){
+        return new ResponseEntity<>(makeCommonResponse(SUCCESS, userService.updateWeight(userSeq, weight)), HttpStatus.OK);
+    }
+
+
+    @Operation(summary = "운동 강도 수정")
+    @PatchMapping("/edit/tension/{userSeq}/{tension}")
+    public ResponseEntity<CommonResponse<Integer>> modifyTension(@PathVariable("userSeq") int userSeq, @PathVariable("tension") int tension){
+        return new ResponseEntity<>(makeCommonResponse(SUCCESS, userService.updateTension(userSeq, tension)), HttpStatus.OK);
+    }
+
+
+    @Operation(summary = "선호 운동 수정")
+    @PostMapping("edit/prefer/{userSeq}/{preferSeq}")
+    public ResponseEntity<CommonResponse<String>> modifyPrefer(@PathVariable("userSeq") int userSeq, @PathVariable("preferSeq") Byte preferSeq){
+        return new ResponseEntity<>(makeCommonResponse(SUCCESS, userService.updatePrefer(userSeq, preferSeq)), HttpStatus.OK);
+    }
+
+
     private <T> CommonResponse<T> makeCommonResponse(String message, T data) {
         return CommonResponse.<T>builder()
                 .message(message)
