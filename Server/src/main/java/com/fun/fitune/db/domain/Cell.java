@@ -23,7 +23,10 @@ public class Cell {
     private String cellName;
 
     @Column(name = "cell_exp")
-    private int cellExp;
+    private long cellExp;
+
+    @Column(name = "cell_latest_exp")
+    private int cellLatestExp;
 
     @ManyToOne
     @JoinColumn(name = "user_seq")

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -18,6 +19,32 @@ spring:
       mode: always
 
 oauth:
+=======
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://j9b306.p.ssafy.io:3306/B306?serverTimezone=Asia/Seoul
+#    username: developer
+#    password: fjksdg
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: none
+#    properties:
+#      hibernate:
+#        format_sql: true
+#    show-sql: true
+#    defer-datasource-initialization: true
+#    database: mysql
+#    data.rest:
+#      base-path: /api
+#      detection-strategy: annotated
+#  sql:
+#    init:
+#      mode: never
+#
+#oauth:
+>>>>>>> 5097b61f9375ab5e5763abf80338cee3293a2a64
 #  google:
 #    client-id: 17a1b4d9fcc605cecc82fd7399c0717f
 #    url:
@@ -25,13 +52,33 @@ oauth:
 #      api: https://kapi.kakao.com
 #      client-id:
 #      client-secret:
+#
+#jwt:
+#  secret-key: Z29nby10bS1zZXJ2ZXItZGxyamVvYW9yb3JodG9kZ290c3Atam9vbmdhbmduaW0teWVvbHNpbWhpaGFsZ2VveW8K
 #      scopre:
-
-
-logging:
-  level:
-    org:
+#
+#
+#logging:
+#  level:
+#    org:
+#      hibernate:
+#        SQL: debug
+#        type: trace
+#
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+      # use-new-id-generator-mappings: true
+    show-sql: true
+    properties:
       hibernate:
-        SQL: debug
-        type: trace
+        format_sql: true
+  datasource:
+    url: jdbc:mysql://j9b306.p.ssafy.io:3306/B306?serverTimezone=Asia/Seoul
+    username: developer
+    password: fjksdg
 
+django:
+  server:
+    url: "http://j9b306.p.ssafy.io:8000"  # Django 서버

@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class UserInfoRequest {
     int userSeq;
-    int age;
-    int height;
-    int weight;
+    private int age;
+    private int height;
+    private int weight;
 }

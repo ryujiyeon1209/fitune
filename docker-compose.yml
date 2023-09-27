@@ -10,20 +10,19 @@ services:
     ports:
       - 5000:5000
 
-  mysql:
-    image: mysql:8.0.34
-    container_name: mysql-container
+  django:
+    image: zhdwldus/django:latest
+    container_name: django-container
     networks:
       - mynetwork
+    restart: always
     ports:
-      - 3306:3306
-    environment:
-      MYSQL_ROOT_PASSWORD: dsildlfj
-      MYSQL_DATABASE: B306
-      MYSQL_USER: developer
-      MYSQL_PASSWORD: fjksdg
-    volumes:
-      - mysql-data:/var/lib/mysql
+      - 8000:8000
+    depends_on:
+      - spring
 
 networks:
   mynetwork:
+
+volumes:
+  mysql-data:

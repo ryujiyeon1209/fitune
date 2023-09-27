@@ -10,11 +10,14 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CellResponse {
     String cellName;
-    int cellExp;
+    long cellExp;
     int userSeq;
+    int cellLatestExp;
+
     public CellResponse(Cell cell){
         this.cellName = cell.getCellName();
         this.cellExp = cell.getCellExp();
-        this.userSeq = cell.getCellSeq();
+        this.userSeq = cell.getUser().getUserSeq();
+        this.cellLatestExp = cell.getCellLatestExp();
     }
 }
