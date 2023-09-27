@@ -7,8 +7,8 @@ services:
     networks:
       - mynetwork
     restart: always
-    ports:
-      - 5000:5000
+    # ports:
+    #   - 5000:5000
 
   django:
     image: zhdwldus/django:latest
@@ -16,8 +16,8 @@ services:
     networks:
       - mynetwork
     restart: always
-    ports:
-      - 8000:8000
+    # ports:
+    #   - 8000:8000
     depends_on:
       - spring
 
