@@ -142,7 +142,7 @@
             android:layout_marginTop="15dp"
             >
             <Button
-                android:id="@+id/btn_tutorial3Start"
+                android:id="@+id/btn_exerciseStart"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
