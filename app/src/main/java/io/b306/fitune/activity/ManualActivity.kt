@@ -19,7 +19,6 @@ class ManualActivity : AppCompatActivity() {
     private lateinit var binding: ActivityManualBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_manual)
 
         binding = ActivityManualBinding.inflate(layoutInflater)
         setContentView(binding.root)
