@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  spring:
+    image: zhdwldus/spring:latest
+    container_name: spring-container
+    networks:
+      - mynetwork
+    restart: always
+    ports:
+      - 5000:5000
+    volumes:
+      - /home/ubuntu:/certs # 호스트 디렉토리와 컨테이너 내부 디렉토리를 연결
+
+  django:
+    image: zhdwldus/django:latest
+    container_name: django-container
+    networks:
+      - mynetwork
+    restart: always
+    ports:
+      - 8000:8000
+    depends_on:
+      - spring
+
+networks:
+  mynetwork:
+
+volumes:
+  mysql-data:
