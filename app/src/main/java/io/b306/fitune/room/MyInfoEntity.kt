@@ -10,13 +10,13 @@ data class MyInfoEntity (
     var userSeq: Int = 0,
     var nickname: String = "",
     var email: String = "",
-    var birth: String = "",
+    var age: Int = 0,
     var bpm: Int = 0,
     var restingBpm: Int = 0,
     var activeBpm: Int = 0,
     var height: Int = 0,
     var weight: Int = 0,
-    // 유저의 세포 정보
+    // 유저의 세포
     var cellSeq: Int = 0,
     var cellExp: Int = 0,
     var cellName: String = "",

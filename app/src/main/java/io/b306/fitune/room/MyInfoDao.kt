@@ -3,16 +3,18 @@ package io.b306.fitune.room
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MyInfoDao {
+
     // 시간이 걸릴 수 있기 때문에 주 스레드에서 하면 안 됨
     // Coroutines를 통해 사용할 수 있는 백그라운드 스레드에서 수행해야 함
     // 그래서 suspend fun
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(myInfoEntity: MyInfoEntity)
 
     @Update
@@ -34,5 +36,5 @@ interface MyInfoDao {
     // @Query("Select * from `myinfo_table` where id=:id")
     // fun fetchEmployeeById(id: Int): Flow<MyInfoEntity>
     @Query("Select * from `myinfo_table` where id=1")
-    fun fetchMyInfo(): Flow<MyInfoEntity>
+    suspend fun getMyInfo(): MyInfoEntity?
 }

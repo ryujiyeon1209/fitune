@@ -2,14 +2,20 @@ package io.b306.fitune.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import io.b306.fitune.adapter.ExerciseAdapter
 import io.b306.fitune.model.ExerciseList
 import io.b306.fitune.databinding.FragmentTutorial2Binding
+import io.b306.fitune.room.FituneDatabase
+import io.b306.fitune.room.MyInfoEntity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class Tutorial2Fragment : Fragment() {
 
@@ -48,6 +54,32 @@ class Tutorial2Fragment : Fragment() {
         }
 
         binding.btnTutorial2.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.IO) {
+
+                // Get an instance of MyInfoDao.
+                val myInfoDao = FituneDatabase.getInstance(requireContext()).myInfoDao()
+
+                // Retrieve user info from the database.
+                val myInfoEntity = myInfoDao.getMyInfo() ?: MyInfoEntity()
+
+                // Get selected exercise from adapter
+                val selectedExercise = (binding.rvExerciseList.adapter as? ExerciseAdapter)?.let {
+                    if (it.selectedPosition != -1) it.exercises[it.selectedPosition] else null
+                }
+
+                if (selectedExercise != null) {
+                    // Set preferred exercise.
+                    myInfoEntity.preferExercise = selectedExercise.name
+
+                    if (myInfoEntity.id != null) {
+                        myInfoDao.update(myInfoEntity)
+                        Log.d("현재 유저",myInfoEntity.toString())
+                    } else {
+                        Log.d("유저의 id 값",myInfoEntity.id.toString())
+                    }
+                }
+
+            }
             pageNavigator?.moveToNextPage()
         }
     }

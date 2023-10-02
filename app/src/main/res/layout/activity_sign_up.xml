@@ -10,7 +10,7 @@
 
     <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="230dp">
+        android:layout_height="214dp">
 
         <View
             android:layout_width="match_parent"
@@ -49,13 +49,66 @@
         android:layout_marginBottom="15dp"
         />
 
+    <!-- 계정 정보 입력   -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:paddingHorizontal="22dp"
-        android:layout_marginBottom="30dp"
-        >
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gmarketmedium"
+            android:text="이메일"
+            android:textColor="@color/default_text"
+            android:textSize="20sp"
+            />
+
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:textSize="18dp"
+            android:background="@drawable/rounded_edittext"
+            android:gravity="center_vertical|start" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="22dp"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gmarketmedium"
+            android:text="비밀번호"
+            android:textColor="@color/default_text"
+            android:textSize="20sp"
+            />
+
+        <EditText
+            android:id="@+id/pwdEditText"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_edittext"
+            android:textSize="18dp"
+            android:gravity="center_vertical|start"
+            android:layout_marginStart="10dp"
+            android:inputType="textPassword"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="22dp"
+        android:layout_marginBottom="30dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -64,19 +117,20 @@
             android:text="닉네임"
             android:textColor="@color/default_text"
             android:textSize="20sp"
-            android:layout_marginBottom="15dp"
             />
 
         <EditText
+            android:id="@+id/nickNameEditText"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_edittext"
-            android:paddingHorizontal="10dp"
-            android:gravity="center"
-            android:maxLength="20"
-            />
-
+            android:textSize="18dp"
+            android:gravity="center_vertical|start"
+            android:layout_marginStart="28dp" />
     </LinearLayout>
+
+
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -100,7 +154,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingHorizontal="22dp"
         >
 
         <LinearLayout
@@ -119,16 +172,17 @@
                 android:textColor="@color/default_text"
                 android:textSize="20sp"
                 android:layout_marginRight="20dp"
-                android:gravity="center"
                 />
 
             <EditText
+                android:id="@+id/heightEditText"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_edittext"
                 android:layout_marginRight="20dp"
+                android:textSize="18dp"
                 android:gravity="center"
-                android:maxLength="3"
+                android:maxLength="20"
                 android:inputType="number"
                 />
 
@@ -164,10 +218,12 @@
                 />
 
             <EditText
+                android:id="@+id/weightEditText"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_edittext"
                 android:layout_marginRight="20dp"
+                android:textSize="18dp"
                 android:gravity="center"
                 android:maxLength="3"
                 android:inputType="number"
@@ -201,14 +257,15 @@
                 android:textColor="@color/default_text"
                 android:textSize="20sp"
                 android:layout_marginRight="20dp"
-                android:gravity="center"
                 />
 
             <EditText
+                android:id="@+id/ageEditText"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_edittext"
                 android:layout_marginRight="20dp"
+                android:textSize="18dp"
                 android:gravity="center"
                 android:maxLength="3"
                 android:inputType="number"
@@ -223,7 +280,6 @@
                 android:textSize="20sp"
                 android:layout_gravity="center"
                 />
-
         </LinearLayout>
 
 

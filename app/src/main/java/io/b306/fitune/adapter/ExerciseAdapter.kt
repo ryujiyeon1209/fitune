@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import io.b306.fitune.model.Exercise
 import io.b306.fitune.R
 
-class ExerciseAdapter(private val exercises: List<Exercise>) : RecyclerView.Adapter<ExerciseViewHolder>() {
+class ExerciseAdapter(val exercises: List<Exercise>) : RecyclerView.Adapter<ExerciseViewHolder>() {
 
-    private var selectedPosition = -1  // 선택된 아이템의 위치를 추적합니다.
+    var selectedPosition = -1  // 선택된 아이템의 위치를 추적합니다.
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
         // 여기서 ViewHolder를 생성하고 반환합니다.
