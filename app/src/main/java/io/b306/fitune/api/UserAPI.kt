@@ -8,4 +8,8 @@ import retrofit2.http.Path
 interface UserAPI {
     @GET("user/info/{userId}")
     fun getUserInfo(@Path("userId") userId: Int) : Call<UserResponse>
+
+    @GET("battle/{userId}")
+    fun getUserList(@Path("userId") userId: Int): Call<CellResponse>
+
 }

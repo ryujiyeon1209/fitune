@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiObject {
-    private const val BASE_URL = "http://j9b306.p.ssafy.io:5000/api/"
+    private const val BASE_URL = "https://j9b306.p.ssafy.io/v1/api/"
 
     private val loggingInterceptor by lazy {
         HttpLoggingInterceptor().apply {
