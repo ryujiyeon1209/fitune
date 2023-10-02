@@ -2,6 +2,7 @@ package io.b306.fitune.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
@@ -44,8 +45,9 @@ class LoginActivity : AppCompatActivity() {
                     val call: Call<LoginResponse> = loginAPI.login(requestBody)
                     val response: Response<LoginResponse> = call.execute()     // Call 객체를 실행하여 Response로 변환
 
+
                     //로그인 성공 > 정보를 room에 저장하기!
-                    if (response.message().equals("SUCCESS")) {
+                    if (response.isSuccessful) {
                         // 새로운 API 호출
 //                        val superEmailAPI = ApiObject.getRetrofitService.getSuperEmail()
 //                        val superEmailResponse: Response<YourResponseModel> = superEmailAPI.execute()
@@ -55,6 +57,8 @@ class LoginActivity : AppCompatActivity() {
 //
 //                        }
 
+                    } else {
+                        Log.d("로그인되염","ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ")
                     }
 
                     // 오류 처리
