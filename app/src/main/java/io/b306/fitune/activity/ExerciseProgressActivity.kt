@@ -28,12 +28,25 @@ class ExerciseProgressActivity : AppCompatActivity() {
     private lateinit var bluetoothAdapter: BluetoothAdapter
     private var bluetoothGatt: BluetoothGatt? = null
     var nowHeartRate = MutableLiveData<String>()
+    var maxHeartRate = 0;
+    var avgHeartRate =0;
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityExerciseProgressBinding.inflate(layoutInflater)
-        setContentView(R.layout.fragment_exercise_progress)
+        setContentView(binding.root)
         findDevice()
+
+        nowHeartRate.observe(this) { heartRate ->
+            binding.curHeart.text = heartRate  // 현재 심박수 업데이트
+
+            // 평균 및 최대 심박수 계산 로직이 필요합니다.
+            // 아래는 예시로 임의의 값을 설정하는 코드입니다.
+            avgHeartRate += heartRate.toInt()
+            maxHeartRate = heartRate.toInt().coerceAtLeast(maxHeartRate)
+            binding.avgHeart.text = (avgHeartRate/4).toString()
+            binding.maxHeart.text = maxHeartRate.toString()
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
