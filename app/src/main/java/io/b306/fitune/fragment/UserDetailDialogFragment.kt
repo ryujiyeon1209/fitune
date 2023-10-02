@@ -6,7 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.fragment.app.DialogFragment
-import io.b306.fitune.model.UserData
+import io.b306.fitune.model.BattleUserData
 import io.b306.fitune.databinding.FragmentUserDetailDialogBinding
 
 class UserDetailDialogFragment : DialogFragment() {
@@ -19,17 +19,17 @@ class UserDetailDialogFragment : DialogFragment() {
 
 
         // SDK 33이상이면 새로운 getParcelable 메소드를 사용
-        val user: UserData? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arguments?.getParcelable("user", UserData::class.java)
+        val user: BattleUserData? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            arguments?.getParcelable("user", BattleUserData::class.java)
         } else {
             arguments?.getParcelable("user")
         }
 
         user?.let {
-            binding.tvClickUserName.text = it.userName
-            binding.ivUserProfile.setImageResource(it.userImageResource)
-            binding.tvUserLv.text = "레벨 : ${it.userLevel}"
-            binding.tvUserBpm.text = "심박수 : ${it.userBpm}"
+            binding.tvClickUserName.text = it.cellName
+//            binding.ivUserProfile.setImageResource(it.userImageResource)
+            binding.tvUserLv.text = "키 : ${it.height}"
+            binding.tvUserBpm.text = "심박수 : ${it.bpm}"
         }
 
         binding.btnUserDetailDialogClose.setOnClickListener{
