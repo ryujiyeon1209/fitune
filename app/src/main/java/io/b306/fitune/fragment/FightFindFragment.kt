@@ -18,19 +18,19 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FightFindFragment : Fragment() {
-    private var userList: List<BattleUserData> = emptyList() // userList를 클래스 멤버 변수로 추가
-    private var _binding: FragmentFightFindBinding? = null
-    private val binding get() = _binding!!
+        private var userList: List<BattleUserData> = emptyList() // userList를 클래스 멤버 변수로 추가
+                private var _binding: FragmentFightFindBinding? = null
+                private val binding get() = _binding!!
 
-    override fun onCreateView(
+                override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentFightFindBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+        ): View? {
+            _binding = FragmentFightFindBinding.inflate(inflater, container, false)
+            return binding.root
+        }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // Retrofit을 사용하여 API 호출
