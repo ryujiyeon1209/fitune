@@ -28,9 +28,9 @@ class UserDetailDialogFragment : DialogFragment() {
         user?.let {
             binding.tvClickUserName.text = it.cellName
 //            binding.ivUserProfile.setImageResource(it.userImageResource)
-            binding.tvUserHeight.text = "키 : ${it.height}"
-            binding.tvUserWeight.text = "몸무게 : ${it.weight}"
-            binding.tvUserBpm.text = "심박수 : ${it.bpm}"
+            binding.tvUserHeight.text = "${it.height}cm"
+            binding.tvUserWeight.text = "${it.weight}kg"
+            binding.tvUserBpm.text = "${it.bpm}bpm"
         }
 
         binding.btnUserDetailDialogClose.setOnClickListener{
