@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Fitune" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimaryDark">@color/default_text</item>
+    </style>
+
+    <style name="Theme.Fitune" parent="Base.Theme.Fitune" />
+</resources>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.Manual1Fragment">
+
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".activity.ManualActivity">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="사용 설명서"
+            android:textSize="30sp"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:fontFamily="@font/gmarketbold"
+            android:textColor="@color/default_text"
+            />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="370dp"
+            android:background="@drawable/bg_middle">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:columnCount="2"
+                android:padding="30dp"
+                android:rowCount="2">
+
+                <!-- Grid Item 1 -->
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center"
+                    android:background="@drawable/item_circular_white"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/gmarketmedium"
+                        android:gravity="center"
+                        android:text="런닝"
+                        android:textColor="@color/none_selected_button"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_jogging"
+                        app:tint="@color/none_selected_button" />
+
+                </LinearLayout>
+
+
+                <!-- Grid Item 2 -->
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center"
+                    android:background="@drawable/item_circular_white"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/gmarketmedium"
+                        android:gravity="center"
+                        android:text="수영"
+                        android:textColor="@color/default_text"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_table_tennis" />
+
+                </LinearLayout>
+
+                <!-- Grid Item 3 -->
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center"
+                    android:background="@drawable/item_circular_white"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/gmarketmedium"
+                        android:gravity="center"
+                        android:text="스쿼트"
+                        android:textColor="@color/none_selected_button"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_squat"
+                        app:tint="@color/none_selected_button" />
+
+                </LinearLayout>
+
+                <!-- Grid Item 4 -->
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center"
+                    android:background="@drawable/item_circular_white"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/gmarketmedium"
+                        android:gravity="center"
+                        android:text="자전거"
+                        android:textColor="@color/none_selected_button"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_cycling"
+                        app:tint="@color/none_selected_button" />
+
+                </LinearLayout>
+            </GridLayout>
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="선호하는 운동을 선택해보세요!"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:fontFamily="@font/gmarketbold"
+            android:textColor="@color/default_text"
+            android:layout_marginBottom="30dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="좋아하는 운동을 선택해보세요.\n
+매일 매일 좋아하는 운동의\n
+난이도를 추천해줄게요!"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:fontFamily="@font/gmarketmedium"
+            android:textColor="@color/default_text"
+            android:lineSpacingExtra="7sp"
+            />
+
+    </LinearLayout>
+
+</FrameLayout>
