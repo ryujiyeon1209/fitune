@@ -25,6 +25,7 @@ class SignUpActivity : AppCompatActivity() {
         // 회원가입 버튼 클릭
         binding.btnSignUp.setOnClickListener{
             val email = binding.etSignUpEmail.text.toString()
+            val password = binding.etSignUpPwd.text.toString()
             val nickname = binding.etSignUpNickName.text.toString()
             val height = binding.etSignUpHeight.text.toString().toIntOrNull() ?: 0
             val weight = binding.etSignUpWeight.text.toString().toIntOrNull() ?: 0
@@ -35,6 +36,7 @@ class SignUpActivity : AppCompatActivity() {
                 if (myInfoEntity != null) {
                     // Update existing entity
                     myInfoEntity.email = email
+                    myInfoEntity.password = password
                     myInfoEntity.nickname = nickname
                     myInfoEntity.height=height
                     myInfoEntity.weight=weight
