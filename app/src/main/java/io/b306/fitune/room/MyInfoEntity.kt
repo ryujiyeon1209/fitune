@@ -8,21 +8,24 @@ import androidx.room.PrimaryKey
 data class MyInfoEntity (
     // 기본 유저 정보
     var userSeq: Int = 0,
-    var nickname: String = "",
     var email: String = "",
+    var password: String = "",
+    var nickname: String = "",
     var age: Int = 0,
-    var bpm: Int = 0,
-    var restingBpm: Int = 0,
-    var activeBpm: Int = 0,
     var height: Int = 0,
     var weight: Int = 0,
+    var bodyFatPercentage: Int = 0,
+    var activeBpm: Int = 0,
+    var restingBpm: Int = 0,
     // 유저의 세포
     var cellSeq: Int = 0,
-    var cellExp: Int = 0,
     var cellName: String = "",
+    var cellExp: Int = 0,
     // 선호 운동
+    var exerciseListSeq: Int = 0,
     var preferExercise: String = "",
     // 운동 기록은 따로 Entity 만듦
+    var tension: Int = 0,
 
 ) {
     @PrimaryKey
