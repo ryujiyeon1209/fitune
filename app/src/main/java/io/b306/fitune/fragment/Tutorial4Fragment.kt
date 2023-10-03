@@ -11,6 +11,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import io.b306.fitune.R
+import io.b306.fitune.activity.LoginActivity
 import io.b306.fitune.activity.MainActivity
 import io.b306.fitune.api.ApiObject
 import io.b306.fitune.api.signUpResponse
@@ -95,7 +96,7 @@ class Tutorial4Fragment : Fragment() {
                     // 네트워크 오류 또는 예외 발생 시 처리
                 }
             }
-            val intent = Intent(context, MainActivity::class.java)
+            val intent = Intent(context, LoginActivity::class.java)
             startActivity(intent)
 
         }

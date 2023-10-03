@@ -17,8 +17,13 @@ data class MyInfoEntity (
     var bodyFatPercentage: Int = 0,
     var activeBpm: Int = 0,
     var restingBpm: Int = 0,
+    var targetBpm : Int = 0,
+    var targetTime : Int = 0,
+    var recommendExercise1 : String = "",
+    var recommendExercise2 : String = "",
+    var recommendExercise3 : String = "",
     // 유저의 세포
-    var cellSeq: Int = 0,
+     var cellSeq: Int = 0,
     var cellName: String = "",
     var cellExp: Int = 0,
     // 선호 운동
