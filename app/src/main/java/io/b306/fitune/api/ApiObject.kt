@@ -42,5 +42,6 @@ object ApiObject {
     val postRetrofitSignUpService: SignUpAPI by lazy {
         getRetrofit.create(SignUpAPI::class.java)
     }
+
 }
 
