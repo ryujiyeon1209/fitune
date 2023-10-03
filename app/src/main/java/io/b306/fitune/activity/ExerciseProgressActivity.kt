@@ -30,14 +30,51 @@ class ExerciseProgressActivity : AppCompatActivity() {
     private lateinit var bluetoothAdapter: BluetoothAdapter
     private var bluetoothGatt: BluetoothGatt? = null
     var nowHeartRate = MutableLiveData<String>()
-    var maxHeartRate = 0;
-    var avgHeartRate =0;
+    private var maxHeartRate = 0;
+    private var avgHeartRate =0;
+    private lateinit var exerciseTimer: TextView
+    private var startTimeMillis: Long = 0
+    private var timerRunning = false
+    private var elapsedTimeMillis: Long = 0
+    private val handler = Handler()
+
+    private fun startTimer() {
+        if (!timerRunning) {
+            handler.post(object : Runnable {
+                override fun run() {
+                    elapsedTimeMillis = System.currentTimeMillis() - startTimeMillis
+                    updateTimerText(elapsedTimeMillis)
+                    handler.postDelayed(this, 1000)
+                }
+            })
+            timerRunning = true
+        }
+    }
+
+    private fun updateTimerText(timeInMillis: Long) {
+        val seconds = (timeInMillis / 1000).toInt()
+        val minutes = seconds / 60
+        val hours = minutes / 60
+
+        val formattedTime = String.format(
+            "%02d:%02d:%02d",
+            hours,
+            minutes % 60,
+            seconds % 60
+        )
+
+        exerciseTimer.text = formattedTime
+    }
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityExerciseProgressBinding.inflate(layoutInflater)
         setContentView(binding.root)
         findDevice()
+
+        exerciseTimer = findViewById(R.id.exerciseTimer)
+        startTimeMillis = System.currentTimeMillis()
+        startTimer()
 
         nowHeartRate.observe(this) { heartRate ->
             binding.curHeart.text = heartRate  // 현재 심박수 업데이트
@@ -48,6 +85,7 @@ class ExerciseProgressActivity : AppCompatActivity() {
             maxHeartRate = heartRate.toInt().coerceAtLeast(maxHeartRate)
             binding.avgHeart.text = (avgHeartRate/4).toString()
             binding.maxHeart.text = maxHeartRate.toString()
+
         }
     }
 
@@ -134,54 +172,4 @@ class ExerciseProgressActivity : AppCompatActivity() {
         fun onExerciseStartButtonClicked()
     }
 
-    //운동 시작하기 > 누적 시간 count
-    class ExerciseProgressActivity : AppCompatActivity(), ExerciseSelectedListener {
-
-        private lateinit var exerciseTimer: TextView
-        private var startTimeMillis: Long = 0
-        private var timerRunning = false
-        private var elapsedTimeMillis: Long = 0
-        private val handler = Handler()
-
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_exercise_progress)
-
-            exerciseTimer = findViewById(R.id.exerciseTimer)
-        }
-
-        // "운동 시작" 버튼 클릭 시 실행할 코드
-        override fun onExerciseStartButtonClicked() {
-            startTimeMillis = System.currentTimeMillis()
-            startTimer()
-        }
-
-        private fun startTimer() {
-            if (!timerRunning) {
-                handler.post(object : Runnable {
-                    override fun run() {
-                        elapsedTimeMillis = System.currentTimeMillis() - startTimeMillis
-                        updateTimerText(elapsedTimeMillis)
-                        handler.postDelayed(this, 1000)
-                    }
-                })
-                timerRunning = true
-            }
-        }
-
-        private fun updateTimerText(timeInMillis: Long) {
-            val seconds = (timeInMillis / 1000).toInt()
-            val minutes = seconds / 60
-            val hours = minutes / 60
-
-            val formattedTime = String.format(
-                "%02d:%02d:%02d",
-                hours,
-                minutes % 60,
-                seconds % 60
-            )
-
-            exerciseTimer.text = formattedTime
-        }
-    }
 }

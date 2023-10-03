@@ -1,6 +1,7 @@
 package io.b306.fitune.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,8 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import io.b306.fitune.R
+import io.b306.fitune.activity.MainActivity
+import io.b306.fitune.activity.TutorialsActivity
 import io.b306.fitune.databinding.FragmentTutorial4Binding
 import io.b306.fitune.room.FituneDatabase
 import io.b306.fitune.room.MyInfoEntity
@@ -66,7 +69,8 @@ class Tutorial4Fragment : Fragment() {
                     Log.d("유저 넣었습니다.",myInfoEntity.toString())
                 }
             }
-            pageNavigator?.moveToNextPage()
+            val intent = Intent(context, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
