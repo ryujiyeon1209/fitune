@@ -2,13 +2,31 @@ package io.b306.fitune.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import io.b306.fitune.activity.ManualActivity
 import io.b306.fitune.R
+import io.b306.fitune.api.ApiObject
+import io.b306.fitune.api.RecommendAPI
+import io.b306.fitune.api.RecommendResponse
+import io.b306.fitune.api.RecommendUser
 import io.b306.fitune.databinding.FragmentMainBinding
+import androidx.lifecycle.ViewModelProvider
+import io.b306.fitune.room.FituneDatabase
+import io.b306.fitune.room.MyInfoRepository
+import io.b306.fitune.viewmodel.MyInfoViewModel
+import io.b306.fitune.viewmodel.MyInfoViewModelFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainFragment : Fragment() {
 
@@ -16,6 +34,10 @@ class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     // Non-Nullable이며, Fragment의 view lifecycle 내에서만 접근 가능
     private val binding get() = _binding!!
+
+    // ViewModel과 Repository 인스턴스
+    private lateinit var viewModel: MyInfoViewModel
+    private lateinit var viewModelFactory: MyInfoViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,10 +53,87 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Repository와 ViewModelFactory 인스턴스 생성
+        val myInfoDao = FituneDatabase.getInstance(requireContext()).myInfoDao()
+        val repository = MyInfoRepository(myInfoDao)
+        viewModelFactory = MyInfoViewModelFactory(repository)
+
+        // ViewModel 인스턴스 가져오기
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MyInfoViewModel::class.java)
+
+        // ViewModel의 LiveData 옵저빙
+        viewModel.myInfo.observe(viewLifecycleOwner, { myInfo ->
+            // 여기서 UI 업데이트 로직이 수행됩니다. 예를 들어:
+            // binding.textView.text = myInfo?.nickname ?: "No nickname available"
+//            pb_main_exp
+            var cellLv = ((myInfo?.cellExp?.div(10000))?.plus(1)) ?: 3
+            var maxExp = ((myInfo?.cellExp?.div(10000))?.plus(1))?.times(
+                10000
+            ) ?: 0
+            var exp = myInfo?.cellExp ?: 10000
+            binding.tvMainCellName.text = myInfo?.cellName ?: "세포 이름"
+            binding.tvMainCellLv.text = ((myInfo?.cellExp?.div(10000))?.plus(1)).toString()
+            binding.tvMainCellExp.text = "${exp} / ${maxExp}"
+            // 아래는 progressbar
+            if (maxExp != null) {
+                binding.pbMainExp.max = maxExp
+            }
+            if (exp != null) {
+                binding.pbMainExp.progress = exp
+            }
+            // 이미지 변경 로직
+            val imageResId = when(cellLv) {
+                1 -> R.drawable.ic_lv1
+                2 -> R.drawable.ic_lv2
+                3 -> R.drawable.ic_lv3
+                else -> R.drawable.ic_lv0 // 기본 이미지
+            }
+            binding.ivMainCell.setImageResource(imageResId)
+        })
+
+        // UserInfo 가져오기
+        viewModel.fetchMyInfo()
+
         // 오늘의 추천 운동 뽑아버리기
         binding.ivFortune.setOnClickListener {
             val recommendDialogFragment = RecommendDialogFragment()
             // supportFragmentManager 대신 childFragmentManager를 사용해야 합니다.
+            Log.d("123","213321321")
+            //운동 추천 API
+            //운동 추천 API 호출
+            GlobalScope.launch(Dispatchers.IO) {
+                try {
+                    val userData = getUserDataFromRoom()
+
+                    val retrofit = Retrofit.Builder()
+                        .baseUrl("http://j9b306.p.ssafy.io:5000/") // 백엔드 API의 기본 URL을 여기에 입력
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build()
+
+                    val recommendAPI = retrofit.create(RecommendAPI::class.java)
+                    val call: Call<RecommendResponse>? = recommendAPI.recommendExercise(userData)
+                    val response: Response<RecommendResponse>? = call?.execute()
+
+                    if (response != null) {
+                        Log.d(" API result", "널을 아니야!!")
+                        Log.d(" API result", response.toString())
+                        if (response.isSuccessful) {
+                            Log.d("운동추천 API 성공", "성공이다아ㅏ!")
+
+                            // 여기에서 API 응답 데이터를 화면에 표시하는 로직을 추가하세요.
+                            val recommendResponse = response.body() // API 응답 데이터
+
+                            // 예시: API 응답 데이터를 로그로 출력
+                            Log.d("운동 추천 데이터", recommendResponse.toString())
+                        } else {
+                            Log.d("운동추천 API 실패", "실패...ㅠ")
+                        }
+                    }
+                } catch (e: Exception) {
+                    // 네트워크 오류 또는 예외 발생 시 처리
+                }
+            }
+
             recommendDialogFragment.show(childFragmentManager, "recommend_dialog")
         }
 
@@ -51,6 +150,7 @@ class MainFragment : Fragment() {
             val intent = Intent(activity, ManualActivity::class.java)
             startActivity(intent)
         }
+
     }
 
     override fun onDestroyView() {
@@ -61,6 +161,26 @@ class MainFragment : Fragment() {
 
     companion object {
         fun newInstance() = MainFragment()
+    }
+
+    // 사용자 데이터를 가져오는 함수
+    private suspend fun getUserDataFromRoom(): RecommendUser? {
+        val myInfoDao = FituneDatabase.getInstance(requireContext()).myInfoDao()
+        val myInfoEntity = myInfoDao.getMyInfo()
+
+
+        // myInfoEntity에서 필요한 데이터 추출
+        return myInfoEntity?.let {
+            RecommendUser(
+                userSeq = 1,
+                age = it.age,
+                height = it.height,
+                weight = it.weight,
+                body_fat_percentage = it.bodyFatPercentage,
+                active_BPM = it.activeBpm,
+                resting_BPM = it.restingBpm
+            )
+        }
     }
 
 }

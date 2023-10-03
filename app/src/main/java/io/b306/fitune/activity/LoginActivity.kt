@@ -42,13 +42,20 @@ class LoginActivity : AppCompatActivity() {
         // db 정보 넣기
         initMyInfoEntity()
 
+        // 회원가입 클릭
+        binding.tvSignUp.setOnClickListener {
+            val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         // 로그인 버튼 클릭
         binding.liLogin.setOnClickListener {
 
-            var email = binding.etLoginEmail.text.toString();
-            var password = binding.etLoginPwd.text.toString();
+            var email = binding.etLoginEmail.text.toString()
+            var password = binding.etLoginPwd.text.toString()
 
-            val requestBody = LoginRequest(email, password);
+            val requestBody = LoginRequest(email, password)
 
             //네트워크 요청을 비동기로 보내기 위한 스코프 정의
             GlobalScope.launch(Dispatchers.IO) {
@@ -175,7 +182,7 @@ class LoginActivity : AppCompatActivity() {
     private fun updateUI() {
         // Update UI using myInfoEntity
         Log.d("초기 유저 정보", myInfoEntity.toString())
-        if (myInfoEntity?.email?.length ?: 0 > 5) {
+        if (myInfoEntity?.userSeq!! > 1) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()

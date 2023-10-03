@@ -51,6 +51,7 @@
             android:background="@drawable/bg_room_background" />
 
         <ImageView
+            android:id="@+id/iv_main_cell"
             android:layout_width="170dp"
             android:layout_height="150dp"
             android:background="@drawable/ic_lv2"
@@ -69,6 +70,7 @@
         />
 
     <TextView
+        android:id="@+id/tv_main_cell_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="흠몽이"
@@ -101,6 +103,7 @@
             android:layout_margin="10dp"
             android:text="Lv. "/>
         <TextView
+            android:id="@+id/tv_main_cell_lv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/gmarketmedium"
@@ -167,6 +170,7 @@
                 android:layout_marginRight="15dp"
                 />
             <ProgressBar
+                android:id="@+id/pb_main_exp"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:indeterminate="false"
@@ -184,7 +188,7 @@
             android:orientation="horizontal"
             >
             <TextView
-                android:id="@+id/progressTextView"
+                android:id="@+id/tv_main_cell_exp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/progress_text_format"
