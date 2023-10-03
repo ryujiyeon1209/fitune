@@ -2,10 +2,13 @@ package io.b306.fitune.fragment
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.fragment.app.DialogFragment
+import io.b306.fitune.activity.FightActivity
 import io.b306.fitune.model.BattleUserData
 import io.b306.fitune.databinding.FragmentUserDetailDialogBinding
 
@@ -37,12 +40,24 @@ class UserDetailDialogFragment : DialogFragment() {
             dismiss() // DialogFragment 닫기
         }
 
+        // Fight Start 버튼 클릭 이벤트 처리
+        binding.btnFightStart.setOnClickListener {
+            // FightActivity로 이동
+            val intent = Intent(activity, FightActivity::class.java)
+            Log.e("asdasdasdasd", user?.userSeq.toString())
+            intent.putExtra("userSeq", user?.userSeq)
+            startActivity(intent)
+            dismiss() // DialogFragment 닫기
+        }
+
         return activity?.let {
             AlertDialog.Builder(it)
                 .setView(binding.root)
                 .create()
         } ?: throw IllegalStateException("Activity가 null")
     }
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

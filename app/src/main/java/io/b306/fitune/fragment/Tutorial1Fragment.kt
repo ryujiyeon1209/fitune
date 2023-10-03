@@ -1,6 +1,7 @@
 package io.b306.fitune.fragment
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -11,10 +12,17 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import io.b306.fitune.R
 import io.b306.fitune.activity.TutorialsActivity
 import io.b306.fitune.databinding.FragmentTutorial1Binding
+import io.b306.fitune.room.FituneDatabase
+import io.b306.fitune.room.MyInfoDao
+import io.b306.fitune.room.MyInfoDao_Impl
+import io.b306.fitune.room.MyInfoEntity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.math.log
 
 class Tutorial1Fragment : Fragment() {
@@ -22,6 +30,7 @@ class Tutorial1Fragment : Fragment() {
     private var _binding: FragmentTutorial1Binding? = null
     private val binding get() = _binding!!
     private lateinit var heartRateTextView: TextView
+    private var heartRate=0
     interface TutorialPageNavigator {
         fun moveToNextPage()
     }
@@ -48,6 +57,7 @@ class Tutorial1Fragment : Fragment() {
 
         tutorialsActivity.nowHeartRate.observe(viewLifecycleOwner) { hearRate ->
             heartRateTextView.text = "$hearRate bpm"
+            heartRate = hearRate.toInt()
         }
 
         Glide.with(this).load(R.drawable.ic_heartbeat).into(binding.ivTutorialHeart)
@@ -59,8 +69,33 @@ class Tutorial1Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnTutorial1.setOnClickListener{
-            // 버튼이 클릭되면 다음 페이지로 이동
-            pageNavigator?.moveToNextPage()
+            // 버튼이 클릭되면 다이얼로그를 띄웁니다.
+            AlertDialog.Builder(context).apply {
+                setTitle("심박수 설정")
+                var restingBPM = heartRateTextView.text
+                // room 에다가 이거 넣어야 대
+
+                setMessage("안정 심박수를 ${restingBPM}로 설정하시겠습니까?")
+                setPositiveButton("예") { _, _ ->
+                    // "예" 버튼을 누르면 다음 페이지로 이동
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        val myInfoDao = FituneDatabase.getInstance(requireContext()).myInfoDao()
+                        val myInfoEntity = myInfoDao.getMyInfo() ?: MyInfoEntity()
+
+                        myInfoEntity.restingBpm = heartRate;
+
+                        if (myInfoEntity.id == 1) {
+                            Log.d("업데이트 유저",myInfoEntity.toString())
+                            myInfoDao.update(myInfoEntity)
+                        } else {
+                            myInfoDao.insert(myInfoEntity)
+                            Log.d("넣어써","ㄴㅁㅇ")
+                        }
+                    }
+                    pageNavigator?.moveToNextPage()
+                }
+                setNegativeButton("아니오", null)
+            }.show()
         }
     }
 

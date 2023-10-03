@@ -1,6 +1,7 @@
 package io.b306.fitune.api
 
 import io.b306.fitune.api.UserResponse
+import io.b306.fitune.model.MyInfoData
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -12,7 +13,12 @@ interface UserAPI {
     @GET("battle/{userId}")
     fun getUserList(@Path("userId") userId: Int): Call<CellResponse>
 
+
     @GET("battle/record/{userId}")
     fun getFightList(@Path("userId") userId: Int): Call<FightRecordResponse>
+
+
+    @GET("user/super/{email}")
+    fun getMyInfo(@Path("email") email: String): Call<SuperResponse>
 
 }
