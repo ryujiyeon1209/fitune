@@ -125,13 +125,20 @@ class LoginActivity : AppCompatActivity() {
 
 
                     } else {
-                        Log.d("로그인되염","ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ")
+                        showAlert("로그인 실패", "이메일과 비밀번호를 확인해주세요.")
+                    }
+
+                    withContext(Dispatchers.Main) { // UI 업데이트는 Main 스레드에서 해야 합니다.
+                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
                     }
 
                     // 오류 처리
                 } catch (e: Exception) {
+
                     runOnUiThread {
-                        showAlert("로그인 실패", "이메일과 비밀번호를 확인해주세요.")
+                        showAlert("로그인 실패", "이메일과 비밀번호를 확인해주세요")
                     }
                 }
             }
@@ -168,11 +175,11 @@ class LoginActivity : AppCompatActivity() {
     private fun updateUI() {
         // Update UI using myInfoEntity
         Log.d("초기 유저 정보", myInfoEntity.toString())
-//        if (myInfoEntity?.email?.length ?: 0 > 5) {
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
+        if (myInfoEntity?.email?.length ?: 0 > 5) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
 }
