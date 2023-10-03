@@ -1,5 +1,6 @@
 package io.b306.fitune.activity
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
@@ -10,6 +11,7 @@ import android.bluetooth.BluetoothGattService
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothProfile
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -70,6 +72,15 @@ class ExerciseProgressActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityExerciseProgressBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION), 306);
+        }
+        if (checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf<String>(Manifest.permission.BLUETOOTH_CONNECT), 306);
+        }
+        if (checkSelfPermission(Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf<String>(Manifest.permission.BLUETOOTH_SCAN), 306);
+        }
         findDevice()
 
         exerciseTimer = findViewById(R.id.exerciseTimer)
