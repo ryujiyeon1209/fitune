@@ -6,15 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import io.b306.fitune.adapter.CalendarAdapter
 import io.b306.fitune.model.CalendarDayModel
 import io.b306.fitune.adapter.OnDayClickListener
 import io.b306.fitune.R
 import io.b306.fitune.databinding.FragmentExerciseHistoryBinding
+import io.b306.fitune.room.ExerciseRecordDao
+import io.b306.fitune.room.ExerciseRecordRepository
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import kotlinx.coroutines.flow.first
 
 class ExerciseHistoryFragment : Fragment() {
 
@@ -23,6 +28,8 @@ class ExerciseHistoryFragment : Fragment() {
 
     // 달력 사용
     private val calendar = Calendar.getInstance()
+
+    private lateinit var exerciseRecordRepository: ExerciseRecordRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,10 +58,17 @@ class ExerciseHistoryFragment : Fragment() {
             updateCalendar(calendar.get(Calendar.MONTH))
         }
 
-        updateCalendar(calendar.get(Calendar.MONTH))
+        lifecycleScope.launch {
+            // Repository에서 가져온 데이터를 기반으로 달력 업데이트
+            val exerciseRecords = exerciseRecordRepository.fetchAllExerciseRecord().first()
+            val exerciseMap = exerciseRecords.associateBy(
+                { it.exerciseStart!!.split("T")[0] }, { true }
+            )
+            updateCalendar(calendar.get(Calendar.MONTH), exerciseMap)
+        }
     }
 
-    private fun updateCalendar(month: Int) {
+    private fun updateCalendar(month: Int, exerciseMap: Map<String, Boolean> = emptyMap()) {
         calendar.set(Calendar.MONTH, month)
         val currentMonth = calendar.get(Calendar.MONTH) + 1 // 0-based index
         val currentYear = calendar.get(Calendar.YEAR)
@@ -81,7 +95,7 @@ class ExerciseHistoryFragment : Fragment() {
         }
 
         binding.rvCalendar.layoutManager = context?.let { GridLayoutManager(it, 7) } // 7일/주
-        binding.rvCalendar.adapter = CalendarAdapter(yourListOfDays, object : OnDayClickListener {
+        binding.rvCalendar.adapter = CalendarAdapter(yourListOfDays, exerciseMap, object : OnDayClickListener {
             override fun onDayClick(calendarDayModel: CalendarDayModel) {
                 val tvDate = view?.findViewById<TextView>(R.id.tv_date)
                 if (calendarDayModel.isCurrentMonth && calendarDayModel.day != 0) {

@@ -136,6 +136,7 @@ class LoginActivity : AppCompatActivity() {
 
                     // 오류 처리
                 } catch (e: Exception) {
+
                     runOnUiThread {
                         showAlert("로그인 실패", "이메일과 비밀번호를 확인해주세요")
                     }
