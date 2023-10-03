@@ -178,4 +178,24 @@ public class UserService {
 
         return exerciseList.getExerciseName();
     }
+
+    public int updateBpm(int userSeq, int bpm){
+        User user = userRepository.findByUserSeq(userSeq).orElseThrow();
+
+        user.setRestingBPM(bpm);
+
+        userRepository.save(user);
+
+        return bpm;
+    }
+
+    public int updateActiveBpm(int userSeq, int bpm){
+        User user = userRepository.findByUserSeq(userSeq).orElseThrow();
+
+        user.setActiveBPM(bpm);
+
+        userRepository.save(user);
+
+        return bpm;
+    }
 }

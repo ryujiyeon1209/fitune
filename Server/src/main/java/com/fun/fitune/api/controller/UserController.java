@@ -179,6 +179,20 @@ public class UserController {
     }
 
 
+    @Operation(summary = "안정 심박수 수정")
+    @PostMapping("edit/bpm/{userSeq}/{bpm}")
+    public ResponseEntity<CommonResponse<Integer>> modifyBpm(@PathVariable("userSeq") int userSeq, @PathVariable("bpm") int bpm){
+        return new ResponseEntity<>(makeCommonResponse(SUCCESS, userService.updateBpm(userSeq, bpm)), HttpStatus.OK);
+    }
+
+
+    @Operation(summary = "활동 심박수 수정")
+    @PostMapping("edit/active_bpm/{userSeq}/{bpm}")
+    public ResponseEntity<CommonResponse<Integer>> modifyActiveBpm(@PathVariable("userSeq") int userSeq, @PathVariable("bpm") int bpm){
+        return new ResponseEntity<>(makeCommonResponse(SUCCESS, userService.updateActiveBpm(userSeq, bpm)), HttpStatus.OK);
+    }
+
+
     private <T> CommonResponse<T> makeCommonResponse(String message, T data) {
         return CommonResponse.<T>builder()
                 .message(message)
