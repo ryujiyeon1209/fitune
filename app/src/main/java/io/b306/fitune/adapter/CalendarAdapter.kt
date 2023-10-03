@@ -14,16 +14,9 @@ interface OnDayClickListener {
 }
 class CalendarAdapter(
     private val days: List<CalendarDayModel>,
+    private val exerciseMap: Map<String, Boolean>,
     private val onDayClickListener: OnDayClickListener
 ) : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
-
-    private val exerciseMap = hashMapOf(
-        "2023-09-01" to true,
-        "2023-09-02" to false,
-        "2023-09-03" to true,
-        "2023-09-04" to true,
-        // ... 추가 날짜 및 상태
-    )
 
     class CalendarViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvDay: TextView = view.findViewById(R.id.tv_day)

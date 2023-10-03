@@ -56,16 +56,16 @@
             android:orientation="vertical"
             >
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="1순위"
-            android:fontFamily="@font/gmarketmedium"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:layout_marginBottom="15dp"
-            />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1순위"
+                android:fontFamily="@font/gmarketmedium"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_marginBottom="15dp"
+                />
 
             <ImageView
                 android:layout_width="70dp"
@@ -100,6 +100,7 @@
                 />
 
             <Button
+                android:id="@+id/btn_exerciseRecommend1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="선택"
@@ -169,6 +170,7 @@
                     />
 
                 <Button
+                    android:id="@+id/btn_exerciseRecommend2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="선택"
@@ -230,6 +232,7 @@
                     />
 
                 <Button
+                    android:id="@+id/btn_exerciseRecommend3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="선택"
@@ -239,10 +242,6 @@
                     />
 
             </LinearLayout>
-
-
         </LinearLayout>
-
     </LinearLayout>
-
 </FrameLayout>

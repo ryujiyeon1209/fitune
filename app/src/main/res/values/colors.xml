@@ -21,5 +21,7 @@
     <color name="exp">#22577A</color>
     <color name="bpm">#F05C5C</color>
 
+    <!-- progressbar colors -->
+    <color name="colorAccent">#00BF24</color>
 
 </resources>

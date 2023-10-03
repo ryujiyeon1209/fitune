@@ -34,5 +34,13 @@ object ApiObject {
     val getRetrofitService : UserAPI by lazy {
         getRetrofit.create(UserAPI::class.java)
     }
+
+    val postRetrofitLoginService: LoginAPI by lazy {
+        getRetrofit.create(LoginAPI::class.java)
+    }
+
+    val postRetrofitSignUpService: SignUpAPI by lazy {
+        getRetrofit.create(SignUpAPI::class.java)
+    }
 }
 

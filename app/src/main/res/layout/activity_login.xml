@@ -10,12 +10,11 @@
 
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_fitune_favicon"
+        android:layout_width="258dp"
+        android:layout_height="213dp"
         android:layout_gravity="center"
         android:layout_marginTop="80dp"
-        />
+        android:src="@drawable/ic_fitune_favicon" />
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -27,6 +26,20 @@
         android:background="@drawable/long_button_white"
         >
 
+        <!--        <TextView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:layout_marginBottom="150dp"-->
+        <!--            android:fontFamily="@font/gmarketlight"-->
+        <!--            android:lineSpacingExtra="8sp"-->
+        <!--            android:text="-->
+        <!--    오늘의 운동세포를 추천 받아\n-->
+        <!--  매일매일 맞춤 운동을 진행하고  \n-->
+        <!--            몸짱이 되어보세요 !"-->
+        <!--            android:textSize="22sp"-->
+        <!--            android:textStyle="bold" />-->
+
         <View
             android:layout_width="match_parent"
             android:layout_height="747dp"
@@ -37,53 +50,88 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="250dp"
-            android:text="@string/app_title"
             android:fontFamily="@font/gmarketmedium"
+            android:textColor="@color/default_text"
+            android:text="@string/app_title"
             android:textSize="30sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="22dp"
+            android:layout_marginTop="130dp"
+            android:layout_marginStart="120dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gmarketmedium"
+                android:text="이메일"
+                android:textColor="@color/default_text"
+                android:textSize="20sp"
+                />
+
+            <EditText
+                android:id="@+id/et_login_email"
+                android:layout_width="240dp"
+                android:layout_height="39dp"
+                android:layout_marginStart="30dp"
+                android:textSize="18dp"
+                android:background="@drawable/rounded_edittext"
+                android:gravity="center_vertical|start" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="22dp"
+            android:layout_marginTop="190dp"
+            android:layout_marginStart="120dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gmarketmedium"
+                android:text="비밀번호"
+                android:textColor="@color/default_text"
+                android:textSize="20sp"
+                />
+
+            <EditText
+                android:id="@+id/et_login_pwd"
+                android:layout_width="240dp"
+                android:layout_height="39dp"
+                android:layout_marginStart="10dp"
+                android:textSize="18dp"
+                android:background="@drawable/rounded_edittext"
+                android:gravity="center_vertical|start" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/liLogin"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="로그인"
+            android:backgroundTint="@color/button_bg"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="150dp"
-            android:text="
-    오늘의 운동세포를 추천 받아\n
-  매일매일 맞춤 운동을 진행하고  \n
-            몸짱이 되어보세요 !"
-            android:fontFamily="@font/gmarketlight"
-            android:textStyle="bold"
-            android:lineSpacingExtra="8sp"
-            android:textSize="22sp" />
-
-        <LinearLayout
-            android:id="@+id/li_login"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:background="@drawable/long_button_white"
-            android:layout_marginBottom="20dp"
-            >
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/google_logo"
-                />
-
-            <Button
-                android:id="@+id/btn_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="구글 계정으로 로그인"
-                android:backgroundTint="@color/white"
-                android:textColor="@color/black"
-                android:fontFamily="@font/gmarketmedium"
-                android:textSize="15sp"
-                />
-
-        </LinearLayout>
+            android:layout_marginTop="50dp"
+            android:clickable="true"
+            android:fontFamily="@font/gmarketmedium"
+            android:onClick="goToSignUp"
+            android:text="회원가입하기"
+            android:textColor="@color/default_text"
+            android:textSize="15sp"
+            />
 
 
     </FrameLayout>
