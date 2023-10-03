@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.ExerciseProgressFragment">
+    tools:context=".activity.ExerciseProgressActivity">
 
     <!-- 상단 제목  -->
     <TextView
@@ -88,6 +88,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/avgHeart"
             android:layout_width="120dp"
             android:layout_row="1"
             android:layout_column="0"
@@ -99,6 +100,7 @@
             android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/curHeart"
             android:layout_width="120dp"
             android:layout_row="1"
             android:layout_column="1"
@@ -111,6 +113,7 @@
             android:textSize="22sp" />
 
         <TextView
+            android:id="@+id/maxHeart"
             android:layout_width="120dp"
             android:layout_row="1"
             android:layout_column="2"
@@ -144,6 +147,7 @@
         android:rowCount="2">
 
         <TextView
+            android:id="@+id/remainTime"
             android:layout_width="match_parent"
             android:layout_row="0"
             android:fontFamily="@font/gmarketmedium"
@@ -152,7 +156,6 @@
             android:textColor="@color/default_text"
             android:textSize="20sp"
             android:textStyle="bold" />
-
     </GridLayout>
 
     <!-- 운동 종료하기 버튼 활성화   -->
@@ -171,7 +174,6 @@
             android:textColor="@color/default_text"
             android:fontFamily="@font/gmarketmedium"
             android:backgroundTint="@color/button_bg" />
-
     </LinearLayout>
 
 

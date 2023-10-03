@@ -150,10 +150,5 @@
                 android:textColor="@color/default_text"
                 android:fontFamily="@font/gmarketmedium"
                 android:backgroundTint="@color/button_bg" />
-
         </LinearLayout>
-
-
-
-
 </LinearLayout>
