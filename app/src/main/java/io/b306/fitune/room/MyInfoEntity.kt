@@ -27,7 +27,7 @@ data class MyInfoEntity (
     // 운동 기록은 따로 Entity 만듦
     var tension: Int = 0,
 
-) {
+    ) {
     @PrimaryKey
     var id: Int = 1 // 이 값이 항상 1이기 때문에, MyInfo Entity에는 오직 하나의 Row만 존재할 수 있음
 }

@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import io.b306.fitune.room.converter.Converters
 
-@Database(entities = [MyInfoEntity::class, ExerciseRecordEntity::class], version = 2)
+@Database(entities = [MyInfoEntity::class, ExerciseRecordEntity::class], version = 3)
 @TypeConverters(Converters::class)
 abstract class FituneDatabase: RoomDatabase() {
     abstract fun myInfoDao(): MyInfoDao
