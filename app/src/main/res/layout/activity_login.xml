@@ -73,7 +73,7 @@
                 />
 
             <EditText
-                android:id="@+id/emailEditText"
+                android:id="@+id/et_login_email"
                 android:layout_width="240dp"
                 android:layout_height="39dp"
                 android:layout_marginStart="30dp"
@@ -101,7 +101,7 @@
                 />
 
             <EditText
-                android:id="@+id/pwdEditText"
+                android:id="@+id/et_login_pwd"
                 android:layout_width="240dp"
                 android:layout_height="39dp"
                 android:layout_marginStart="10dp"

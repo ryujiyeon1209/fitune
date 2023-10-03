@@ -24,17 +24,19 @@ class SignUpActivity : AppCompatActivity() {
 
         // 회원가입 버튼 클릭
         binding.btnSignUp.setOnClickListener{
-            val email = binding.emailEditText.text.toString()
-            val nickname = binding.nickNameEditText.text.toString()
-            val height = binding.heightEditText.text.toString().toIntOrNull() ?: 0
-            val weight = binding.weightEditText.text.toString().toIntOrNull() ?: 0
-            val age = binding.ageEditText.text.toString().toIntOrNull() ?: 0
+            val email = binding.etSignUpEmail.text.toString()
+            val password = binding.etSignUpPwd.text.toString()
+            val nickname = binding.etSignUpNickName.text.toString()
+            val height = binding.etSignUpHeight.text.toString().toIntOrNull() ?: 0
+            val weight = binding.etSignUpWeight.text.toString().toIntOrNull() ?: 0
+            val age = binding.etSignUpAge.text.toString().toIntOrNull() ?: 0
             lifecycleScope.launch(Dispatchers.IO) {
                 val myInfoDao = FituneDatabase.getInstance(this@SignUpActivity).myInfoDao()
                 var myInfoEntity = myInfoDao.getMyInfo() ?: MyInfoEntity()
                 if (myInfoEntity != null) {
                     // Update existing entity
                     myInfoEntity.email = email
+                    myInfoEntity.password = password
                     myInfoEntity.nickname = nickname
                     myInfoEntity.height=height
                     myInfoEntity.weight=weight
