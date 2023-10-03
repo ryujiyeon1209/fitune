@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import androidx.fragment.app.DialogFragment
 import io.b306.fitune.model.FightResultData
 import io.b306.fitune.databinding.FragmentFightResultDetailDialogBinding
+import io.b306.fitune.model.FightRecordData
 
 class FightResultDetailDialogFragment : DialogFragment() {
 
@@ -19,16 +20,21 @@ class FightResultDetailDialogFragment : DialogFragment() {
 
 
         // SDK 33이상이면 새로운 getParcelable 메소드를 사용
-        val fightResult: FightResultData? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arguments?.getParcelable("fight_result", FightResultData::class.java)
+        val fightResult: FightRecordData? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            arguments?.getParcelable("fight_result", FightRecordData::class.java)
         } else {
             arguments?.getParcelable("fight_result")
         }
 
         fightResult?.let {
-            binding.tvDetailFightDate.text = it.fightDate
-            binding.tvDetailFightUserName.text = "상대 닉네임 : ${it.fightUserName}"
-            binding.tvDetailFightResult.text = it.fightResult
+            binding.tvDetailFightDate.text = it.battleDate
+            binding.tvDetailFightUserName.text = "상대 닉네임 : ${it.battleOtherName}"
+            binding.tvDetailFightResult.text = if (it.battleOtherName == it.winnerName) {
+                "패배"
+            } else {
+                "승리"
+            }
+
         }
 
         binding.btnFightResultClose.setOnClickListener {

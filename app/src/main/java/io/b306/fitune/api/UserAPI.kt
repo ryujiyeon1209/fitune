@@ -12,4 +12,7 @@ interface UserAPI {
     @GET("battle/{userId}")
     fun getUserList(@Path("userId") userId: Int): Call<CellResponse>
 
+    @GET("battle/record/{userId}")
+    fun getFightList(@Path("userId") userId: Int): Call<FightRecordResponse>
+
 }

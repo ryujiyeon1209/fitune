@@ -19,74 +19,75 @@ import retrofit2.Response
 
 class FightFindFragment : Fragment() {
         private var userList: List<BattleUserData> = emptyList() // userList를 클래스 멤버 변수로 추가
-                private var _binding: FragmentFightFindBinding? = null
-                private val binding get() = _binding!!
+        private var _binding: FragmentFightFindBinding? = null
+        private val binding get() = _binding!!
 
-                override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-        ): View? {
+        override fun onCreateView(
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
+            ): View? {
             _binding = FragmentFightFindBinding.inflate(inflater, container, false)
             return binding.root
         }
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+            super.onViewCreated(view, savedInstanceState)
 
-        // Retrofit을 사용하여 API 호출
-        val userApi = ApiObject.getRetrofitService
-        val userId = 2 // 예시로 userId 값을 설정합니다.
+            // Retrofit을 사용하여 API 호출
+            val userApi = ApiObject.getRetrofitService
+            val userId = 2 // 예시로 userId 값을 설정합니다.
+            //room이 완성되면 설정..
 
-        userApi.getUserList(userId).enqueue(object : Callback<CellResponse> {
-            override fun onResponse(call: Call<CellResponse>, response: Response<CellResponse>) {
-                if (response.isSuccessful) {
-                    val cellResponse = response.body()
-                    val cellList = cellResponse?.data
+            userApi.getUserList(userId).enqueue(object : Callback<CellResponse> {
+                override fun onResponse(call: Call<CellResponse>, response: Response<CellResponse>) {
+                    if (response.isSuccessful) {
+                        val cellResponse = response.body()
+                        val cellList = cellResponse?.data
 
-                    Log.e("세포 정보", cellList.toString())
+                        Log.e("세포 정보", cellList.toString())
 
-                    if (cellList != null) {
-                        val cellDataList = cellResponse.data
+                        if (cellList != null) {
+                            val cellDataList = cellResponse.data
 
-                        if (cellDataList != null) {
-                            // cellDataList가 null이 아닌 경우에만 처리
+                            if (cellDataList != null) {
+                                // cellDataList가 null이 아닌 경우에만 처리
 
-                            userList = cellDataList.map { cellData ->
-                                BattleUserData(
-                                    cellData.userSeq,
-                                    cellData.cellExp,
-                                    cellData.cellName,
-                                    cellData.height,
-                                    cellData.weight,
-                                    cellData.bpm
-                                )
-                            }
-                            Log.e("어댑터 출력 확인11", userList.toString())
-                            binding.rvUser.apply {
-                                layoutManager = LinearLayoutManager(context)
-                                adapter = UserAdapter(this@FightFindFragment, userList) { selectedUser ->
-                                    val dialogFragment = UserDetailDialogFragment().apply {
-                                        arguments = Bundle().apply {
-                                            putParcelable("user", selectedUser)
-                                        }
-                                    }
-                                    dialogFragment.show(parentFragmentManager, "userDetail")
+                                userList = cellDataList.map { cellData ->
+                                    BattleUserData(
+                                        cellData.userSeq,
+                                        cellData.cellExp,
+                                        cellData.cellName,
+                                        cellData.height,
+                                        cellData.weight,
+                                        cellData.bpm
+                                    )
                                 }
+                                Log.e("어댑터 출력 확인11", userList.toString())
+                                binding.rvUser.apply {
+                                    layoutManager = LinearLayoutManager(context)
+                                    adapter = UserAdapter(this@FightFindFragment, userList) { selectedUser ->
+                                        val dialogFragment = UserDetailDialogFragment().apply {
+                                            arguments = Bundle().apply {
+                                                putParcelable("user", selectedUser)
+                                            }
+                                        }
+                                        dialogFragment.show(parentFragmentManager, "userDetail")
+                                    }
 
-                                Log.e("어댑터",adapter.toString())
+                                    Log.e("어댑터",adapter.toString())
 
+                                }
                             }
+                        } else {
+                            // 실패 처리
                         }
-                    } else {
-                        // 실패 처리
-                    }
 
-                }}
+                    }}
 
-            override fun onFailure(call: Call<CellResponse>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })
+                override fun onFailure(call: Call<CellResponse>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
 
 
         Log.e("??",userList.toString())
