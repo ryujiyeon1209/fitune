@@ -13,7 +13,9 @@ import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import io.b306.fitune.R
@@ -124,6 +126,62 @@ class ExerciseProgressActivity : AppCompatActivity() {
             val heartRate = data?.let { String(it, Charsets.UTF_8) }
             nowHeartRate.postValue(heartRate!!)
             Log.i("onCharacteristicChanged", "변경된 심박수: $heartRate bpm")
+        }
+    }
+
+    //fragments와 연동을 위한 인터페이스
+    interface ExerciseSelectedListener {
+        fun onExerciseStartButtonClicked()
+    }
+
+    //운동 시작하기 > 누적 시간 count
+    class ExerciseProgressActivity : AppCompatActivity(), ExerciseSelectedListener {
+
+        private lateinit var exerciseTimer: TextView
+        private var startTimeMillis: Long = 0
+        private var timerRunning = false
+        private var elapsedTimeMillis: Long = 0
+        private val handler = Handler()
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_exercise_progress)
+
+            exerciseTimer = findViewById(R.id.exerciseTimer)
+        }
+
+        // "운동 시작" 버튼 클릭 시 실행할 코드
+        override fun onExerciseStartButtonClicked() {
+            startTimeMillis = System.currentTimeMillis()
+            startTimer()
+        }
+
+        private fun startTimer() {
+            if (!timerRunning) {
+                handler.post(object : Runnable {
+                    override fun run() {
+                        elapsedTimeMillis = System.currentTimeMillis() - startTimeMillis
+                        updateTimerText(elapsedTimeMillis)
+                        handler.postDelayed(this, 1000)
+                    }
+                })
+                timerRunning = true
+            }
+        }
+
+        private fun updateTimerText(timeInMillis: Long) {
+            val seconds = (timeInMillis / 1000).toInt()
+            val minutes = seconds / 60
+            val hours = minutes / 60
+
+            val formattedTime = String.format(
+                "%02d:%02d:%02d",
+                hours,
+                minutes % 60,
+                seconds % 60
+            )
+
+            exerciseTimer.text = formattedTime
         }
     }
 }

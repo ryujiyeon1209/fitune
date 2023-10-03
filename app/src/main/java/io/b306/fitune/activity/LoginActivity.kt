@@ -33,8 +33,8 @@ class LoginActivity : AppCompatActivity() {
         // 로그인 버튼 클릭
         binding.liLogin.setOnClickListener {
 
-            var email = binding.emailEditText.text.toString();
-            var password = binding.pwdEditText.text.toString();
+            var email = binding.etLoginEmail.text.toString();
+            var password = binding.etLoginPwd.text.toString();
 
             val requestBody = LoginRequest(email, password);
 
