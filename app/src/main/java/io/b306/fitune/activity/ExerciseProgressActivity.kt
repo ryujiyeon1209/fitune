@@ -13,7 +13,9 @@ import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import io.b306.fitune.R
@@ -28,12 +30,63 @@ class ExerciseProgressActivity : AppCompatActivity() {
     private lateinit var bluetoothAdapter: BluetoothAdapter
     private var bluetoothGatt: BluetoothGatt? = null
     var nowHeartRate = MutableLiveData<String>()
+    private var maxHeartRate = 0;
+    private var avgHeartRate =0;
+    private lateinit var exerciseTimer: TextView
+    private var startTimeMillis: Long = 0
+    private var timerRunning = false
+    private var elapsedTimeMillis: Long = 0
+    private val handler = Handler()
+
+    private fun startTimer() {
+        if (!timerRunning) {
+            handler.post(object : Runnable {
+                override fun run() {
+                    elapsedTimeMillis = System.currentTimeMillis() - startTimeMillis
+                    updateTimerText(elapsedTimeMillis)
+                    handler.postDelayed(this, 1000)
+                }
+            })
+            timerRunning = true
+        }
+    }
+
+    private fun updateTimerText(timeInMillis: Long) {
+        val seconds = (timeInMillis / 1000).toInt()
+        val minutes = seconds / 60
+        val hours = minutes / 60
+
+        val formattedTime = String.format(
+            "%02d:%02d:%02d",
+            hours,
+            minutes % 60,
+            seconds % 60
+        )
+
+        exerciseTimer.text = formattedTime
+    }
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityExerciseProgressBinding.inflate(layoutInflater)
-        setContentView(R.layout.fragment_exercise_progress)
+        setContentView(binding.root)
         findDevice()
+
+        exerciseTimer = findViewById(R.id.exerciseTimer)
+        startTimeMillis = System.currentTimeMillis()
+        startTimer()
+
+        nowHeartRate.observe(this) { heartRate ->
+            binding.curHeart.text = heartRate  // 현재 심박수 업데이트
+
+            // 평균 및 최대 심박수 계산 로직이 필요합니다.
+            // 아래는 예시로 임의의 값을 설정하는 코드입니다.
+            avgHeartRate += heartRate.toInt()
+            maxHeartRate = heartRate.toInt().coerceAtLeast(maxHeartRate)
+            binding.avgHeart.text = (avgHeartRate/4).toString()
+            binding.maxHeart.text = maxHeartRate.toString()
+
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
@@ -113,4 +166,10 @@ class ExerciseProgressActivity : AppCompatActivity() {
             Log.i("onCharacteristicChanged", "변경된 심박수: $heartRate bpm")
         }
     }
+
+    //fragments와 연동을 위한 인터페이스
+    interface ExerciseSelectedListener {
+        fun onExerciseStartButtonClicked()
+    }
+
 }
