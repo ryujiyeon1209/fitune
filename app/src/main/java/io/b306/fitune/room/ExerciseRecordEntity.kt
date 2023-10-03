@@ -17,16 +17,14 @@ import java.util.Date
 )
 data class ExerciseRecordEntity(
     var exerciseRecordSeq: Int = 0, // 운동 기록 번호
-    var exerciseAvgBpm: Int = 0, // 평균 심박수
-    var exerciseDistance: Int = 0, // 움직인 거리
-    var exerciseStart: Date? = null, // 운동 시작 시간
-    var exerciseEnd: Date? = null, //  운동 종료 시간
-    var exerciseMaxBpm: Int = 0,
+    var exerciseStart: String? = null, // 운동 시작 시간
+    var exerciseEnd: String? = null, //  운동 종료 시간
     var exerciseReco: Boolean = false, // 이거 mySQL에서 BIT 타입
+    var exerciseAvgBpm: Int = 0, // 평균 심박수
+    var exerciseMaxBpm: Int = 0,
+    var exerciseDistance: Int = 0, // 움직인 거리
     var exerciseReview: Int = 0,
     var exerciseWeather: Int = 0,
-    var exerciseListSeq: Int = 0, // 이거 뭐자
-
 
     @ColumnInfo(index = true)
     val userId: Int = 1 // MyInfoEntity의 id를 참조
