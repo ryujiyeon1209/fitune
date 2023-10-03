@@ -62,10 +62,8 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MyInfoViewModel::class.java)
 
         // ViewModel의 LiveData 옵저빙
-        viewModel.myInfo.observe(viewLifecycleOwner, { myInfo ->
-            // 여기서 UI 업데이트 로직이 수행됩니다. 예를 들어:
-            // binding.textView.text = myInfo?.nickname ?: "No nickname available"
-//            pb_main_exp
+        viewModel.myInfo.observe(viewLifecycleOwner) { myInfo ->
+            // UI 업데이트 로직
             var cellLv = ((myInfo?.cellExp?.div(10000))?.plus(1)) ?: 3
             var maxExp = ((myInfo?.cellExp?.div(10000))?.plus(1))?.times(
                 10000
@@ -82,14 +80,14 @@ class MainFragment : Fragment() {
                 binding.pbMainExp.progress = exp
             }
             // 이미지 변경 로직
-            val imageResId = when(cellLv) {
+            val imageResId = when (cellLv) {
                 1 -> R.drawable.ic_lv1
                 2 -> R.drawable.ic_lv2
                 3 -> R.drawable.ic_lv3
                 else -> R.drawable.ic_lv0 // 기본 이미지
             }
             binding.ivMainCell.setImageResource(imageResId)
-        })
+        }
 
         // UserInfo 가져오기
         viewModel.fetchMyInfo()

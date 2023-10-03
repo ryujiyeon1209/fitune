@@ -33,12 +33,15 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
+                // 운동 기록 페이지
                 R.id.navigation_record -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fm_container, ExerciseHistoryFragment())
                         .commitNow()
                     true
                 }
+
+                // 마이 페이지
                 R.id.navigation_mypage -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fm_container, MyPageFragment())
