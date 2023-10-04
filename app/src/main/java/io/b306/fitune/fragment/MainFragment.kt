@@ -18,6 +18,8 @@ import io.b306.fitune.databinding.FragmentMainBinding
 import androidx.lifecycle.ViewModelProvider
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import io.b306.fitune.room.FituneDatabase
+import io.b306.fitune.room.MyInfoDao
+import io.b306.fitune.room.MyInfoEntity
 import io.b306.fitune.room.MyInfoRepository
 import io.b306.fitune.viewmodel.MyInfoViewModel
 import io.b306.fitune.viewmodel.MyInfoViewModelFactory
@@ -39,7 +41,8 @@ class MainFragment : Fragment() {
     // ViewModel과 Repository 인스턴스
     private lateinit var viewModel: MyInfoViewModel
     private lateinit var viewModelFactory: MyInfoViewModelFactory
-
+    private lateinit var myInfoDao: MyInfoDao
+    private lateinit var myInfoEntity: MyInfoEntity
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,6 +72,7 @@ class MainFragment : Fragment() {
             var maxExp = ((myInfo?.cellExp?.div(10000))?.plus(1))?.times(
                 10000
             ) ?: 0
+
             var exp = myInfo?.cellExp ?: 10000
             binding.tvMainCellName.text = myInfo?.cellName ?: "세포 이름"
             binding.tvMainCellLv.text = ((myInfo?.cellExp?.div(10000))?.plus(1)).toString()
@@ -114,17 +118,18 @@ class MainFragment : Fragment() {
                     val response: Response<RecommendResponse>? = call?.execute()
 
                     if (response != null) {
-                        Log.d(" API result", "널을 아니야!!")
-                        Log.d(" API result", response.toString())
                         if (response.isSuccessful) {
                             Log.d("운동추천 API 성공", "성공이다아ㅏ!")
 
                             // room에 저장하기!
-                            val recommendResponse = response.body() // API 응답 데이터
-
-
+                            val recommendResponse = response.body()?.data // API 응답 데이터
+                            myInfoEntity.recommendExercise1 = recommendResponse?.recommendFirst.toString()
+                            myInfoEntity.recommendExercise2 = recommendResponse?.recommendSecond.toString()
+                            myInfoEntity.recommendExercise3 = recommendResponse?.recommendThird.toString()
+                            myInfoDao.update(myInfoEntity)
                             // 예시: API 응답 데이터를 로그로 출력
                             Log.d("운동 추천 데이터", recommendResponse.toString())
+
                         } else {
                             Log.d("운동추천 API 실패", "실패...ㅠ")
                         }
@@ -162,12 +167,10 @@ class MainFragment : Fragment() {
     companion object {
         fun newInstance() = MainFragment()
     }
-
     // 사용자 데이터를 가져오는 함수
     private suspend fun getUserDataFromRoom(): RecommendUser? {
-        val myInfoDao = FituneDatabase.getInstance(requireContext()).myInfoDao()
-        val myInfoEntity = myInfoDao.getMyInfo()
-
+        myInfoDao = FituneDatabase.getInstance(requireContext()).myInfoDao()
+        myInfoEntity = myInfoDao.getMyInfo()!!
 
         // myInfoEntity에서 필요한 데이터 추출
         return myInfoEntity?.let {
