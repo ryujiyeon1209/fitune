@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.b306.fitune.api.MyEditAPI
+import io.b306.fitune.api.UpdateNicknameRequest
 import io.b306.fitune.room.MyInfoEntity
 import io.b306.fitune.room.MyInfoRepository
 import kotlinx.coroutines.launch
@@ -36,12 +37,19 @@ class MyEditViewModel(
     }
 
     // 서버로 닉네임 업데이트 - 스웨거에 없음
-//    fun updateNickname(userSeq: Int, newNickname: String) {
-//        updateValueThroughAPI(
-//            { myEditAPI.updateNickname(userSeq, newNickname) }, // API 호출
-//            { it.copy(nickname = newNickname) } // 로컬 데이터 업데이트
-//        )
-//    }
+    fun updateNickname(userSeq: Int, newNickname: String) {
+        updateValueThroughAPI(
+            {
+                // API 호출
+                val request = UpdateNicknameRequest(userSeq, newNickname)
+                myEditAPI.updateNickname(request)
+            },
+            {
+                // 로컬 데이터 업데이트
+                it.copy(nickname = newNickname)
+            }
+        )
+    }
 
     // 서버로 세포 이름 업데이트
     fun updateCellName(userSeq: Int, newCellName: String) {
@@ -81,6 +89,13 @@ class MyEditViewModel(
             { myEditAPI.updateTension(userSeq, newTension) },
             { it.copy(tension = newTension) }
         )
+    }
+
+    // 로그아웃 -> MyInfo 테이블 데이터 날리기
+    fun deleteMyInfo() {
+        viewModelScope.launch {
+            repository.deleteUserInfo() // repository 내의 메서드, 이를 Dao의 delete 메서드를 호출하도록 정의해주세요.
+        }
     }
 
     private fun updateValueThroughAPI(

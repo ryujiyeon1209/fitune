@@ -11,7 +11,6 @@ import io.b306.fitune.api.LoginRequest
 import io.b306.fitune.api.LoginResponse
 import io.b306.fitune.api.SuperResponse
 import io.b306.fitune.databinding.ActivityLoginBinding
-import io.b306.fitune.model.MyInfoData
 import io.b306.fitune.room.ExerciseRecordDao
 import io.b306.fitune.room.ExerciseRecordEntity
 import io.b306.fitune.room.FituneDatabase
@@ -23,7 +22,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.Retrofit
 
 class LoginActivity : AppCompatActivity() {
 

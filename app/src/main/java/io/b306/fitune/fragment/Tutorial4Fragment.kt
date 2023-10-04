@@ -125,7 +125,7 @@ class Tutorial4Fragment : Fragment() {
                 nickName = it.nickname,
                 height = it.height,
                 weight = it.weight,
-                age = it.age,
+                year = it.year,
                 restingBpm = it.restingBpm,
                 activeBpm = it.activeBpm,
                 bodyFatPer = 0,

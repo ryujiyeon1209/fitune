@@ -6,7 +6,7 @@ data class SignUpUser (
     var nickName: String,
     var height: Int,
     var weight: Int,
-    var age: Int,
+    var year: Int,
     var restingBpm: Int,
     var activeBpm: Int,
     var bodyFatPer: Int,

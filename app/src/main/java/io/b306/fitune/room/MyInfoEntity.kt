@@ -5,25 +5,26 @@ import androidx.room.PrimaryKey
 
 // 데이터 모델 클래스 만들기
 @Entity(tableName = "myinfo_table")
-data class MyInfoEntity (
+data class MyInfoEntity(
     // 기본 유저 정보
     var userSeq: Int = 0,
     var email: String = "",
     var password: String = "",
     var nickname: String = "",
+    var year: Int = 0,
     var age: Int = 0,
     var height: Int = 0,
     var weight: Int = 0,
     var bodyFatPercentage: Int = 0,
     var activeBpm: Int = 0,
     var restingBpm: Int = 0,
-    var targetBpm : Int = 0,
-    var targetTime : Int = 0,
-    var recommendExercise1 : String = "",
-    var recommendExercise2 : String = "",
-    var recommendExercise3 : String = "",
+    var targetBpm: Int = 0,
+    var targetTime: Int = 0,
+    var recommendExercise1: String = "",
+    var recommendExercise2: String = "",
+    var recommendExercise3: String = "",
     // 유저의 세포
-     var cellSeq: Int = 0,
+    var cellSeq: Int = 0,
     var cellName: String = "",
     var cellExp: Int = 0,
     // 선호 운동
