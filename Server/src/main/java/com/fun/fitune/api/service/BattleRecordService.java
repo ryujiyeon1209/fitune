@@ -80,12 +80,15 @@ public class BattleRecordService {
             User battleOther = userRepository
                     .findByUserSeq(battleRecord.getBattleOtherSeq()).orElseThrow();
 
+            String battleOtherCellName = cellRepository.findByUser(battleOther).orElseThrow().getCellName();
+
             BattleRecordResponse battleRecordResponse = BattleRecordResponse.builder()
                     .battleRecordSeq(battleRecord.getBattleRecordSeq())
                     .battleDate(battleRecord.getBattleDate())
                     .winnerName(winnerName)
                     .battleOtherSeq(battleOther.getUserSeq())
                     .battleOtherName(battleOther.getNickname())
+                    .battleOtherCellName(battleOtherCellName)
                     .build();
 
             battleRecordResponses.add(battleRecordResponse);
