@@ -5,6 +5,7 @@ import com.fun.fitune.api.dto.request.NicknameRequest;
 import com.fun.fitune.api.dto.request.UserCreateRequest;
 import com.fun.fitune.api.dto.request.UserInfoRequest;
 import com.fun.fitune.api.dto.request.UserLoginRequest;
+import com.fun.fitune.api.dto.response.CellResponse;
 import com.fun.fitune.api.dto.response.PreferExerciseResponse;
 import com.fun.fitune.api.dto.response.UserSuperResponse;
 import com.fun.fitune.db.domain.*;
@@ -32,13 +33,19 @@ public class UserService {
     public UserSuperResponse selectAllUserInfo(String email) {
         User user = userRepository.findByEmail(email).orElseThrow();
         Cell cell = cellRepository.findByUser(user).orElseThrow();
+        CellResponse cellResponse = CellResponse.builder()
+                .cellSeq(cell.getCellSeq())
+                .cellName(cell.getCellName())
+                .cellExp(cell.getCellExp())
+                .cellLatestExp(cell.getCellLatestExp())
+                .build();
         PreferExercise preferExercise = preferExerciseRepository.findByUser(user).orElseThrow();
         List<ExerciseRecord> exerciseRecordList = exerciseRecordRepository.findAllByUserOrderByExerciseEndDesc(user).orElseThrow();
         List<BattleRecord> battleRecordList = battleRecordRepository.findAllByBattleUserSeqOrderByBattleDateDesc(user.getUserSeq()).orElseThrow();
 
         UserSuperResponse userSuperResponse = UserSuperResponse.builder()
                 .user(user)
-                .cell(cell)
+                .cell(cellResponse)
                 .preferExerciseResponse(PreferExerciseResponse.builder()
                         .exerciseListSeq(preferExercise.getExerciseList().getExerciseListSeq())
                         .exerciseName(preferExercise.getExerciseList().getExerciseName())
@@ -178,24 +185,23 @@ public class UserService {
 
         return exerciseList.getExerciseName();
     }
-
-    public int updateBpm(int userSeq, int bpm){
-        User user = userRepository.findByUserSeq(userSeq).orElseThrow();
-
-        user.setRestingBPM(bpm);
-
-        userRepository.save(user);
-
-        return bpm;
-    }
-
-    public int updateActiveBpm(int userSeq, int bpm){
-        User user = userRepository.findByUserSeq(userSeq).orElseThrow();
-
-        user.setActiveBPM(bpm);
-
-        userRepository.save(user);
-
-        return bpm;
-    }
+//    public int updateBpm(int userSeq, int bpm){
+//        User user = userRepository.findByUserSeq(userSeq).orElseThrow();
+//
+//        user.setRestingBPM(bpm);
+//
+//        userRepository.save(user);
+//
+//        return bpm;
+//    }
+//
+//    public int updateActiveBpm(int userSeq, int bpm){
+//        User user = userRepository.findByUserSeq(userSeq).orElseThrow();
+//
+//        user.setActiveBPM(bpm);
+//
+//        userRepository.save(user);
+//
+//        return bpm;
+//    }
 }

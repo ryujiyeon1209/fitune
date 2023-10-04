@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.UniqueElements;
 
 import java.time.LocalDateTime;
 
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @DynamicUpdate
 @Entity
