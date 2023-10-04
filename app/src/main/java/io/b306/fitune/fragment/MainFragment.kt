@@ -26,6 +26,7 @@ import io.b306.fitune.viewmodel.MyInfoViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.count
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
@@ -121,9 +122,9 @@ class MainFragment : Fragment() {
                     if (response != null) {
                         if (response.isSuccessful) {
                             Log.d("운동추천 API 성공", "성공이다아ㅏ!")
-
-                            var ExcerciseCount = FituneDatabase.getInstance(requireContext()).exerciseRecordDao().fetchAllExerciseRecord().count()
-
+                            Log.d("운동 추천 데이터", myInfoEntity.toString())
+                            var exerciseCount = FituneDatabase.getInstance(requireContext()).exerciseRecordDao().fetchAllExerciseRecord()?.first()?.size ?: 0
+                            Log.d("운동갯수", exerciseCount.toString())
 
                             // room에 저장하기!
                             val recommendResponse = response.body()?.data // API 응답 데이터
@@ -131,10 +132,10 @@ class MainFragment : Fragment() {
                             myInfoEntity.recommendExercise2 = recommendResponse?.recommendSecond.toString()
                             myInfoEntity.recommendExercise3 = recommendResponse?.recommendThird.toString()
                             myInfoEntity.targetBpm = ((0.5+(0.1)*myInfoEntity.tension)*(220-myInfoEntity.age-myInfoEntity.restingBpm)+myInfoEntity.restingBpm).toInt()
-                            myInfoEntity.targetTime = 60-15*myInfoEntity.tension + 3/ExcerciseCount
+                            myInfoEntity.targetTime = 60-15*myInfoEntity.tension - 3/exerciseCount
                             myInfoDao.update(myInfoEntity)
                             // 예시: API 응답 데이터를 로그로 출력
-                            Log.d("운동 추천 데이터", recommendResponse.toString())
+                            Log.d("운동 추천 데이터", myInfoEntity.toString())
 
                         } else {
                             Log.d("운동추천 API 실패", "실패...ㅠ")
