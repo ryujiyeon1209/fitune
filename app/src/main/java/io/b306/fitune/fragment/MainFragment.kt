@@ -16,8 +16,10 @@ import io.b306.fitune.api.RecommendResponse
 import io.b306.fitune.api.RecommendUser
 import io.b306.fitune.databinding.FragmentMainBinding
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import io.b306.fitune.room.FituneDatabase
+import io.b306.fitune.room.MyInfoEntity
 import io.b306.fitune.room.MyInfoRepository
 import io.b306.fitune.viewmodel.MyInfoViewModel
 import io.b306.fitune.viewmodel.MyInfoViewModelFactory
@@ -93,19 +95,16 @@ class MainFragment : Fragment() {
         // UserInfo 가져오기
         viewModel.fetchMyInfo()
 
-        // 오늘의 추천 운동 뽑아버리기
+        // 오늘의 추천 운동 API 요청
         binding.ivFortune.setOnClickListener {
             val recommendDialogFragment = RecommendDialogFragment()
-            // supportFragmentManager 대신 childFragmentManager를 사용해야 합니다.
-            Log.d("123","213321321")
-            //운동 추천 API
-            //운동 추천 API 호출
-            GlobalScope.launch(Dispatchers.IO) {
+
+            lifecycleScope.launch(Dispatchers.IO) {
                 try {
                     val userData = getUserDataFromRoom()
 
                     val retrofit = Retrofit.Builder()
-                        .baseUrl("http://j9b306.p.ssafy.io:5000/") // 백엔드 API의 기본 URL을 여기에 입력
+                        .baseUrl("http://j9b306.p.ssafy.io:5000/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build()
 
@@ -114,7 +113,6 @@ class MainFragment : Fragment() {
                     val response: Response<RecommendResponse>? = call?.execute()
 
                     if (response != null) {
-                        Log.d(" API result", "널을 아니야!!")
                         Log.d(" API result", response.toString())
                         if (response.isSuccessful) {
                             Log.d("운동추천 API 성공", "성공이다아ㅏ!")
@@ -122,15 +120,27 @@ class MainFragment : Fragment() {
                             // room에 저장하기!
                             val recommendResponse = response.body() // API 응답 데이터
 
+                            val myInfoDao = FituneDatabase.getInstance(requireContext()).myInfoDao()
+                            val myInfoEntity = myInfoDao.getMyInfo() ?: MyInfoEntity()
 
-                            // 예시: API 응답 데이터를 로그로 출력
-                            Log.d("운동 추천 데이터", recommendResponse.toString())
+                            if (recommendResponse != null) {
+                                myInfoEntity.recommendExercise1 = recommendResponse.data.recommendFirst
+                                myInfoEntity.recommendExercise2 = recommendResponse.data.recommendSecond
+                                myInfoEntity.recommendExercise3 = recommendResponse.data.recommendThird
+
+                                if(myInfoEntity.id != null) {
+                                    myInfoDao.update(myInfoEntity)
+                                    Log.d("room에 저장 완료!", myInfoEntity.toString() )
+                                } else {
+                                    Log.d("유저의 id 값",myInfoEntity.id.toString())
+                                }
+                            }
                         } else {
                             Log.d("운동추천 API 실패", "실패...ㅠ")
                         }
                     }
                 } catch (e: Exception) {
-                    // 네트워크 오류 또는 예외 발생 시 처리
+
                 }
             }
 
