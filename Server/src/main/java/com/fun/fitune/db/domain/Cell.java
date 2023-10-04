@@ -4,7 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 import jakarta.persistence.*;
 
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @DynamicUpdate
 @Entity
