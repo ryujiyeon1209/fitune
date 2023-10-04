@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.Observer
 import io.b306.fitune.databinding.FragmentRecommendDialogBinding
 import io.b306.fitune.model.getImageResourceByExerciseName
+import io.b306.fitune.model.getKoreanNAmeByExerciseName
 import io.b306.fitune.room.ExerciseRecommendRepository
 import io.b306.fitune.room.FituneDatabase
 import io.b306.fitune.viewmodel.ExerciseRecommendViewModel
@@ -37,9 +38,10 @@ class RecommendDialogFragment : DialogFragment() {
         // LiveData를 사용하여 데이터를 비동기적으로 관찰하고 UI 업데이트
         viewModel.myInfo.observe(viewLifecycleOwner, Observer { myInfo ->
             if (myInfo != null) {
-                binding.tvRecommendType1.text = myInfo.recommendExercise1
-                binding.tvRecommendType2.text = myInfo.recommendExercise2
-                binding.tvRecommendType3.text = myInfo.recommendExercise3
+                binding.tvRecommendType1.setText(getKoreanNAmeByExerciseName(myInfo.recommendExercise1))
+                binding.tvRecommendType2.setText(getKoreanNAmeByExerciseName(myInfo.recommendExercise2))
+                binding.tvRecommendType3.setText(getKoreanNAmeByExerciseName(myInfo.recommendExercise3))
+
 
                 binding.ivRecommend1.setImageResource(getImageResourceByExerciseName(myInfo.recommendExercise1))
                 binding.ivRecommend2.setImageResource(getImageResourceByExerciseName(myInfo.recommendExercise2))

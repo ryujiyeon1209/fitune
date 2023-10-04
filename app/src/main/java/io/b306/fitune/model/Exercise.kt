@@ -25,7 +25,7 @@ object ExerciseList {
         Exercise("Bowling", "볼링", R.drawable.ic_bowling, 12),
         Exercise("Table Tennis","탁구", R.drawable.ic_table_tennis, 13),
         Exercise("Hiking", "등산", R.drawable.ic_hiking, 14),
-        Exercise("Tai Bo", "태보", R.drawable.ic_tai_bo, 15),
+        Exercise("Tai Bo", "태권도", R.drawable.ic_tai_bo, 15),
         Exercise("Rock Climbing","암벽등반", R.drawable.ic_rock_climbing, 16),
         Exercise("Weightlifting","헬스", R.drawable.ic_weightlifting, 17),
         Exercise("Horseback Riding", "승마", R.drawable.ic_horseback_riding, 18),
@@ -39,4 +39,9 @@ object ExerciseList {
 fun getImageResourceByExerciseName(exerciseName: String): Int {
     val exercise = ExerciseList.list.find { it.englishName == exerciseName }
     return exercise?.imageResId ?: R.drawable.ic_walking // null이면 그냥 걷기 반환!
+}
+
+fun getKoreanNAmeByExerciseName(exerciseName: String): String {
+    val exercise = ExerciseList.list.find { it.englishName == exerciseName }
+    return exercise?.name ?: "걷기" // null이면 그냥 걷기 반환!
 }
