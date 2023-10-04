@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 public class UserSuperResponse {
     User user;
-    Cell cell;
+    CellResponse cell;
     PreferExerciseResponse preferExerciseResponse;
     List<ExerciseRecord> exerciseRecord;
     List<BattleRecord> battleRecord;

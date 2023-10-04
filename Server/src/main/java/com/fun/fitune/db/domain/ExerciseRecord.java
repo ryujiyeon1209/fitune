@@ -8,7 +8,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDateTime;
 
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @DynamicUpdate
 @Entity
