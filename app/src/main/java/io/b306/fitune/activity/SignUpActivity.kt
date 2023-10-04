@@ -29,7 +29,7 @@ class SignUpActivity : AppCompatActivity() {
             val nickname = binding.etSignUpNickName.text.toString()
             val height = binding.etSignUpHeight.text.toString().toIntOrNull() ?: 0
             val weight = binding.etSignUpWeight.text.toString().toIntOrNull() ?: 0
-            val age = binding.etSignUpAge.text.toString().toIntOrNull() ?: 0
+            val year = binding.etSignUpYaer.text.toString().toIntOrNull() ?: 0
             lifecycleScope.launch(Dispatchers.IO) {
                 val myInfoDao = FituneDatabase.getInstance(this@SignUpActivity).myInfoDao()
                 var myInfoEntity = myInfoDao.getMyInfo() ?: MyInfoEntity()
@@ -40,7 +40,7 @@ class SignUpActivity : AppCompatActivity() {
                     myInfoEntity.nickname = nickname
                     myInfoEntity.height=height
                     myInfoEntity.weight=weight
-                    myInfoEntity.age= age
+                    myInfoEntity.year= year
                     myInfoDao.insert(myInfoEntity)
                     Log.d("초기 유저 정보",myInfoEntity.toString())
 

@@ -4,6 +4,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 
 object ApiObject {
     private const val BASE_URL = "https://j9b306.p.ssafy.io/v1/api/"
@@ -42,5 +43,10 @@ object ApiObject {
     val postRetrofitSignUpService: SignUpAPI by lazy {
         getRetrofit.create(SignUpAPI::class.java)
     }
+
+    val patchRetrofitMyEditService: MyEditAPI by lazy {
+        getRetrofit.create(MyEditAPI::class.java)
+    }
+
 }
 

@@ -64,7 +64,7 @@
             android:layout_marginStart="120dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="95dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gmarketmedium"
                 android:text="이메일"
@@ -76,10 +76,11 @@
                 android:id="@+id/et_login_email"
                 android:layout_width="240dp"
                 android:layout_height="39dp"
-                android:layout_marginStart="30dp"
                 android:textSize="18dp"
                 android:background="@drawable/rounded_edittext"
-                android:gravity="center_vertical|start" />
+                android:gravity="center"
+                android:maxLength="30"
+                />
 
         </LinearLayout>
 
@@ -92,7 +93,7 @@
             android:layout_marginStart="120dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="95dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gmarketmedium"
                 android:text="비밀번호"
@@ -104,10 +105,12 @@
                 android:id="@+id/et_login_pwd"
                 android:layout_width="240dp"
                 android:layout_height="39dp"
-                android:layout_marginStart="10dp"
                 android:textSize="18dp"
                 android:background="@drawable/rounded_edittext"
-                android:gravity="center_vertical|start" />
+                android:gravity="center"
+                android:maxLength="20"
+                android:inputType="textPassword"
+                />
         </LinearLayout>
 
         <Button
@@ -121,6 +124,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_sign_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

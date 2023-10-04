@@ -2,6 +2,8 @@ package io.b306.fitune.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import io.b306.fitune.R
 import io.b306.fitune.databinding.ActivityMainBinding
 import io.b306.fitune.fragment.ExerciseHistoryFragment
@@ -10,6 +12,9 @@ import io.b306.fitune.fragment.MyPageFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
+    // 처음 뒤로가기 누르고 시간 재는 용
+    private var backPressedTime: Long = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -33,12 +38,15 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
+                // 운동 기록 페이지
                 R.id.navigation_record -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fm_container, ExerciseHistoryFragment())
                         .commitNow()
                     true
                 }
+
+                // 마이 페이지
                 R.id.navigation_mypage -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fm_container, MyPageFragment())
@@ -50,8 +58,29 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        onBackPressedDispatcher.addCallback(this@MainActivity, onBackPressedCallback)
 
     }
 
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (supportFragmentManager.backStackEntryCount > 0) {
+                // 프래그먼트 백스택에 프래그먼트가 있다면, 이전 프래그먼트로 돌아감
+                supportFragmentManager.popBackStack()
+            } else {
+                // 프래그먼트 백스택에 프래그먼트가 없다면, 뒤로 가기 로직을 실행
+                // 현재 시간을 가져오기
+                val currentTime = System.currentTimeMillis()
 
+                if (currentTime - backPressedTime <= 2000) {
+                    finish()
+                } else {
+                    // 2초 이상 경과했을 경우 Toast 메시지를 표시하고 뒤로가기 버튼 누른 시간 업데이트
+                    backPressedTime = currentTime
+                    Toast.makeText(this@MainActivity, "한 번 더 뒤로가기를 누르면 종료합니다.", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
+    }
 }
