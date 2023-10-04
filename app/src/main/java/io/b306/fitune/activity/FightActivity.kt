@@ -8,6 +8,9 @@ import android.os.Looper
 import com.bumptech.glide.Glide
 import io.b306.fitune.R
 import io.b306.fitune.databinding.ActivityFightBinding
+import io.b306.fitune.fragment.FightFindFragment
+import io.b306.fitune.fragment.FightNowResultFragment
+import io.b306.fitune.fragment.FightResultDetailDialogFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -30,10 +33,24 @@ class FightActivity : AppCompatActivity() {
             .into(binding.ivFighting)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            // 현재 액티비티를 종료
             finish()
+
+
+            // FightFindFragment로 이동
+            val findFragment = FightFindFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, findFragment)
+                .commit()
+
+            // FightNowResultFragment를 띄우는 코드 추가
+            val nowResultFragment = FightNowResultFragment()
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, nowResultFragment)
+                .addToBackStack(null) // 백 스택에 추가 (선택 사항)
+                .commit()
         }, 5100) // 4000 밀리초 후에 실행
+
     }
 
     override fun onDestroy() {
