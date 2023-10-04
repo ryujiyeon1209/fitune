@@ -1,44 +1,62 @@
 package io.b306.fitune.fragment
 
-import android.app.AlertDialog
-import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import io.b306.fitune.R
-import io.b306.fitune.activity.ExerciseProgressActivity
-import io.b306.fitune.activity.ExerciseSelectedActivity
-import io.b306.fitune.activity.MainActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
 import io.b306.fitune.databinding.FragmentRecommendDialogBinding
+import io.b306.fitune.model.getImageResourceByExerciseName
+import io.b306.fitune.room.ExerciseRecommendRepository
+import io.b306.fitune.room.FituneDatabase
+import io.b306.fitune.viewmodel.ExerciseRecommendViewModel
+import io.b306.fitune.viewmodel.ExerciseRecommendViewModelFactory
 
 class RecommendDialogFragment : DialogFragment() {
 
-    private var _binding: FragmentRecommendDialogBinding? = null
-    private val binding get() = _binding!!
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        _binding = FragmentRecommendDialogBinding.inflate(LayoutInflater.from(context))
+    private lateinit var binding: FragmentRecommendDialogBinding
+    private lateinit var viewModel: ExerciseRecommendViewModel
 
-        // 닫기 버튼 btn_recommend_dialog_close
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentRecommendDialogBinding.inflate(inflater, container, false)
+
+        val exerciseRecommendDao = FituneDatabase.getInstance(requireContext()).exerciseRecommendDao()
+        val repository = ExerciseRecommendRepository(exerciseRecommendDao)
+        val viewModelFactory = ExerciseRecommendViewModelFactory(repository)
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ExerciseRecommendViewModel::class.java)
+
+        val userId = 1
+
+        // LiveData를 사용하여 데이터를 비동기적으로 관찰하고 UI 업데이트
+        viewModel.myInfo.observe(viewLifecycleOwner, Observer { myInfo ->
+            if (myInfo != null) {
+                binding.tvRecommendType1.text = myInfo.recommendExercise1
+                binding.tvRecommendType2.text = myInfo.recommendExercise2
+                binding.tvRecommendType3.text = myInfo.recommendExercise3
+
+                binding.ivRecommend1.setImageResource(getImageResourceByExerciseName(myInfo.recommendExercise1))
+                binding.ivRecommend2.setImageResource(getImageResourceByExerciseName(myInfo.recommendExercise2))
+                binding.ivRecommend3.setImageResource(getImageResourceByExerciseName(myInfo.recommendExercise3))
+
+                binding.tvRecommendTargetTime.text = myInfo.targetTime.toString() + "분"
+                binding.tvRecommendTargetHeart.text = myInfo.targetBpm.toString() + "BPM"
+            }
+        })
+
         binding.btnRecommendDialogClose.setOnClickListener {
-            dismiss() // DialogFragment를 닫습니다.
-        }
-        binding.btnExerciseRecommend1.setOnClickListener {
-            val intent = Intent(context, ExerciseSelectedActivity::class.java)
-            startActivity(intent)
+            dismiss()
         }
 
+        // 데이터를 가져오는 작업 시작
+        viewModel.fetchMyInfo(userId)
 
-        return activity?.let {
-            val builder = AlertDialog.Builder(it)
-                .setView(binding.root)
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null // ViewBinding 참조를 해제합니다.
+        return binding.root
     }
 }
