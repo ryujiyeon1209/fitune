@@ -70,6 +70,7 @@ class Tutorial2Fragment : Fragment() {
                 if (selectedExercise != null) {
                     // Set preferred exercise.
                     myInfoEntity.preferExercise = selectedExercise.name
+                    myInfoEntity.exerciseListSeq = selectedExercise.exerciseId
 
                     if (myInfoEntity.id != null) {
                         myInfoDao.update(myInfoEntity)

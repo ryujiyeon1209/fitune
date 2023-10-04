@@ -78,8 +78,6 @@ class Tutorial4Fragment : Fragment() {
             }
 
             //회원가입 API 보내기
-
-
             GlobalScope.launch(Dispatchers.IO) {
                 try {
                     val userData = getUserDataFromRoom()
