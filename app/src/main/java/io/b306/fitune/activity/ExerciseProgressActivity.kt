@@ -19,11 +19,19 @@ import android.os.Handler
 import android.util.Log
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import io.b306.fitune.R
 import io.b306.fitune.databinding.ActivityExerciseProgressBinding
 import io.b306.fitune.databinding.ActivityMainBinding
 import io.b306.fitune.databinding.ActivityTutorialsBinding
+import io.b306.fitune.databinding.FragmentRecommendDialogBinding
+import io.b306.fitune.room.ExerciseRecommendRepository
+import io.b306.fitune.room.FituneDatabase
+import io.b306.fitune.viewmodel.ExerciseRecommendViewModel
+import io.b306.fitune.viewmodel.ExerciseRecommendViewModelFactory
 import java.util.UUID
 
 class ExerciseProgressActivity : AppCompatActivity() {
@@ -98,7 +106,30 @@ class ExerciseProgressActivity : AppCompatActivity() {
             binding.maxHeart.text = maxHeartRate.toString()
 
         }
+
+        //목표 운동시간, 심박수 가져오기
+        lateinit var viewModel: ExerciseRecommendViewModel
+
+        val exerciseRecommendDao = FituneDatabase.getInstance(this).exerciseRecommendDao()
+        val repository = ExerciseRecommendRepository(exerciseRecommendDao)
+        val viewModelFactory = ExerciseRecommendViewModelFactory(repository)
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ExerciseRecommendViewModel::class.java)
+
+        val userId = 1
+        viewModel.fetchMyInfo(userId)
+        viewModel.myInfo.observe(this, Observer { myInfo ->
+
+            Log.d("myInfo", "myInfo가 null일까? : " + myInfo.toString())
+
+            if (myInfo != null) {
+                binding.tvProgressRecommendTargetTime.text = myInfo.targetTime.toString() + "분"
+                binding.tvProgressRecommendTargetHeart.text = myInfo.targetBpm.toString() + "BPM"
+                binding.tvProgressRecommendTargetTime2.text = myInfo.targetTime.toString() + "분"
+            }
+        })
     }
+
 
     @RequiresApi(Build.VERSION_CODES.R)
     @SuppressLint("MissingPermission")

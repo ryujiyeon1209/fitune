@@ -24,4 +24,5 @@ class ExerciseRecommendViewModel(private val repository: ExerciseRecommendReposi
         }
     }
 
+
 }

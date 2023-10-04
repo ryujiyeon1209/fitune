@@ -22,15 +22,48 @@
   <!-- 배경 -->
   <FrameLayout
       android:layout_width="match_parent"
-      android:layout_height="240dp"
+      android:layout_height="250dp"
       android:background="@drawable/bg_middle">
 
     <!-- 운동 시작 후 누적 시간 -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="25dp"
+        android:orientation="horizontal">
+
+      <TextView
+          android:id="@+id/tv_progress_recommendTargetTime"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:fontFamily="@font/gmarketmedium"
+          android:text="30분"
+          android:textColor="@color/default_text"
+          android:textSize="27dp"
+          android:textStyle="bold" />
+
+      <TextView
+          android:id="@+id/tv_progress_recommendTargetHeart"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginStart="10dp"
+
+          android:fontFamily="@font/gmarketmedium"
+          android:text="150BPM"
+          android:textColor="@color/default_text"
+          android:textSize="27sp"
+          android:textStyle="bold" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/exerciseTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="35dp"
         android:fontFamily="@font/gmarketmedium"
         android:text="00:00:00"
         android:textSize="45dp"
@@ -134,30 +167,56 @@
       android:scaleType="fitCenter"
       android:layout_marginTop="20dp" />
 
-  <!-- 남은 시간   -->
-  <GridLayout
-      android:layout_width="380dp"
-      android:layout_height="wrap_content"
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="70dp"
       android:layout_gravity="center"
-      android:layout_marginTop="10dp"
-      android:layout_marginLeft="20dp"
-      android:layout_marginRight="20dp"
-      android:layout_marginBottom="10dp"
-      android:padding="10dp"
-      android:rowCount="2">
+      android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/remainTime"
-        android:layout_width="match_parent"
-        android:layout_row="0"
-        android:fontFamily="@font/gmarketmedium"
-        android:gravity="center"
-        android:text="남은 시간 / 목표 시간"
-        android:textColor="@color/default_text"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+    <!-- 남은 시간   -->
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:columnCount="3"
+        android:padding="10dp">
 
-  </GridLayout>
+      <TextView
+          android:id="@+id/remainTime"
+          android:layout_width="110dp"
+          android:layout_column="0"
+          android:fontFamily="@font/gmarketmedium"
+          android:gravity="center"
+          android:text="남은 시간"
+          android:textColor="@color/default_text"
+          android:textSize="20sp"
+          android:textStyle="bold" />
+
+      <TextView
+          android:layout_width="30dp"
+          android:layout_column="1"
+          android:fontFamily="@font/gmarketmedium"
+          android:gravity="center"
+          android:text=" / "
+          android:textColor="@color/default_text"
+          android:textSize="20sp"
+          android:textStyle="bold" />
+
+      <TextView
+          android:id="@+id/tv_progress_recommendTargetTime2"
+          android:layout_width="110dp"
+          android:layout_column="2"
+          android:fontFamily="@font/gmarketmedium"
+          android:gravity="center"
+          android:text="목표 시간"
+          android:textColor="@color/default_text"
+          android:textSize="20sp"
+          android:textStyle="bold" />
+      </GridLayout>
+  </LinearLayout>
+
 
   <!-- 운동 종료하기 버튼 활성화   -->
   <LinearLayout
