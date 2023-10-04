@@ -66,12 +66,7 @@ class LoginActivity : AppCompatActivity() {
                     //로그인 성공 > 정보를 room에 저장하기!
                     if (response.isSuccessful) {
 
-//                        val myInfoDao = MyApplication.database.myInfoDao()
-
-                        Log.d("로그인되염","")
-
                         // 로그인 성공 후 두 번째 API 호출: getMyInfo
-
                         val userAPI = ApiObject.getRetrofitService // UserAPI 인스턴스를 가져옵니다.
                         val myInfoResponse: Response<SuperResponse> = userAPI.getMyInfo(email).execute()
 
@@ -81,7 +76,6 @@ class LoginActivity : AppCompatActivity() {
                             Log.e("음냐",myInfoData.toString())
 
                             // DB에 데이터 저장 로직
-
                             val userInfo = myInfoData.data.let { it1 ->
                                 MyInfoEntity(
                                     userSeq = it1.user!!.userSeq,

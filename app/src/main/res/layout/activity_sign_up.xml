@@ -37,7 +37,7 @@
         android:fontFamily="@font/gmarketmedium"
         android:text="계정 정보 입력"
         android:textColor="@color/default_text"
-        android:textSize="17sp"
+        android:textSize="22sp"
         android:layout_marginLeft="15dp"
         android:layout_marginBottom="15dp"
         />
@@ -52,7 +52,7 @@
     <!-- 계정 정보 입력   -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="26dp"
         android:orientation="horizontal"
         android:paddingHorizontal="22dp"
         android:layout_marginBottom="20dp">
@@ -69,16 +69,16 @@
         <EditText
             android:id="@+id/et_signUp_email"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="28dp"
             android:textSize="18dp"
-            android:background="@drawable/rounded_edittext"
+            android:background="@drawable/edittext_with_border"
             android:gravity="center_vertical|start" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="26dp"
         android:orientation="horizontal"
         android:paddingHorizontal="22dp"
         android:layout_marginBottom="20dp">
@@ -95,8 +95,8 @@
         <EditText
             android:id="@+id/et_signUp_pwd"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_edittext"
+            android:layout_height="match_parent"
+            android:background="@drawable/edittext_with_border"
             android:textSize="18dp"
             android:gravity="center_vertical|start"
             android:layout_marginStart="10dp"
@@ -105,10 +105,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="26dp"
         android:orientation="horizontal"
         android:paddingHorizontal="22dp"
-        android:layout_marginBottom="30dp">
+        android:layout_marginBottom="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -122,11 +122,35 @@
         <EditText
             android:id="@+id/et_signUp_nickName"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_edittext"
+            android:layout_height="match_parent"
+            android:background="@drawable/edittext_with_border"
             android:textSize="18dp"
             android:gravity="center_vertical|start"
             android:layout_marginStart="28dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="22dp"
+        android:layout_marginBottom="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gmarketmedium"
+            android:text="운동강도"
+            android:textColor="@color/default_text"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/sp_signUp_tension"
+            android:background="@drawable/edittext_with_border"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp" />
+
     </LinearLayout>
 
 
@@ -138,7 +162,7 @@
         android:fontFamily="@font/gmarketmedium"
         android:text="신체 정보 입력"
         android:textColor="@color/default_text"
-        android:textSize="17sp"
+        android:textSize="22sp"
         android:layout_marginLeft="15dp"
         android:layout_marginBottom="15dp"
         />

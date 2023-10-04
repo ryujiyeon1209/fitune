@@ -88,7 +88,6 @@ class Tutorial4Fragment : Fragment() {
                     if (response != null && response.isSuccessful) {
 
                     } else {
-                        // 서버에서 실패 응답을 받았을 때 처리
                     }
                 } catch (e: Exception) {
                     // 네트워크 오류 또는 예외 발생 시 처리
@@ -124,6 +123,7 @@ class Tutorial4Fragment : Fragment() {
                 height = it.height,
                 weight = it.weight,
                 year = it.year,
+                tension = it.tension,
                 restingBpm = it.restingBpm,
                 activeBpm = it.activeBpm,
                 bodyFatPer = 0,
