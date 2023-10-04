@@ -17,4 +17,5 @@ public class BattleRecordResponse {
     String winnerName;
     int battleOtherSeq;
     String battleOtherName;
+    String battleOtherCellName;
 }
