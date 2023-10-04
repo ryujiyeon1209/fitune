@@ -25,6 +25,7 @@ import io.b306.fitune.viewmodel.MyInfoViewModel
 import io.b306.fitune.viewmodel.MyInfoViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
@@ -121,11 +122,16 @@ class MainFragment : Fragment() {
                         if (response.isSuccessful) {
                             Log.d("운동추천 API 성공", "성공이다아ㅏ!")
 
+                            var ExcerciseCount = FituneDatabase.getInstance(requireContext()).exerciseRecordDao().fetchAllExerciseRecord().count()
+
+
                             // room에 저장하기!
                             val recommendResponse = response.body()?.data // API 응답 데이터
                             myInfoEntity.recommendExercise1 = recommendResponse?.recommendFirst.toString()
                             myInfoEntity.recommendExercise2 = recommendResponse?.recommendSecond.toString()
                             myInfoEntity.recommendExercise3 = recommendResponse?.recommendThird.toString()
+                            myInfoEntity.targetBpm = ((0.5+(0.1)*myInfoEntity.tension)*(220-myInfoEntity.age-myInfoEntity.restingBpm)+myInfoEntity.restingBpm).toInt()
+                            myInfoEntity.targetTime = 60-15*myInfoEntity.tension + 3/ExcerciseCount
                             myInfoDao.update(myInfoEntity)
                             // 예시: API 응답 데이터를 로그로 출력
                             Log.d("운동 추천 데이터", recommendResponse.toString())
@@ -171,7 +177,6 @@ class MainFragment : Fragment() {
     private suspend fun getUserDataFromRoom(): RecommendUser? {
         myInfoDao = FituneDatabase.getInstance(requireContext()).myInfoDao()
         myInfoEntity = myInfoDao.getMyInfo()!!
-
         // myInfoEntity에서 필요한 데이터 추출
         return myInfoEntity?.let {
             RecommendUser(
