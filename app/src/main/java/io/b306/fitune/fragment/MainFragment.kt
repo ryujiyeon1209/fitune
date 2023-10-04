@@ -16,6 +16,7 @@ import io.b306.fitune.api.RecommendResponse
 import io.b306.fitune.api.RecommendUser
 import io.b306.fitune.databinding.FragmentMainBinding
 import androidx.lifecycle.ViewModelProvider
+import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import io.b306.fitune.room.FituneDatabase
 import io.b306.fitune.room.MyInfoRepository
 import io.b306.fitune.viewmodel.MyInfoViewModel
@@ -118,8 +119,9 @@ class MainFragment : Fragment() {
                         if (response.isSuccessful) {
                             Log.d("운동추천 API 성공", "성공이다아ㅏ!")
 
-                            // 여기에서 API 응답 데이터를 화면에 표시하는 로직을 추가하세요.
+                            // room에 저장하기!
                             val recommendResponse = response.body() // API 응답 데이터
+
 
                             // 예시: API 응답 데이터를 로그로 출력
                             Log.d("운동 추천 데이터", recommendResponse.toString())

@@ -97,7 +97,7 @@ class ExerciseHistoryFragment : Fragment() {
         binding.rvCalendar.layoutManager = context?.let { GridLayoutManager(it, 7) } // 7일/주
         binding.rvCalendar.adapter = CalendarAdapter(yourListOfDays, exerciseMap, object : OnDayClickListener {
             override fun onDayClick(calendarDayModel: CalendarDayModel) {
-                val tvDate = view?.findViewById<TextView>(R.id.tv_date)
+                val tvDate = view?.findViewById<TextView>(R.id.tv_history_date)
                 if (calendarDayModel.isCurrentMonth && calendarDayModel.day != 0) {
                     tvDate?.text = calendarDayModel.date.replace("-", ".")
                 }
