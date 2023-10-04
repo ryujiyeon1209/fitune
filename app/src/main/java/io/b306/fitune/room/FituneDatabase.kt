@@ -7,11 +7,12 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import io.b306.fitune.room.converter.Converters
 
-@Database(entities = [MyInfoEntity::class, ExerciseRecordEntity::class], version = 7, exportSchema = false)
+@Database(entities = [MyInfoEntity::class, ExerciseRecordEntity::class, ExerciseRecommendEntity::class], version = 9, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class FituneDatabase: RoomDatabase() {
     abstract fun myInfoDao(): MyInfoDao
     abstract fun exerciseRecordDao(): ExerciseRecordDao // 이 부분은 ExerciseRecordDao 인터페이스를 정의한 후에 사용하세요.
+    abstract fun exerciseRecommendDao(): ExerciseRecommendDao // 아마 이 부분도 그러지 않을까용?
 
     companion object {
         @Volatile
