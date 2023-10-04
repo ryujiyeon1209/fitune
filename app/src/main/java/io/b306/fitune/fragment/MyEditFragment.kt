@@ -1,6 +1,7 @@
 package io.b306.fitune.fragment
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import io.b306.fitune.R
+import io.b306.fitune.activity.LoginActivity
 import io.b306.fitune.api.ApiObject
 import io.b306.fitune.databinding.FragmentMyEditBinding
 import io.b306.fitune.room.FituneDatabase
@@ -62,11 +64,16 @@ class MyEditFragment : Fragment() {
         // UserInfo 가져오기
         viewModel.fetchMyInfo()
 
-//        binding.btnModifyNickname.setOnClickListener {
-//            showEditDialog("닉네임 변경", InputType.TYPE_CLASS_TEXT) { newValue ->
-//                viewModel.updateNickname(userSeq, newValue)
-//            }
-//        }
+        binding.btnModifyNickname.setOnClickListener {
+            showEditDialog("닉네임 변경", InputType.TYPE_CLASS_TEXT) { newValue ->
+                viewModel.myInfo.value?.let { currentUser ->
+                    val userSeq = currentUser.userSeq ?: 0
+
+                    // 서버 업데이트
+                    viewModel.updateNickname(userSeq, newValue)
+                }
+            }
+        }
 
         binding.btnModifyCellname.setOnClickListener{
             showEditDialog("세포 이름 변경", InputType.TYPE_CLASS_TEXT) { newValue ->
@@ -117,6 +124,19 @@ class MyEditFragment : Fragment() {
                 }
             }
         }
+
+        // 로그아웃
+        binding.liLogout.setOnClickListener {
+            viewModel.deleteMyInfo()
+
+            // 화면 전환
+            val intent = Intent(activity, LoginActivity::class.java)
+            startActivity(intent)
+
+            // 선택적: 현재 액티비티 종료 (로그아웃 시나리오에서 일반적으로 사용)
+            activity?.finish()
+        }
+
 //        binding.btnModifyAge.setOnClickListener{
 //            showEditDialog("나이 변경", InputType.TYPE_CLASS_NUMBER) { newValue ->
 //                try {

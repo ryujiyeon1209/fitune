@@ -23,6 +23,9 @@ interface MyInfoDao {
     @Delete
     suspend fun delete(myInfoEntity: MyInfoEntity)
 
+    @Query("DELETE FROM myinfo_table")
+    suspend fun deleteAll()
+
     // 검색 은 두 가지 방법이 있음
     // 1. 전체 데이터 가져와서 특정 id가 있는 데이터 검색
     // 테이블 이름은 작은따옴표로

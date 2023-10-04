@@ -1,11 +1,17 @@
 package io.b306.fitune.api
 
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.PATCH
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 public interface MyEditAPI {
+
+    @PUT("user/nickname/change")
+    suspend fun updateNickname(@Body request: UpdateNicknameRequest): Response<Void>
+
     @PATCH("user/edit/cell/{userSeq}/{cellName}")
     suspend fun updateCellName(@Path("userSeq") userSeq: Int, @Path("cellName") cellName: String): Response<Void>
 
