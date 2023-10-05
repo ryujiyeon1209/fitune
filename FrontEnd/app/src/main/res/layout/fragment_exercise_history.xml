@@ -32,7 +32,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow_left"
             android:layout_gravity="center"
-            />
+            android:backgroundTint="@color/white"
+            app:tint="@color/default_text" />
 
         <TextView
             android:id="@+id/tv_currentMonthYear"
@@ -52,6 +53,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow_right"
             android:layout_gravity="center"
+            android:backgroundTint="@color/white"
+            app:tint="@color/default_text"
             />
 
     </LinearLayout>
@@ -157,7 +160,7 @@
                 android:id="@+id/tv_history_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2023. 10. 00."
+                android:text=""
                 android:textSize="18sp"
                 app:layout_constraintTop_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -174,7 +177,7 @@
                 android:id="@+id/tv_history_totalTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="총 운동시간"
+                android:text=""
                 android:textSize="18sp"
                 app:layout_constraintTop_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -209,14 +212,13 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_history_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="45dp"
+                    <ImageView
+                        android:id="@+id/iv_history_type"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/gmarketbold"
-                        android:text="-"
-                        android:textSize="25sp" />
+                        android:layout_marginBottom="5dp"
+                        />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -233,6 +235,68 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     />
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_history_review"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="5dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="후기"
+                        android:fontFamily="@font/gmarketmedium"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_history_weather"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="5dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="날씨"
+                        android:fontFamily="@font/gmarketmedium"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
 
                 <LinearLayout
                     android:layout_width="100dp"
@@ -265,40 +329,6 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     />
-
-                <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv_history_weather"
-                        android:layout_width="wrap_content"
-                        android:layout_height="45dp"
-                        android:text="-"
-                        android:fontFamily="@font/gmarketbold"
-                        android:textSize="25sp"
-                        android:layout_gravity="center"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="날씨"
-                        android:fontFamily="@font/gmarketmedium"
-                        android:textSize="18sp"
-                        android:layout_gravity="center"
-                        />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
 
                 <LinearLayout
                     android:layout_width="100dp"
@@ -358,42 +388,10 @@
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    />
-
-                <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/iv_history_review"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="5dp"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="후기"
-                        android:fontFamily="@font/gmarketmedium"
-                        android:textSize="18sp"
-                        android:layout_gravity="center"
-                        />
-
-                </LinearLayout>
-
             </LinearLayout>
-
 
         </LinearLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>

@@ -17,6 +17,7 @@ import io.b306.fitune.api.RecommendUser
 import io.b306.fitune.databinding.FragmentMainBinding
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import io.b306.fitune.room.FituneDatabase
 import io.b306.fitune.room.MyInfoDao
 import io.b306.fitune.room.MyInfoEntity
@@ -87,13 +88,17 @@ class MainFragment : Fragment() {
                 binding.pbMainExp.progress = exp
             }
             // 이미지 변경 로직
-            val imageResId = when (cellLv) {
-                1 -> R.drawable.ic_lv1
-                2 -> R.drawable.ic_lv2
-                3 -> R.drawable.ic_lv3
-                else -> R.drawable.ic_lv3 // 기본 이미지
+            val gifResId = when (cellLv) {
+                1 -> R.drawable.gif_lv1
+                2 -> R.drawable.main_character
+                3 -> R.drawable.gif_lv3
+                else -> R.drawable.gif_lv3 // 기본 gif
             }
-            binding.ivMainCell.setImageResource(imageResId)
+
+            Glide.with(this)
+                .asGif()
+                .load(gifResId)
+                .into(binding.ivMainCell)
         }
 
         // UserInfo 가져오기

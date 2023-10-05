@@ -15,6 +15,7 @@
     import io.b306.fitune.R
     import io.b306.fitune.databinding.FragmentExerciseHistoryBinding
     import io.b306.fitune.model.ExerciseList
+    import io.b306.fitune.model.getImageResourceByExerciseId
     import io.b306.fitune.room.ExerciseRecordDao
     import io.b306.fitune.room.ExerciseRecordEntity
     import io.b306.fitune.room.ExerciseRecordRepository
@@ -117,13 +118,12 @@
 //                        tvDate?.text = calendarDayModel.date.replace("-", ".")
 //                    }
                     val selectedDate = calendarDayModel.date
-                    val tvDate = view?.findViewById<TextView>(R.id.tv_history_date)
 
                     // 선택된 날짜에 대한 운동 기록 찾기
                     val selectedRecord = exerciseRecords.find { it.exerciseStart?.split("T")?.get(0) == selectedDate }
 
                     Log.e("DEBUG Calender", "Selected Record: $selectedRecord")
-                    tvDate?.text = calendarDayModel.date.replace("-", ".")
+                    binding.tvHistoryDate.text = calendarDayModel.date.replace("-", ".")
 
                     if (selectedRecord != null && calendarDayModel.isCurrentMonth && calendarDayModel.day != 0) {
 
@@ -137,13 +137,13 @@
                         // 밀리초를 분으로 변환 (1분 = 60,000 밀리초)
                         val differenceInMinutes = differenceInMs / (1000 * 60)
 
-                        val weatherText = when (selectedRecord.exerciseWeather) {
-                            1 -> "맑음"
-                            2 -> "구름많음"
-                            3 -> "비"
-                            4 -> "눈"
-                            5 -> "쌀쌀함"
-                            else -> "알 수 없음"  // 기타 값을 대비한 기본 텍스트
+                        val weatherImageResource = when (selectedRecord.exerciseWeather) {
+                            1 -> R.drawable.ic_weather1
+                            2 -> R.drawable.ic_weather2
+                            3 -> R.drawable.ic_weather3
+                            4 -> R.drawable.ic_weather4
+                            5 -> R.drawable.ic_weather5
+                            else -> R.drawable.ic_weather3  // 기타 값을 대비한 기본 텍스트
                         }
 
                         val reviewImageResource = when (selectedRecord.exerciseReview) {
@@ -155,23 +155,38 @@
                             else -> R.drawable.ic_star_three
                         }
 
+                        val startTime = selectedRecord.exerciseStart?.let { formatTimeString(it) }
+                        val endTime = selectedRecord.exerciseEnd?.let { formatTimeString(it) }
+
+                        // 운동 타입에 따라 이미지 변경
+                        val imageResId = getImageResourceByExerciseId(selectedRecord.exerciseRecordSeq)
+
                         // TODO: 가져온 selectedRecord의 다른 정보들을 UI에 표시
-                        binding.tvHistoryType.text = getExerciseNameByExerciseId(selectedRecord.exerciseRecordSeq)
+                        binding.tvHistoryTotalTime.text = "$startTime - $endTime"
+                        binding.ivHistoryType.setImageResource(imageResId)
                         binding.tvHistoryExerciseTime.text = differenceInMinutes.toString()
                         binding.tvHistoryAvgHeart.text = selectedRecord.exerciseAvgBpm.toString()
                         binding.tvHistoryMaxHeart.text = selectedRecord.exerciseMaxBpm.toString()
-                        binding.tvHistoryWeather.text = weatherText
+                        binding.ivHistoryWeather.setImageResource(weatherImageResource)
                         binding.ivHistoryReview.setImageResource(reviewImageResource)
                     } else {
-                        binding.tvHistoryType.text = "-"
+                        binding.tvHistoryTotalTime.text = ""
+                        binding.ivHistoryType.setImageResource(0)
                         binding.tvHistoryExerciseTime.text = "-"
                         binding.tvHistoryAvgHeart.text = "-"
                         binding.tvHistoryMaxHeart.text = "-"
-                        binding.tvHistoryWeather.text = "-"
+                        binding.ivHistoryWeather.setImageResource(0)
                         binding.ivHistoryReview.setImageResource(0)
                     }
                 }
             })
+        }
+
+        fun formatTimeString(time: String): String? {
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+            val outputFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+
+            return inputFormat.parse(time)?.let { outputFormat.format(it) }
         }
 
         fun getExerciseNameByExerciseId(exerciseId: Int): String {

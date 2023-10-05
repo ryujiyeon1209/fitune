@@ -58,13 +58,27 @@
             android:layout_gravity="bottom|center_horizontal"
             />
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/iv_speech_bubble"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_speech_bubble"
+        android:layout_gravity="bottom|right"
+        android:layout_marginTop="-135dp"
+        android:layout_marginEnd="15dp"
+        android:gravity="center"
+        android:text="\n\n  운동 뽑기"
+        android:fontFamily="@font/gmarketmedium"
+        android:textSize="16dp"
+        />
+
     <ImageView
         android:id="@+id/iv_fortune"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_fortune_cookie"
         android:layout_gravity="bottom|right"
-        android:layout_marginTop="-50dp"
         android:layout_marginEnd="20dp"
         />
 
