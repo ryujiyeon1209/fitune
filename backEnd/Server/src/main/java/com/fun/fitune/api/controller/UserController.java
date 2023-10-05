@@ -86,7 +86,7 @@ public class UserController {
     public ResponseEntity<CommonResponse<CellResponse>> makeUserCell(@RequestBody CellRequest cellReq) {
         //유저 아이디와 세포 이름을 얻어서 저장
         return new ResponseEntity<>(makeCommonResponse(SUCCESS,
-                    new CellResponse(cellService.addCell(cellReq))), HttpStatus.OK);
+                new CellResponse(cellService.addCell(cellReq))), HttpStatus.OK);
 
     }
 
