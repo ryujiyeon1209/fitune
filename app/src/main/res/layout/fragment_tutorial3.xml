@@ -60,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="안정심박수 재기"
+                android:text="활동심박수 측정"
                 android:lineSpacingExtra="17sp"
                 android:textSize="30dp"
                 android:fontFamily="@font/gmarketmedium"
