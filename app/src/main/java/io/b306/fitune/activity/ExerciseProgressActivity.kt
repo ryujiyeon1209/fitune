@@ -125,7 +125,6 @@ class ExerciseProgressActivity : AppCompatActivity() {
             if (myInfo != null) {
                 binding.tvProgressRecommendTargetTime.text = myInfo.targetTime.toString() + "분"
                 binding.tvProgressRecommendTargetHeart.text = myInfo.targetBpm.toString() + "BPM"
-                binding.tvProgressRecommendTargetTime2.text = myInfo.targetTime.toString() + "분"
             }
         })
     }

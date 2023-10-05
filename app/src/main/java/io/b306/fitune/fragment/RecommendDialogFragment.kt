@@ -29,6 +29,12 @@ class RecommendDialogFragment : DialogFragment() {
     ): View? {
         binding = FragmentRecommendDialogBinding.inflate(inflater, container, false)
 
+        // 너비 설정
+        dialog?.window?.setLayout(
+            (resources.displayMetrics.widthPixels * 0.7).toInt(),
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
         val exerciseRecommendDao = FituneDatabase.getInstance(requireContext()).exerciseRecommendDao()
         val repository = ExerciseRecommendRepository(exerciseRecommendDao)
         val viewModelFactory = ExerciseRecommendViewModelFactory(repository)
