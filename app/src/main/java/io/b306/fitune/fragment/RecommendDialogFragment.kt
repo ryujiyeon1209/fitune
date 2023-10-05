@@ -87,6 +87,9 @@ class RecommendDialogFragment : DialogFragment() {
             startActivity(intent)
 
             dismiss()
+
+            // Fragment의 호스팅 Activity를 종료
+            requireActivity().finish()
         }
 
         binding.btnExerciseRecommend2.setOnClickListener {
@@ -98,6 +101,9 @@ class RecommendDialogFragment : DialogFragment() {
             startActivity(intent)
 
             dismiss()
+
+            // Fragment의 호스팅 Activity를 종료
+            requireActivity().finish()
         }
 
         binding.btnExerciseRecommend3.setOnClickListener {
@@ -110,6 +116,9 @@ class RecommendDialogFragment : DialogFragment() {
             startActivity(intent)
 
             dismiss()
+
+            // Fragment의 호스팅 Activity를 종료
+            requireActivity().finish()
         }
 
 
