@@ -49,7 +49,7 @@ class Tutorial2Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.rvExerciseList.apply {
-            layoutManager = GridLayoutManager(context, 2) // 2개의 컬럼을 가진 그리드 레이아웃
+            layoutManager = GridLayoutManager(context, 3) // 2개의 컬럼을 가진 그리드 레이아웃
             adapter = ExerciseAdapter(ExerciseList.list) // ExerciseAdapter는 별도로 정의해야 함
         }
 
