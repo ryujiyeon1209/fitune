@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fitune</string>
+    <string name="app_name">오늘의 운세</string>
     <string name="app_title">오늘의 운세</string>
     <string name="progress_text_format">%1$d / %2$d</string>
     <!-- TODO: Remove or change this placeholder text -->
