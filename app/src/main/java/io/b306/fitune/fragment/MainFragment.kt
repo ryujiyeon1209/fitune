@@ -101,7 +101,7 @@ class MainFragment : Fragment() {
         viewModel.fetchMyInfo()
 
         // 오늘의 추천 운동 API 요청
-        binding.ivFortune.setOnClickListener {
+
             val recommendDialogFragment = RecommendDialogFragment()
 
             lifecycleScope.launch(Dispatchers.IO) {
@@ -146,7 +146,7 @@ class MainFragment : Fragment() {
 
                 }
             }
-
+        binding.ivFortune.setOnClickListener {
             recommendDialogFragment.show(childFragmentManager, "recommend_dialog")
         }
 

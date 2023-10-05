@@ -141,7 +141,6 @@ class ExerciseProgressActivity : AppCompatActivity() {
                     seconds % 60
                 )
                 binding.tvProgressRemainTime.text = formattedTime
-                binding.tvProgressRecommendTargetTime.text = myInfo.targetTime.toString() + "분"
                 binding.tvProgressRecommendTargetHeart.text = myInfo.targetBpm.toString() + "BPM"
             }
         })
