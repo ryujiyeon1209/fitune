@@ -43,10 +43,15 @@ class ExerciseProgressActivity : AppCompatActivity() {
     private var maxHeartRate = 0;
     private var avgHeartRate =0;
     private lateinit var exerciseTimer: TextView
+    private lateinit var remainTimer: TextView
     private var startTimeMillis: Long = 0
     private var timerRunning = false
     private var elapsedTimeMillis: Long = 0
     private val handler = Handler()
+    private var timeCount = 0
+    private var remainTimeCount =0
+    private var targetBPM = 0;
+    private var targetTime = 0;
 
     private fun startTimer() {
         if (!timerRunning) {
@@ -100,9 +105,8 @@ class ExerciseProgressActivity : AppCompatActivity() {
 
             // 평균 및 최대 심박수 계산 로직이 필요합니다.
             // 아래는 예시로 임의의 값을 설정하는 코드입니다.
-            avgHeartRate += heartRate.toInt()
             maxHeartRate = heartRate.toInt().coerceAtLeast(maxHeartRate)
-            binding.avgHeart.text = (avgHeartRate/4).toString()
+            binding.avgHeart.text = (avgHeartRate/timeCount).toString()
             binding.maxHeart.text = maxHeartRate.toString()
 
         }
@@ -123,6 +127,9 @@ class ExerciseProgressActivity : AppCompatActivity() {
             Log.d("myInfo", "myInfo가 null일까? : " + myInfo.toString())
 
             if (myInfo != null) {
+                targetBPM = myInfo.targetBpm
+                remainTimeCount = myInfo.targetTime*60
+                Log.d("myInfo", "남은시간 : " + remainTimeCount)
                 binding.tvProgressRecommendTargetTime.text = myInfo.targetTime.toString() + "분"
                 binding.tvProgressRecommendTargetHeart.text = myInfo.targetBpm.toString() + "BPM"
             }
@@ -204,6 +211,25 @@ class ExerciseProgressActivity : AppCompatActivity() {
             val data = characteristic?.value
             val heartRate = data?.let { String(it, Charsets.UTF_8) }
             nowHeartRate.postValue(heartRate!!)
+            avgHeartRate += heartRate.toInt()
+            timeCount++;
+            if(heartRate.toInt()>targetBPM && remainTimeCount>0) {
+                remainTimeCount--
+                val seconds = remainTimeCount
+                val minutes = seconds / 60
+                val hours = minutes / 60
+
+                val formattedTime = String.format(
+                    "%02d:%02d:%02d",
+                    hours,
+                    minutes % 60,
+                    seconds % 60
+                )
+                runOnUiThread {
+                    binding.tvProgressRemainTime.text = formattedTime
+                }
+                Log.i("onCharacteristicChanged", "남은운동시간: $formattedTime bpm")
+            }
             Log.i("onCharacteristicChanged", "변경된 심박수: $heartRate bpm")
         }
     }

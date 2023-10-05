@@ -122,7 +122,9 @@ class MainFragment : Fragment() {
                             Log.d("운동추천 API 성공", "성공이다아ㅏ!")
                             Log.d("운동 추천 데이터", myInfoEntity.toString())
                             var exerciseCount = FituneDatabase.getInstance(requireContext()).exerciseRecordDao().fetchAllExerciseRecord()?.first()?.size ?: 0
-                            Log.d("운동갯수", exerciseCount.toString())
+                            Log.d("운동 기록 갯수", exerciseCount.toString())
+                            var plusTime = 0;
+                            if(exerciseCount>0) plusTime = exerciseCount*(3/myInfoEntity.tension)
 
                             // room에 저장하기!
 
@@ -131,7 +133,7 @@ class MainFragment : Fragment() {
                             myInfoEntity.recommendExercise2 = recommendResponse?.recommendSecond.toString()
                             myInfoEntity.recommendExercise3 = recommendResponse?.recommendThird.toString()
                             myInfoEntity.targetBpm = ((0.5+(0.1)*myInfoEntity.tension)*(220-myInfoEntity.age-myInfoEntity.restingBpm)+myInfoEntity.restingBpm).toInt()
-                            myInfoEntity.targetTime = 60-15*myInfoEntity.tension - 3/exerciseCount
+                            myInfoEntity.targetTime = 60 - 15 * myInfoEntity.tension + plusTime
                             myInfoDao.update(myInfoEntity)
                             // 예시: API 응답 데이터를 로그로 출력
                             Log.d("운동 추천 데이터", myInfoEntity.toString())
