@@ -1,20 +1,25 @@
 package io.b306.fitune.activity
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import io.b306.fitune.R
 import io.b306.fitune.databinding.ActivityMainBinding
 import io.b306.fitune.fragment.ExerciseHistoryFragment
+import io.b306.fitune.fragment.ExerciseResultFragment
 import io.b306.fitune.fragment.FightResultFragment
 import io.b306.fitune.fragment.MainFragment
 import io.b306.fitune.fragment.MyPageFragment
+import io.b306.fitune.model.ExerciseData
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private var exerciseData: ExerciseData? = null
 
     // 처음 뒤로가기 누르고 시간 재는 용
     private var backPressedTime: Long = 0
@@ -39,6 +44,31 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.fm_container, fragment)
                 .commit()
         }
+
+        // 운동 리뷰 작성하는 fragment 띄우기
+        if (intent.getBooleanExtra("SHOW_RESULT_FRAGMENT", false)) {
+            Log.e("이거 오나", "트루일텐데?")
+            // 버전에 따른 메소드 지원
+            exerciseData = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent.getParcelableExtra("EXTRA_EXERCISE_DATA", ExerciseData::class.java)
+            } else {
+                intent.getParcelableExtra("EXTRA_EXERCISE_DATA")
+            }
+
+            val fragment = ExerciseResultFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable("EXERCISE_DATA", exerciseData)
+                }
+            }
+
+            Log.e("이거 오나", "프래그넘기기")
+
+            // FragmentTransaction을 사용하여 fragment를 띄우기
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fm_container, fragment)
+                .commit()
+        }
+        Log.e("메인밖", (intent.getBooleanExtra("SHOW_RESULT_FRAGMENT", false)).toString())
 
         // 하단 navbar의 클릭에 따라 보여지는 페이지 달라짐
         binding.navigation.setOnItemSelectedListener { item ->

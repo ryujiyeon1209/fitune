@@ -50,3 +50,13 @@ fun getExerciseIdByName(exerciseName: String): Int {
     val exercise = ExerciseList.list.find { it.englishName == exerciseName }
     return exercise?.exerciseId ?: 3 // 일치하는 이름이 없으면 3(걷기) 반환
 }
+
+fun getKoreanNameByExerciseId(exerciseId: Int): String {
+    val exercise = ExerciseList.list.find { it.exerciseId == exerciseId }
+    return exercise?.name ?: "걷기" // 일치하는 ID가 없으면 "걷기" 반환
+}
+
+fun getImageResourceByExerciseId(exerciseId: Int): Int {
+    val exercise = ExerciseList.list.find { it.exerciseId == exerciseId }
+    return exercise?.imageResId ?: R.drawable.ic_walking // 일치하는 ID가 없으면 걷기 이미지 반환
+}

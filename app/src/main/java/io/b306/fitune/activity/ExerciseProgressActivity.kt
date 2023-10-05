@@ -11,6 +11,7 @@ import android.bluetooth.BluetoothGattService
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothProfile
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,7 @@ import android.os.Handler
 import android.util.Log
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -143,6 +145,7 @@ class ExerciseProgressActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(ExerciseRecommendViewModel::class.java)
 
+        // room에 있는 user는 1명밖에 없음
         val userId = 1
         viewModel.fetchMyInfo(userId)
         viewModel.myInfo.observe(this, Observer { myInfo ->
@@ -174,8 +177,31 @@ class ExerciseProgressActivity : AppCompatActivity() {
             val endSdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
             // 시작 시간을 저장
             exerciseData?.endTimeMillis = endSdf.format(endDate)
+            // 심박수 저장
+            if(avgHeartRate != 0 || timeCount != 0) {
+                exerciseData?.avgHeartRate = avgHeartRate / timeCount
+            } else {
+                // 와치가 없어서 일단 임의 값 저장
+                exerciseData?.avgHeartRate = 111
+            }
+            if(maxHeartRate != 0) {
+                exerciseData?.maxHeartRate = maxHeartRate
+            } else {
+                // 와치가 없어서 일단 임의 값 저장
+                exerciseData?.maxHeartRate = 133
+            }
 
             Log.e("여기는액설사이즈프로그래스액티비티 정보22", exerciseData.toString())
+
+            // MainActivity를 시작하고 ExerciseResultFragment를 띄우게 하기 위한 코드
+            val intent = Intent(this@ExerciseProgressActivity, MainActivity::class.java)
+            // 여기서는 FLAG_ACTIVITY_CLEAR_TOP 플래그를 사용하여 액티비티 스택을 정리
+            // 이렇게 하면 MainActivity 위의 모든 액티비티가 종료 됨
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            intent.putExtra("EXTRA_EXERCISE_DATA", exerciseData)
+            intent.putExtra("SHOW_RESULT_FRAGMENT", true)
+            startActivity(intent)
+            finish()
         }
     }
 
@@ -280,6 +306,24 @@ class ExerciseProgressActivity : AppCompatActivity() {
     //fragments와 연동을 위한 인터페이스
     interface ExerciseSelectedListener {
         fun onExerciseStartButtonClicked()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        // Handler의 콜백 및 메시지 제거
+        handler.removeCallbacksAndMessages(null)
+
+        // BluetoothGatt 연결 종료
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.BLUETOOTH_CONNECT
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+        bluetoothGatt?.close()
+        bluetoothGatt = null
     }
 
 }
