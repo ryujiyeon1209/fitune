@@ -38,9 +38,6 @@ class FightActivity : AppCompatActivity() {
             userSeq = myInfoDao.getUserSeq()
             userNickname = myInfoDao.getUserNickname()
 
-            Log.e("여긴파이트액티비티 상대시크", otherUserSeq.toString())
-            Log.e("여긴파이트액티비티 나시크", userSeq.toString())
-
             // API 요청
             val battleAddRequest = BattleAddRequest(userSeq!!, otherUserSeq)
 
