@@ -75,24 +75,21 @@ class Tutorial4Fragment : Fragment() {
                     myInfoDao.insert(myInfoEntity)
                     Log.d("유저 넣었습니다.",myInfoEntity.toString())
                 }
-            }
 
-            //회원가입 API 보내기
-            GlobalScope.launch(Dispatchers.IO) {
-                try {
-                    val userData = getUserDataFromRoom()
-                    val signUpAPI = ApiObject.postRetrofitSignUpService
-                    val call: Call<signUpResponse>? = signUpAPI.createUser(userData)
-                    val response: Response<signUpResponse>? = call?.execute()
+                //회원가입 API 보내기
+                val userData = getUserDataFromRoom()
+                val signUpAPI = ApiObject.postRetrofitSignUpService
+                val call: Call<signUpResponse>? = signUpAPI.createUser(userData)
+                val response: Response<signUpResponse>? = call?.execute()
 
-                    if (response != null && response.isSuccessful) {
+                Log.d("세포이름이 DB에 들어가야 해!", userData.toString())
 
-                    } else {
-                    }
-                } catch (e: Exception) {
-                    // 네트워크 오류 또는 예외 발생 시 처리
+                if (response != null && response.isSuccessful) {
+                    Log.d("회원가입 완료!", response.toString())
+                } else {
                 }
             }
+
             val intent = Intent(context, LoginActivity::class.java)
             startActivity(intent)
 

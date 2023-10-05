@@ -49,7 +49,7 @@
                         android:layout_height="75dp"
                         android:backgroundTint="@color/button_bg"
                         android:fontFamily="@font/gmarketmedium"
-                        android:text="3분 제자리 뛰기"
+                        android:text="1분 제자리 뛰기"
                         android:textColor="@color/black"
                         android:textSize="30dp" />
 
@@ -65,8 +65,8 @@
                 android:textStyle="bold"
                 android:lineSpacingExtra="17sp"
                 android:textSize="25sp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
                 android:textColor="@color/none_selected_button"
                 />
 
@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="남은 시간: 180초"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/gmarketmedium"
                 android:layout_gravity="center"
@@ -88,8 +88,8 @@
             <ProgressBar
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="155dp"
-                android:layout_height="155dp"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
                 android:layout_gravity="center"
                 android:background="@drawable/circular_progress_bar_gray"
                 android:indeterminate="false"
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="0 bpm"
-                android:textSize="25sp"
+                android:textSize="20dp"
                 android:textColor="#000000" />
 
             <RelativeLayout
@@ -114,20 +114,6 @@
                 android:layout_gravity="center">
             </RelativeLayout>
 
-
-
-            <Button
-                android:layout_marginTop="50dp"
-                android:id="@+id/btn_tutorial3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="운동 심박수 저장하기 \n(3/4)"
-                android:backgroundTint="@color/button_bg"
-                android:textColor="@color/black"
-                android:fontFamily="@font/gmarketmedium"
-                android:textSize="15dp"
-                android:layout_gravity="center"
-                />
 
         </LinearLayout>
     </FrameLayout>

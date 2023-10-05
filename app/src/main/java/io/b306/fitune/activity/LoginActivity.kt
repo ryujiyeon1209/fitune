@@ -72,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
 
                         if (myInfoResponse.isSuccessful) {
                             val myInfoData = myInfoResponse.body() ?: throw Exception("MyInfoData is null")
-                            Log.e("이메일은..",email)
+                            Log.e("세포 이름은?", myInfoData.data.cell.toString())
                             Log.e("음냐",myInfoData.toString())
 
                             // DB에 데이터 저장 로직
