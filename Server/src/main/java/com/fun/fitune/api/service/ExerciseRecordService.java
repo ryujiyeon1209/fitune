@@ -81,6 +81,7 @@ public class ExerciseRecordService {
                     .exerciseName(exerciseList.getExerciseName())
                     .exerciseStart(exerciseRecord.getExerciseStart())
                     .exerciseEnd(exerciseRecord.getExerciseEnd())
+                    .isRecommended(exerciseRecord.isExerciseReco())
                     .avgBpm(exerciseRecord.getExerciseAvgBpm())
                     .maxBpm(exerciseRecord.getExerciseMaxBpm())
                     .review(exerciseRecord.getExerciseReview())
