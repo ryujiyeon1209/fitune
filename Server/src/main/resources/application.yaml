@@ -1,13 +1,7 @@
 server:
   port: 5000
-    
-#     443 # HTTPS 포트 (기본 443)
 
-# server.ssl:
-#   key-store: /certs/keystore.jks # keystore 파일 경로
-#   key-store-password: fitune
-#   key-alias: mynewdomain # 사용할 키 스토어의 별칭 (alias)
-#   key-password: fitune
+server.ssl.enabled: false
 
 spring:
   profiles:

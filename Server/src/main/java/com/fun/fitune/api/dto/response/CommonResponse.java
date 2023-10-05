@@ -2,9 +2,7 @@ package com.fun.fitune.api.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.ToString;
 
-@ToString
 @Getter
 public class CommonResponse<T> {
     private String message;

@@ -10,16 +10,10 @@ import lombok.ToString;
 @ToString
 public class UserInfoResponse {
     String nickname;
-    int userSeq;
-    int age;
-    int height;
-    int weight;
 
     public UserInfoResponse(User user){
         this.nickname=user.getNickname();
-        this.userSeq=user.getUserSeq();
-        this.age=user.getAge();
-        this.height=user.getHeight();
-        this.weight=user.getWeight();
     }
+
+
 }

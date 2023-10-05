@@ -4,14 +4,13 @@ import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 import jakarta.persistence.*;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @AllArgsConstructor
 @DynamicUpdate
 @Entity
 @Getter
 @Setter
 @ToString
-@Builder
 @Table(name = "cell")
 public class Cell {
     @Id
@@ -23,12 +22,9 @@ public class Cell {
     private String cellName;
 
     @Column(name = "cell_exp")
-    private long cellExp;
+    private int cellExp;
 
-    @Column(name = "cell_latest_exp")
-    private int cellLatestExp;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_seq")
     private User user;
 }
