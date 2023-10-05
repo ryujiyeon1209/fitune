@@ -9,19 +9,39 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import io.b306.fitune.R
+import io.b306.fitune.api.ApiObject
+import io.b306.fitune.api.ExerciseRequestBody
 import io.b306.fitune.databinding.FragmentExerciseResultBinding
 import io.b306.fitune.model.ExerciseData
 import io.b306.fitune.model.getImageResourceByExerciseId
 import io.b306.fitune.model.getKoreanNameByExerciseId
+import io.b306.fitune.room.ExerciseRecordEntity
+import io.b306.fitune.room.FituneDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
+import java.util.TimeZone
 
 class ExerciseResultFragment : Fragment() {
 
     private var _binding: FragmentExerciseResultBinding? = null
     private val binding get() = _binding!!
-    // 맑음 구름많음 비 눈 쌀쌀함
     private var exerciseData: ExerciseData? = null
+
+    // Fragment 내부의 멤버 변수로 코루틴 스코프 정의
+    private val viewModelScope = CoroutineScope(Dispatchers.Main + Job())
+
+    // userSeq
+    private var userSeq : Int = 0
+
+    // room 에 저장할 운동 시간
+    private var startTimeKst: String = ""
+    private var endTimeKst: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +54,15 @@ class ExerciseResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // 데이타베입스 연결
+        val myInfoDao = FituneDatabase.getInstance(requireContext()).myInfoDao()
+        val exerciseRecordDao = FituneDatabase.getInstance(requireContext()).exerciseRecordDao()
+
+        //room에서 가져온 내 아이디
+        viewModelScope.launch {
+            userSeq = myInfoDao.getUserSeq()
+        }
+
         // 버전에 따른 메소드 지원
         exerciseData = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             arguments?.getParcelable("EXERCISE_DATA", ExerciseData::class.java)
@@ -41,13 +70,13 @@ class ExerciseResultFragment : Fragment() {
             arguments?.getParcelable("EXERCISE_DATA")
         }
 
-        Log.e("여기는 엑설리절트프래그멍트", exerciseData.toString())
-
         // 해당하는 이미지 리소스 가져오기
         val imageResId = getImageResourceByExerciseId(exerciseData?.exerciseSeq ?: 3)
 
         // 운동 시간 구하기
         val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+        val utcTimeZone = TimeZone.getTimeZone("UTC")
+        sdf.timeZone = TimeZone.getTimeZone("Asia/Seoul")
 
         val startTime = exerciseData?.startTimeMillis?.let { sdf.parse(it) }
         val endTime = exerciseData?.endTimeMillis?.let { sdf.parse(it) }
@@ -65,6 +94,23 @@ class ExerciseResultFragment : Fragment() {
                 minutes,
                 seconds
             )
+
+            // 한국 시간으로 바꾸기
+            val originalFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+            val startTimeDate = exerciseData?.startTimeMillis?.let { originalFormat.parse(it) }
+            val endTimeDate = exerciseData?.endTimeMillis?.let { originalFormat.parse(it) }
+
+            // 9시간을 밀리초로 환산
+            val nineHoursInMillis = 9 * 60 * 60 * 1000
+
+            // Date에 9시간을 더하기
+            val adjustedStartTime = startTimeDate?.let { Date(it.time + nineHoursInMillis) }
+            val adjustedEndTime = endTimeDate?.let { Date(it.time + nineHoursInMillis) }
+
+            // 다시 String 형태로 변환하여 저장 혹은 다른 작업을 진행
+            startTimeKst = adjustedStartTime?.let { originalFormat.format(it) }.toString()
+            endTimeKst = adjustedEndTime?.let { originalFormat.format(it) }.toString()
+
         }
 
         val starButtons = listOf(
@@ -113,6 +159,55 @@ class ExerciseResultFragment : Fragment() {
 
         binding.btnExerciseResult.setOnClickListener {
             Log.e("최종로그",exerciseData.toString())
+            val requestBody = exerciseData?.let { it ->
+                ExerciseRequestBody(
+                    exerciseListSeq = it.exerciseSeq,
+                    recommended = true,
+                    exerciseStart = it.startTimeMillis,
+                    exerciseEnd = it.endTimeMillis,
+                    exerciseAvgBpm = it.avgHeartRate,
+                    exerciseMaxBpm = it.maxHeartRate,
+                    review = it.exerciseReview,
+                    weather = it.exerciseWeather
+                )
+            }
+
+            // Retrofit 호출
+            GlobalScope.launch(Dispatchers.IO) {
+                val response = requestBody?.let { it1 ->
+                    ApiObject.patchRetrofitExerciseService.postExerciseData(
+                        userSeq = userSeq,
+                        requestBody = it1
+                    )
+                }
+
+                if (response != null) {
+                    if (response.isSuccessful) {
+                        // 성공적으로 API 호출 완료
+                        // Room DB에 데이터 저장
+                        val exerciseRecord = exerciseData?.let { it ->
+                            ExerciseRecordEntity(
+                                // 필요한 정보 입력
+                                exerciseRecordSeq = it.exerciseSeq,
+                                exerciseStart = startTimeKst,
+                                exerciseEnd = endTimeKst,
+                                exerciseReco = true,
+                                exerciseAvgBpm = it.avgHeartRate,
+                                exerciseMaxBpm = it.maxHeartRate,
+                                exerciseDistance = 0,
+                                exerciseReview = it.exerciseReview,
+                                exerciseWeather = it.exerciseWeather
+                            )
+                        }
+                        if (exerciseRecord != null) {
+                            exerciseRecordDao.insert(exerciseRecord)
+                        }
+                    } else {
+                        // API 호출 오류 처리
+                    }
+                }
+            }
+
         }
     }
 

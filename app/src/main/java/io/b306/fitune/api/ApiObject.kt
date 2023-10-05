@@ -52,5 +52,9 @@ object ApiObject {
         getRetrofit.create(BattleAPI::class.java)
     }
 
+    val patchRetrofitExerciseService: ExerciseAPI by lazy {
+        getRetrofit.create(ExerciseAPI::class.java)
+    }
+
 }
 
