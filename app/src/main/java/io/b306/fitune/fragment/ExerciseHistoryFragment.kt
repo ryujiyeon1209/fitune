@@ -52,15 +52,11 @@
             exerciseRecordRepository = exerciseRecordDao?.let { ExerciseRecordRepository(it) }!!
 
             lifecycleScope.launch {
-                // Repository에서 가져온 데이터를 기반으로 달력 업데이트
-                val exerciseRecords = exerciseRecordRepository.fetchAllExerciseRecord().first()
-
-                // exerciseStart를 기준으로 exerciseMap 생성
-                val exerciseMap = exerciseRecords.associateBy(
-                    { it.exerciseStart!!.split("T")[0] }, { true }
-                )
-
-                updateCalendar(calendar.get(Calendar.MONTH), exerciseMap)
+                if (exerciseRecords.isEmpty()) {
+                    // Repository에서 가져온 데이터를 기반으로 달력 업데이트
+                    exerciseRecords = exerciseRecordRepository.fetchAllExerciseRecord().first()
+                }
+                updateCalendar(calendar.get(Calendar.MONTH))
             }
 
             // 달력 이전 버튼
@@ -82,6 +78,10 @@
         }
 
         private fun updateCalendar(month: Int, exerciseMap: Map<String, Boolean> = emptyMap()) {
+            val exerciseMap = exerciseRecords.associateBy(
+                { it.exerciseStart!!.split("T")[0] }, { true }
+            )
+
             calendar.set(Calendar.MONTH, month)
             val currentMonth = calendar.get(Calendar.MONTH) + 1 // 0-based index
             val currentYear = calendar.get(Calendar.YEAR)
@@ -121,9 +121,9 @@
                     val selectedRecord = exerciseRecords.find { it.exerciseStart?.split("T")?.get(0) == selectedDate }
 
                     Log.e("DEBUG Calender", "Selected Record: $selectedRecord")
+                    tvDate?.text = calendarDayModel.date.replace("-", ".")
 
                     if (selectedRecord != null && calendarDayModel.isCurrentMonth && calendarDayModel.day != 0) {
-                        tvDate?.text = calendarDayModel.date.replace("-", ".")
 
                         // TODO: 가져온 selectedRecord의 다른 정보들을 UI에 표시
                         binding.tvHistoryType.text = selectedRecord.exerciseRecordSeq.toString()
