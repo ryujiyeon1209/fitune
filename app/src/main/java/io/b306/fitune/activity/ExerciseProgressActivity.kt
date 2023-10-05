@@ -121,7 +121,6 @@ class ExerciseProgressActivity : AppCompatActivity() {
         // 시작 시간을 저장
         exerciseData?.startTimeMillis = sdf.format(date)
 
-        Log.e("여기는액설사이즈프로그래스액티비티 정보", exerciseData.toString())
 
         startTimer()
 
@@ -191,7 +190,6 @@ class ExerciseProgressActivity : AppCompatActivity() {
                 exerciseData?.maxHeartRate = 133
             }
 
-            Log.e("여기는액설사이즈프로그래스액티비티 정보22", exerciseData.toString())
 
             // MainActivity를 시작하고 ExerciseResultFragment를 띄우게 하기 위한 코드
             val intent = Intent(this@ExerciseProgressActivity, MainActivity::class.java)

@@ -47,7 +47,6 @@ class MainActivity : AppCompatActivity() {
 
         // 운동 리뷰 작성하는 fragment 띄우기
         if (intent.getBooleanExtra("SHOW_RESULT_FRAGMENT", false)) {
-            Log.e("이거 오나", "트루일텐데?")
             // 버전에 따른 메소드 지원
             exerciseData = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 intent.getParcelableExtra("EXTRA_EXERCISE_DATA", ExerciseData::class.java)
@@ -61,14 +60,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            Log.e("이거 오나", "프래그넘기기")
-
             // FragmentTransaction을 사용하여 fragment를 띄우기
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fm_container, fragment)
                 .commit()
         }
-        Log.e("메인밖", (intent.getBooleanExtra("SHOW_RESULT_FRAGMENT", false)).toString())
 
         // 하단 navbar의 클릭에 따라 보여지는 페이지 달라짐
         binding.navigation.setOnItemSelectedListener { item ->
