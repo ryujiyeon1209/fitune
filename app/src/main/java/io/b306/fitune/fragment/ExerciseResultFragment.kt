@@ -11,6 +11,7 @@ class ExerciseResultFragment : Fragment() {
 
     private var _binding: FragmentExerciseResultBinding? = null
     private val binding get() = _binding!!
+    // 맑음 구름많음 비 눈 쌀쌀함
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

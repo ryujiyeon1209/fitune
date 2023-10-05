@@ -14,6 +14,7 @@
     import io.b306.fitune.adapter.OnDayClickListener
     import io.b306.fitune.R
     import io.b306.fitune.databinding.FragmentExerciseHistoryBinding
+    import io.b306.fitune.model.ExerciseList
     import io.b306.fitune.room.ExerciseRecordDao
     import io.b306.fitune.room.ExerciseRecordEntity
     import io.b306.fitune.room.ExerciseRecordRepository
@@ -23,6 +24,7 @@
     import java.util.Calendar
     import java.util.Locale
     import kotlinx.coroutines.flow.first
+    import java.util.Date
 
     class ExerciseHistoryFragment : Fragment() {
 
@@ -125,19 +127,56 @@
 
                     if (selectedRecord != null && calendarDayModel.isCurrentMonth && calendarDayModel.day != 0) {
 
+                        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+                        val startDate: Date = format.parse(selectedRecord.exerciseStart)
+                        val endDate: Date = format.parse(selectedRecord.exerciseEnd)
+
+                        // 두 날짜 간의 차이를 밀리초(ms) 단위로 계산
+                        val differenceInMs = endDate.time - startDate.time
+
+                        // 밀리초를 분으로 변환 (1분 = 60,000 밀리초)
+                        val differenceInMinutes = differenceInMs / (1000 * 60)
+
+                        val weatherText = when (selectedRecord.exerciseWeather) {
+                            1 -> "맑음"
+                            2 -> "구름많음"
+                            3 -> "비"
+                            4 -> "눈"
+                            5 -> "쌀쌀함"
+                            else -> "알 수 없음"  // 기타 값을 대비한 기본 텍스트
+                        }
+
+                        val reviewImageResource = when (selectedRecord.exerciseReview) {
+                            1 -> R.drawable.ic_star_one
+                            2 -> R.drawable.ic_star_two
+                            3 -> R.drawable.ic_star_three
+                            4 -> R.drawable.ic_star_four
+                            5 -> R.drawable.ic_star_five
+                            else -> R.drawable.ic_star_three
+                        }
+
                         // TODO: 가져온 selectedRecord의 다른 정보들을 UI에 표시
-                        binding.tvHistoryType.text = selectedRecord.exerciseRecordSeq.toString()
-//                        binding.tvHistoryTargetTime.text = // 목표 시간이 없음
+                        binding.tvHistoryType.text = getExerciseNameByExerciseId(selectedRecord.exerciseRecordSeq)
+                        binding.tvHistoryExerciseTime.text = differenceInMinutes.toString()
                         binding.tvHistoryAvgHeart.text = selectedRecord.exerciseAvgBpm.toString()
                         binding.tvHistoryMaxHeart.text = selectedRecord.exerciseMaxBpm.toString()
+                        binding.tvHistoryWeather.text = weatherText
+                        binding.ivHistoryReview.setImageResource(reviewImageResource)
                     } else {
-                        binding.tvHistoryType.text = "a"
-//                        binding.tvHistoryTargetTime.text = // 목표 시간이 없음
-                        binding.tvHistoryAvgHeart.text = "b"
-                        binding.tvHistoryMaxHeart.text = "c"
+                        binding.tvHistoryType.text = "-"
+                        binding.tvHistoryExerciseTime.text = "-"
+                        binding.tvHistoryAvgHeart.text = "-"
+                        binding.tvHistoryMaxHeart.text = "-"
+                        binding.tvHistoryWeather.text = "-"
+                        binding.ivHistoryReview.setImageResource(0)
                     }
                 }
             })
+        }
+
+        fun getExerciseNameByExerciseId(exerciseId: Int): String {
+            val exercise = ExerciseList.list.find { it.exerciseId == exerciseId }
+            return exercise?.name ?: "알 수 없음" // 해당 ID에 맞는 운동이 없으면 "알 수 없음" 반환
         }
         override fun onDestroyView() {
             super.onDestroyView()

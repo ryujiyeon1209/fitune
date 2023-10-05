@@ -91,7 +91,7 @@ class MainFragment : Fragment() {
                 1 -> R.drawable.ic_lv1
                 2 -> R.drawable.ic_lv2
                 3 -> R.drawable.ic_lv3
-                else -> R.drawable.ic_lv0 // 기본 이미지
+                else -> R.drawable.ic_lv3 // 기본 이미지
             }
             binding.ivMainCell.setImageResource(imageResId)
         }
