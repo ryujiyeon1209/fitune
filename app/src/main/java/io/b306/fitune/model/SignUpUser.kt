@@ -7,6 +7,7 @@ data class SignUpUser (
     var height: Int,
     var weight: Int,
     var year: Int,
+    var tension: Int,
     var restingBpm: Int,
     var activeBpm: Int,
     var bodyFatPer: Int,

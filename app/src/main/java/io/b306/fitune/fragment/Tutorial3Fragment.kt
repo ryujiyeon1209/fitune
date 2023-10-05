@@ -69,7 +69,7 @@ class Tutorial3Fragment : Fragment() {
         progressBar.progressDrawable = ContextCompat.getDrawable(requireContext(),
             R.drawable.circular_progress_bar)
 
-        val totalTimeMillis: Long = 1800 // 3분 (60초 * 1000밀리초)
+        val totalTimeMillis: Long = 10000 // 3분 (60초 * 1000밀리초)
         val intervalMillis: Long = 1000 // 1초
 
         // 초당 갱신되는 양 (프로그레스 막대에 표시될 초록색 양)
@@ -88,7 +88,7 @@ class Tutorial3Fragment : Fragment() {
             val timer = object : CountDownTimer(totalTimeMillis, intervalMillis) {
                 override fun onTick(millisUntilFinished: Long) {
                     // 남은 시간 업데이트
-                    val secondsRemaining = millisUntilFinished / 1000
+                    val secondsRemaining = millisUntilFinished / 1000 + 1
                     remainingTimeTextView.text = "남은 시간: $secondsRemaining 초"
 
                     // 프로그레스바 업데이트
@@ -131,9 +131,9 @@ class Tutorial3Fragment : Fragment() {
         }
 
         // 버튼이 클릭되면 다음 페이지로 이동
-        binding.btnTutorial3.setOnClickListener{
-            pageNavigator?.moveToNextPage()
-        }
+//        binding.btnTutorial3.setOnClickListener{
+//            pageNavigator?.moveToNextPage()
+//        }
     }
 
 

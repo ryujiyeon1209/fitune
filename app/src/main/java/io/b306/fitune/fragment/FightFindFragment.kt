@@ -13,14 +13,25 @@ import io.b306.fitune.api.CellResponse
 import io.b306.fitune.api.UserResponse
 import io.b306.fitune.databinding.FragmentFightFindBinding
 import io.b306.fitune.model.BattleUserData
+import io.b306.fitune.room.FituneDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class FightFindFragment : Fragment() {
-        private var userList: List<BattleUserData> = emptyList() // userList를 클래스 멤버 변수로 추가
-        private var _binding: FragmentFightFindBinding? = null
-        private val binding get() = _binding!!
+    private var userList: List<BattleUserData> = emptyList() // userList를 클래스 멤버 변수로 추가
+    private var _binding: FragmentFightFindBinding? = null
+    private val binding get() = _binding!!
+
+    // Fragment 내부의 멤버 변수로 코루틴 스코프 정의
+    private val viewModelScope = CoroutineScope(Dispatchers.Main + Job())
+
+    // userSeq
+    private var userId : Int = 0
 
         override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -33,61 +44,77 @@ class FightFindFragment : Fragment() {
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
 
+            binding.tvFightFindLoading.visibility = View.VISIBLE // 통신 시작 전에 보이게 설정
+
+            // 데이타베입스 연결
+            val myInfoDao = FituneDatabase.getInstance(requireContext()).myInfoDao()
+
             // Retrofit을 사용하여 API 호출
             val userApi = ApiObject.getRetrofitService
-            val userId = 2 // 예시로 userId 값을 설정합니다.
-            //room이 완성되면 설정..
 
-            userApi.getUserList(userId).enqueue(object : Callback<CellResponse> {
-                override fun onResponse(call: Call<CellResponse>, response: Response<CellResponse>) {
-                    if (response.isSuccessful) {
-                        val cellResponse = response.body()
-                        val cellList = cellResponse?.data
+            //room에서 가져온 내 아이디
+            viewModelScope.launch {
+                userId = myInfoDao.getUserSeq()
 
-                        Log.e("세포 정보", cellList.toString())
+                userApi.getUserList(userId).enqueue(object : Callback<CellResponse> {
+                    override fun onResponse(
+                        call: Call<CellResponse>,
+                        response: Response<CellResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            val cellResponse = response.body()
+                            val cellList = cellResponse?.data
 
-                        if (cellList != null) {
-                            val cellDataList = cellResponse.data
+                            Log.e("세포 정보", cellList.toString())
 
-                            if (cellDataList != null) {
-                                // cellDataList가 null이 아닌 경우에만 처리
+                            if (cellList != null) {
+                                val cellDataList = cellResponse.data
 
-                                userList = cellDataList.map { cellData ->
-                                    BattleUserData(
-                                        cellData.userSeq,
-                                        cellData.cellExp,
-                                        cellData.cellName,
-                                        cellData.height,
-                                        cellData.weight,
-                                        cellData.bpm
-                                    )
-                                }
-                                Log.e("어댑터 출력 확인11", userList.toString())
-                                binding.rvUser.apply {
-                                    layoutManager = LinearLayoutManager(context)
-                                    adapter = UserAdapter(this@FightFindFragment, userList) { selectedUser ->
-                                        val dialogFragment = UserDetailDialogFragment().apply {
-                                            arguments = Bundle().apply {
-                                                putParcelable("user", selectedUser)
-                                            }
-                                        }
-                                        dialogFragment.show(parentFragmentManager, "userDetail")
+                                if (cellDataList != null) {
+                                    // cellDataList가 null이 아닌 경우에만 처리
+
+                                    userList = cellDataList.map { cellData ->
+                                        BattleUserData(
+                                            cellData.userSeq,
+                                            cellData.cellExp,
+                                            cellData.cellName,
+                                            cellData.height,
+                                            cellData.weight,
+                                            cellData.bpm
+                                        )
                                     }
+                                    Log.e("어댑터 출력 확인11", userList.toString())
+                                    binding.rvUser.apply {
+                                        layoutManager = LinearLayoutManager(context)
+                                        adapter = UserAdapter(
+                                            this@FightFindFragment,
+                                            userList
+                                        ) { selectedUser ->
+                                            val dialogFragment = UserDetailDialogFragment().apply {
+                                                arguments = Bundle().apply {
+                                                    putParcelable("user", selectedUser)
+                                                }
+                                            }
+                                            dialogFragment.show(parentFragmentManager, "userDetail")
+                                        }
 
-                                    Log.e("어댑터",adapter.toString())
+                                        Log.e("어댑터", adapter.toString())
 
+                                    }
                                 }
+                            } else {
+                                // 실패 처리
                             }
-                        } else {
-                            // 실패 처리
+
                         }
+                        binding.tvFightFindLoading.visibility = View.GONE // 데이터 로딩 후에 숨기기
+                    }
 
-                    }}
-
-                override fun onFailure(call: Call<CellResponse>, t: Throwable) {
-                    TODO("Not yet implemented")
-                }
-            })
+                    override fun onFailure(call: Call<CellResponse>, t: Throwable) {
+                        binding.tvFightFindLoading.visibility = View.GONE // 통신 실패했을 때도 숨기기
+                    }
+                })
+            }
 
 
         Log.e("??",userList.toString())
@@ -122,14 +149,6 @@ class FightFindFragment : Fragment() {
         fun newInstance() = FightFindFragment()
     }
 
-
-    // 얘는 이제 추천 리스트 뽑아주는 거로 대체하면 됨
-//    private fun getUserList() = arrayListOf(
-//        UserData("세포3", R.drawable.ic_lv1, 1, 110),
-//        UserData("세포4", R.drawable.ic_lv2, 2, 115),
-//        UserData("세포5", R.drawable.ic_lv1, 1, 120),
-//
-//    )
 
 }
 

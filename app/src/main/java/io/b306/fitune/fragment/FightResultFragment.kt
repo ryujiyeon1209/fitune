@@ -44,6 +44,8 @@ class FightResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.tvFightResultLoading.visibility = View.VISIBLE // 통신 시작 전에 보이게 설정
+
         val userApi = ApiObject.getRetrofitService
 
         // 데이타베입스 연결
@@ -103,11 +105,12 @@ class FightResultFragment : Fragment() {
                             // 실패 처리
 
                         }
+                        binding.tvFightResultLoading.visibility = View.GONE // 통신 후 숨기기
                     }
                 }
 
                 override fun onFailure(call: Call<FightRecordResponse>, t: Throwable) {
-
+                    binding.tvFightResultLoading.visibility = View.GONE // 통신 실패했을 때도 숨기기
                 }
             })
         }
