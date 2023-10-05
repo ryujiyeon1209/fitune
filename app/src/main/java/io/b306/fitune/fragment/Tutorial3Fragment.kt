@@ -131,9 +131,9 @@ class Tutorial3Fragment : Fragment() {
         }
 
         // 버튼이 클릭되면 다음 페이지로 이동
-        binding.btnTutorial3.setOnClickListener{
-            pageNavigator?.moveToNextPage()
-        }
+//        binding.btnTutorial3.setOnClickListener{
+//            pageNavigator?.moveToNextPage()
+//        }
     }
 
 
