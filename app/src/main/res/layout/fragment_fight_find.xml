@@ -36,6 +36,19 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_fight_find_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="추천 상대를 받아오는 중.."
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:fontFamily="@font/gmarketmedium"
+            android:layout_marginTop="30dp"
+            />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_user"

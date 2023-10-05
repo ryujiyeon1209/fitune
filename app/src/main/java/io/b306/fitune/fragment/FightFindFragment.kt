@@ -44,6 +44,8 @@ class FightFindFragment : Fragment() {
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
 
+            binding.tvFightFindLoading.visibility = View.VISIBLE // 통신 시작 전에 보이게 설정
+
             // 데이타베입스 연결
             val myInfoDao = FituneDatabase.getInstance(requireContext()).myInfoDao()
 
@@ -105,10 +107,11 @@ class FightFindFragment : Fragment() {
                             }
 
                         }
+                        binding.tvFightFindLoading.visibility = View.GONE // 데이터 로딩 후에 숨기기
                     }
 
                     override fun onFailure(call: Call<CellResponse>, t: Throwable) {
-                        TODO("Not yet implemented")
+                        binding.tvFightFindLoading.visibility = View.GONE // 통신 실패했을 때도 숨기기
                     }
                 })
             }
@@ -146,14 +149,6 @@ class FightFindFragment : Fragment() {
         fun newInstance() = FightFindFragment()
     }
 
-
-    // 얘는 이제 추천 리스트 뽑아주는 거로 대체하면 됨
-//    private fun getUserList() = arrayListOf(
-//        UserData("세포3", R.drawable.ic_lv1, 1, 110),
-//        UserData("세포4", R.drawable.ic_lv2, 2, 115),
-//        UserData("세포5", R.drawable.ic_lv1, 1, 120),
-//
-//    )
 
 }
 

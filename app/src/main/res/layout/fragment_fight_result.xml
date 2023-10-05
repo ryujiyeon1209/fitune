@@ -34,9 +34,8 @@
             android:fontFamily="@font/gmarketmedium"
             android:textSize="15sp"
             android:text="대결 날짜"
-            android:layout_weight="1"
             android:layout_marginVertical="10dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:gravity="center"
             />
         <TextView
@@ -56,12 +55,25 @@
             android:fontFamily="@font/gmarketmedium"
             android:textSize="15sp"
             android:text="결과"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
+            android:layout_marginVertical="10dp"
+            android:layout_marginRight="20dp"
             android:gravity="center"
             />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_fight_result_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="대결 기록을 불러오는 중.."
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:fontFamily="@font/gmarketmedium"
+        android:layout_marginTop="50dp"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_fight_result"
