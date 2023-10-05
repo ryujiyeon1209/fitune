@@ -19,7 +19,6 @@ import io.b306.fitune.activity.TutorialsActivity
 import io.b306.fitune.databinding.FragmentTutorial1Binding
 import io.b306.fitune.room.FituneDatabase
 import io.b306.fitune.room.MyInfoDao
-import io.b306.fitune.room.MyInfoDao_Impl
 import io.b306.fitune.room.MyInfoEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
