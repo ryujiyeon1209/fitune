@@ -1,7 +1,9 @@
 package io.b306.fitune.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import io.b306.fitune.R
@@ -94,4 +96,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    //운동 종료 버튼 누르면 MainActivity로 돌아오기!
+    fun onExerciseEndButtonClick(view: View) {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+
 }
