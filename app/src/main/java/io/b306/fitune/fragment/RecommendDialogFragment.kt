@@ -57,8 +57,8 @@ class RecommendDialogFragment : DialogFragment() {
                 binding.ivRecommend3.setImageResource(getImageResourceByExerciseName(myInfo.recommendExercise3))
 
                 //목표
-                binding.tvRecommendTargetTime.text = myInfo.targetTime.toString() + "분"
-                binding.tvRecommendTargetHeart.text = myInfo.targetBpm.toString() + "BPM"
+                binding.tvRecommendTargetTime.text = myInfo.targetTime.toString() + "분 유지"
+                binding.tvRecommendTargetHeart.text = myInfo.targetBpm.toString() + "BPM "
             }
         })
 
