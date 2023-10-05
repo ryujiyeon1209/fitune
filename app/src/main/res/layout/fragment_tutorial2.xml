@@ -1,24 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="평소에 좋아 했던"
+        android:fontFamily="@font/gmarketlight"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="17sp"
+        android:textColor="@color/none_selected_button"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="운동을 선택해주세요!"
+        android:fontFamily="@font/gmarketlight"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:layout_marginBottom="30dp"
+        android:textColor="@color/none_selected_button"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_exercise_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        tools:listitem="@layout/item_exercise"/>
+        tools:listitem="@layout/item_exercise"
+        app:spanCount="3"/>
 
     <Button
         android:id="@+id/btn_tutorial2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="다음 (2/4)"
+        android:text="다음"
         android:backgroundTint="@color/button_bg"
         android:textColor="@color/black"
         android:fontFamily="@font/gmarketmedium"

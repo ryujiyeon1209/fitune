@@ -131,7 +131,7 @@ class MainFragment : Fragment() {
                             myInfoEntity.recommendExercise1 = recommendResponse?.recommendFirst.toString()
                             myInfoEntity.recommendExercise2 = recommendResponse?.recommendSecond.toString()
                             myInfoEntity.recommendExercise3 = recommendResponse?.recommendThird.toString()
-                            myInfoEntity.targetBpm = ((0.5+(0.1)*myInfoEntity.tension)*(220-myInfoEntity.age-myInfoEntity.restingBpm)+myInfoEntity.restingBpm).toInt()
+                            myInfoEntity.targetBpm = ((0.5+(0.07)*myInfoEntity.tension)*(208-(myInfoEntity.age*0.7)-myInfoEntity.restingBpm)+myInfoEntity.restingBpm).toInt()
                             myInfoEntity.targetTime = 60 - 15 * myInfoEntity.tension + plusTime
                             myInfoDao.update(myInfoEntity)
                             // 예시: API 응답 데이터를 로그로 출력
