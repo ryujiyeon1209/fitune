@@ -51,10 +51,12 @@ class ExerciseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             itemView.backgroundTintList = ColorStateList.valueOf(
                 ContextCompat.getColor(itemView.context, R.color.default_text)
             )
+            textView.setTextColor(ContextCompat.getColor(itemView.context, R.color.none_selected_button))
         } else {
             itemView.backgroundTintList = ColorStateList.valueOf(
                 ContextCompat.getColor(itemView.context, R.color.white)
             )
+            textView.setTextColor(ContextCompat.getColor(itemView.context, R.color.default_text))
         }
     }
 }
