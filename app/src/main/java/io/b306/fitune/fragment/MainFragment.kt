@@ -16,7 +16,6 @@ import io.b306.fitune.api.RecommendResponse
 import io.b306.fitune.api.RecommendUser
 import io.b306.fitune.databinding.FragmentMainBinding
 import androidx.lifecycle.ViewModelProvider
-import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import io.b306.fitune.room.FituneDatabase
 import io.b306.fitune.room.MyInfoRepository
 import io.b306.fitune.viewmodel.MyInfoViewModel

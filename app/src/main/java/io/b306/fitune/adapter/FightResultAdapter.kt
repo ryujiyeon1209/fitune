@@ -40,7 +40,7 @@ class FightResultAdapter(
         private val fightResultTextView = itemView.findViewById<TextView>(R.id.tv_fight_result)
         fun bind(fightRecordData: FightRecordData) {
             fightDateTextView.text = fightRecordData.battleDate
-            fightUserNameTextView.text = fightRecordData.battleOtherName
+            fightUserNameTextView.text = fightRecordData.battleOtherCellName
             fightResultTextView.text = if (fightRecordData.battleOtherName == fightRecordData.winnerName) {
                 "패배"
             } else {

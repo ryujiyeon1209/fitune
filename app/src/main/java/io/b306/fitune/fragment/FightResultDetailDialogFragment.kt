@@ -28,7 +28,7 @@ class FightResultDetailDialogFragment : DialogFragment() {
 
         fightResult?.let {
             binding.tvDetailFightDate.text = it.battleDate
-            binding.tvDetailFightUserName.text = "상대 닉네임 : ${it.battleOtherName}"
+            binding.tvDetailFightUserName.text = "상대 닉네임 : ${it.battleOtherCellName}"
             binding.tvDetailFightResult.text = if (it.battleOtherName == it.winnerName) {
                 "패배"
             } else {
