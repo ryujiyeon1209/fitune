@@ -79,7 +79,7 @@
         android:textColor="@color/default_text"
         android:textSize="25sp"
         android:fontFamily="@font/gmarketmedium"
-        android:layout_marginTop="-30dp"
+        android:layout_marginTop="-20dp"
         />
 
 
@@ -204,17 +204,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
 
             >
-            <Button
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="먹이주기"
-                android:textColor="@color/default_text"
-                android:fontFamily="@font/gmarketmedium"
-                android:backgroundTint="@color/button_bg" />
+<!--            <Button-->
+<!--                android:layout_width="200dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:text="먹이주기"-->
+<!--                android:textColor="@color/default_text"-->
+<!--                android:fontFamily="@font/gmarketmedium"-->
+<!--                android:backgroundTint="@color/button_bg" />-->
 
             <Button
                 android:id="@+id/btn_go_fight"
@@ -224,7 +224,8 @@
                 android:layout_gravity="center"
                 android:textColor="@color/default_text"
                 android:fontFamily="@font/gmarketmedium"
-                android:backgroundTint="@color/button_bg" />
+                android:backgroundTint="@color/button_bg"
+                />
         </LinearLayout>
 
 

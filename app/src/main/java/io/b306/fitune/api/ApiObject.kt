@@ -48,5 +48,9 @@ object ApiObject {
         getRetrofit.create(MyEditAPI::class.java)
     }
 
+    val patchRetrofitBattleService: BattleAPI by lazy {
+        getRetrofit.create(BattleAPI::class.java)
+    }
+
 }
 

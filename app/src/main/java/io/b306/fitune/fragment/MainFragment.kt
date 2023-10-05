@@ -17,7 +17,6 @@ import io.b306.fitune.api.RecommendUser
 import io.b306.fitune.databinding.FragmentMainBinding
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import io.b306.fitune.room.FituneDatabase
 import io.b306.fitune.room.MyInfoDao
 import io.b306.fitune.room.MyInfoEntity
@@ -101,7 +100,7 @@ class MainFragment : Fragment() {
         viewModel.fetchMyInfo()
 
         // 오늘의 추천 운동 API 요청
-        binding.ivFortune.setOnClickListener {
+
             val recommendDialogFragment = RecommendDialogFragment()
 
             lifecycleScope.launch(Dispatchers.IO) {
@@ -146,7 +145,7 @@ class MainFragment : Fragment() {
 
                 }
             }
-
+        binding.ivFortune.setOnClickListener {
             recommendDialogFragment.show(childFragmentManager, "recommend_dialog")
         }
 

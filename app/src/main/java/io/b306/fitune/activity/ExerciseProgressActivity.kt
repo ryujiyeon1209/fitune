@@ -130,7 +130,17 @@ class ExerciseProgressActivity : AppCompatActivity() {
                 targetBPM = myInfo.targetBpm
                 remainTimeCount = myInfo.targetTime*60
                 Log.d("myInfo", "남은시간 : " + remainTimeCount)
-                binding.tvProgressRecommendTargetTime.text = myInfo.targetTime.toString() + "분"
+                val seconds = remainTimeCount
+                val minutes = seconds / 60
+                val hours = minutes / 60
+
+                val formattedTime = String.format(
+                    "%02d:%02d:%02d",
+                    hours,
+                    minutes % 60,
+                    seconds % 60
+                )
+                binding.tvProgressRemainTime.text = formattedTime
                 binding.tvProgressRecommendTargetHeart.text = myInfo.targetBpm.toString() + "BPM"
             }
         })

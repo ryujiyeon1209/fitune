@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:fontFamily="@font/gmarketmedium"
-            android:text="상대 닉네임 : 태흠쿤"
+            android:text="상대 세포 : 태흠쿤"
             android:textColor="@color/default_text"
             android:textSize="17sp"
             android:layout_gravity="center"

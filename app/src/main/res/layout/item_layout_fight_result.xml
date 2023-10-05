@@ -17,10 +17,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/gmarketmedium"
-            android:textSize="15sp"
+            android:textSize="13sp"
             android:text="2023.09.08"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginVertical="10dp"
             android:gravity="center"
             />
         <TextView
@@ -28,10 +28,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/gmarketmedium"
-            android:textSize="15sp"
-            android:text="흠몽이"
+            android:textSize="13sp"
+            android:text="zhddkfxks123"
             android:layout_weight="1"
-            android:layout_margin="10dp"
+            android:paddingHorizontal="7dp"
+            android:layout_marginVertical="10dp"
             android:gravity="center"
             />
         <TextView
@@ -39,10 +40,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/gmarketmedium"
-            android:textSize="15sp"
+            android:textSize="13sp"
             android:text="승리"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginVertical="10dp"
             android:gravity="center"
             />
 

@@ -11,5 +11,6 @@ data class FightRecordData (
     val winnerName: String,
     val battleOtherSeq: Int,
     val battleOtherName: String,
+    val battleOtherCellName: String,
 ) : Parcelable
 
