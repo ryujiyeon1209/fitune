@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.LoginActivity">
+
+    <ImageView
+        android:layout_width="258dp"
+        android:layout_height="213dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/ic_fitune_favicon" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="618dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="-100dp"
+        android:layout_marginRight="-100dp"
+        android:layout_marginBottom="-100dp"
+        android:background="@drawable/long_button_white"
+        >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="747dp"
+            android:background="@drawable/bg_bottom" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="250dp"
+            android:fontFamily="@font/gmarketmedium"
+            android:text="@string/app_title"
+            android:textColor="@color/default_text"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="22dp"
+            android:layout_marginTop="130dp"
+            android:layout_marginStart="120dp">
+
+            <TextView
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gmarketmedium"
+                android:text="이메일"
+                android:textColor="@color/default_text"
+                android:textSize="20sp"
+                />
+
+            <EditText
+                android:id="@+id/et_login_email"
+                android:layout_width="190dp"
+                android:layout_height="39dp"
+                android:textSize="18dp"
+                android:background="@drawable/rounded_edittext"
+                android:gravity="center"
+                android:maxLength="30"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="22dp"
+            android:layout_marginTop="190dp"
+            android:layout_marginStart="120dp">
+
+            <TextView
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gmarketmedium"
+                android:text="비밀번호"
+                android:textColor="@color/default_text"
+                android:textSize="20sp"
+                />
+
+            <EditText
+                android:id="@+id/et_login_pwd"
+                android:layout_width="190dp"
+                android:layout_height="39dp"
+                android:textSize="18dp"
+                android:background="@drawable/rounded_edittext"
+                android:gravity="center"
+                android:maxLength="20"
+                android:inputType="textPassword"
+                />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/liLogin"
+            android:layout_width="150dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="13dp"
+            android:backgroundTint="@color/button_bg"
+            android:text="로그인"
+            android:textSize="20dp"
+            android:fontFamily="@font/gmarketmedium"
+            android:textColor="@color/default_text" />
+
+        <TextView
+            android:id="@+id/tv_sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:clickable="true"
+            android:fontFamily="@font/gmarketmedium"
+            android:onClick="goToSignUp"
+            android:text="회원가입하기"
+            android:textColor="@color/default_text"
+            android:textSize="18sp"
+            />
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.ExerciseSelectedActivity">
+
+    <!-- 상단 제목  -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="오늘의 운동"
+        android:textSize="30sp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:fontFamily="@font/gmarketbold"
+        android:textColor="@color/default_text"
+        />
+
+    <!-- 배경 -->
+    <!-- android:layout_height="370dp"에서 바꿈!   -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@drawable/bg_middle">
+
+        <!-- 오늘의 운동 이미지 커버 -->
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:padding="20dp">
+
+            <!-- Grid Item 1 -->
+            <LinearLayout
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_gravity="center"
+                android:background="@drawable/item_circular_white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/gmarketmedium"
+                    android:gravity="center"
+                    android:text="런닝"
+                    android:textColor="@color/none_selected_button"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_jogging"
+                    app:tint="@color/none_selected_button" />
+
+            </LinearLayout>
+        </GridLayout>
+    </FrameLayout>
+
+    <!-- 운동 종목 -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="운동 종목"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:fontFamily="@font/gmarketbold"
+        android:textColor="@color/default_text"
+        android:layout_marginBottom="10dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="운동 종목 가져오기"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:fontFamily="@font/gmarketmedium"
+        android:textColor="@color/default_text"
+        android:layout_marginBottom="20dp"
+        />
+
+    <!-- 목표 심박수 -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="목표 심박수"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:fontFamily="@font/gmarketbold"
+        android:textColor="@color/default_text"
+        android:layout_marginBottom="10dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="목표 심박수 가져오기"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:fontFamily="@font/gmarketmedium"
+        android:textColor="@color/default_text"
+        android:layout_marginBottom="20dp"
+        />
+
+    <!-- 목표 시간 -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="목표 시간"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:fontFamily="@font/gmarketbold"
+        android:textColor="@color/default_text"
+        android:layout_marginBottom="10dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="목표 시간 가져오기"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:fontFamily="@font/gmarketmedium"
+        android:textColor="@color/default_text"
+        android:layout_marginBottom="10dp"
+        />
+
+    <!--운동 하기 버튼 활성화 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        >
+        <Button
+            android:id="@+id/btn_exerciseStart"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="운동 시작"
+            android:textColor="@color/default_text"
+            android:fontFamily="@font/gmarketmedium"
+            android:backgroundTint="@color/button_bg" />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/long_button_border"
+    android:padding="8dp"
+    android:layout_marginHorizontal="11dp"
+    android:layout_marginVertical="10dp"
+    >
+
+    <ImageView
+        android:id="@+id/exerciseImage"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_swimming"
+        android:layout_gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/exerciseName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingTop="8dp"
+        android:text="수영"
+        android:fontFamily="@font/gmarketmedium"
+        android:layout_gravity="center"
+        />
+</LinearLayout>
