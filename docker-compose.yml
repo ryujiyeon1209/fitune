@@ -1,23 +1,30 @@
 version: '3'
 
 services:
-  nginx:
-    image: nginx:1.15-alpine
-    container_name: nginx-container
+  spring:
+    image: zhdwldus/spring:latest
+    container_name: spring-container
+    networks:
+      - mynetwork
+    restart: always
     ports:
-      - "80:80"
-      - "443:443"
+      - 5000:5000
     volumes:
-      - ./data/nginx:/etc/nginx/conf.d
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
-    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+      - /home/ubuntu:/certs # 호스트 디렉토리와 컨테이너 내부 디렉토리를 연결
 
-  certbot:
-    image: certbot/certbot
-    container_name: certbot-container
-    restart: unless-stopped
-    volumes:
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+  django:
+    image: zhdwldus/django:latest
+    container_name: django-container
+    networks:
+      - mynetwork
+    restart: always
+    ports:
+      - 8000:8000
+    depends_on:
+      - spring
+
+networks:
+  mynetwork:
+
+volumes:
+  mysql-data:
