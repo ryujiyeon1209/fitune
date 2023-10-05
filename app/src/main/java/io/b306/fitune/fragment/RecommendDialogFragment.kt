@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.Observer
 import io.b306.fitune.activity.ExerciseProgressActivity
 import io.b306.fitune.databinding.FragmentRecommendDialogBinding
+import io.b306.fitune.model.ExerciseData
+import io.b306.fitune.model.getExerciseIdByName
 import io.b306.fitune.model.getImageResourceByExerciseName
 import io.b306.fitune.model.getKoreanNAmeByExerciseName
 import io.b306.fitune.room.ExerciseRecommendRepository
@@ -21,6 +23,10 @@ class RecommendDialogFragment : DialogFragment() {
 
     private lateinit var binding: FragmentRecommendDialogBinding
     private lateinit var viewModel: ExerciseRecommendViewModel
+
+    private var exerciseId1: Int = 0
+    private var exerciseId2: Int = 0
+    private var exerciseId3: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,6 +65,11 @@ class RecommendDialogFragment : DialogFragment() {
                 //목표
                 binding.tvRecommendTargetTime.text = myInfo.targetTime.toString() + "분 유지"
                 binding.tvRecommendTargetHeart.text = myInfo.targetBpm.toString() + "BPM "
+
+                // 운동 종목의 Seq(Int) 값을 갖고 있기
+                exerciseId1 = getExerciseIdByName(myInfo.recommendExercise1)
+                exerciseId2 = getExerciseIdByName(myInfo.recommendExercise2)
+                exerciseId3 = getExerciseIdByName(myInfo.recommendExercise3)
             }
         })
 
@@ -68,21 +79,34 @@ class RecommendDialogFragment : DialogFragment() {
 
         //운동 선택 버튼을 누르면 ExerciseProgressActivity로 화면 전환
         binding.btnExerciseRecommend1.setOnClickListener {
-            val intent = Intent(context, ExerciseProgressActivity::class.java)
+            val exerciseData = ExerciseData(exerciseSeq = exerciseId1)
+
+            val intent = Intent(context, ExerciseProgressActivity::class.java).apply {
+                putExtra("EXTRA_EXERCISE_DATA", exerciseData)
+            }
             startActivity(intent)
 
             dismiss()
         }
 
         binding.btnExerciseRecommend2.setOnClickListener {
-            val intent = Intent(context, ExerciseProgressActivity::class.java)
+            val exerciseData = ExerciseData(exerciseSeq = exerciseId2)
+
+            val intent = Intent(context, ExerciseProgressActivity::class.java).apply {
+                putExtra("EXTRA_EXERCISE_DATA", exerciseData)
+            }
             startActivity(intent)
 
             dismiss()
         }
 
         binding.btnExerciseRecommend3.setOnClickListener {
-            val intent = Intent(context, ExerciseProgressActivity::class.java)
+            val exerciseData = ExerciseData(exerciseSeq = exerciseId3)
+
+            val intent = Intent(context, ExerciseProgressActivity::class.java).apply {
+                putExtra("EXTRA_EXERCISE_DATA", exerciseData)
+            }
+
             startActivity(intent)
 
             dismiss()

@@ -45,3 +45,8 @@ fun getKoreanNAmeByExerciseName(exerciseName: String): String {
     val exercise = ExerciseList.list.find { it.englishName == exerciseName }
     return exercise?.name ?: "걷기" // null이면 그냥 걷기 반환!
 }
+
+fun getExerciseIdByName(exerciseName: String): Int {
+    val exercise = ExerciseList.list.find { it.englishName == exerciseName }
+    return exercise?.exerciseId ?: 3 // 일치하는 이름이 없으면 3(걷기) 반환
+}

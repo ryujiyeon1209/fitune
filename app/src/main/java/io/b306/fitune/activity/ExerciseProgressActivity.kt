@@ -28,10 +28,14 @@ import io.b306.fitune.databinding.ActivityExerciseProgressBinding
 import io.b306.fitune.databinding.ActivityMainBinding
 import io.b306.fitune.databinding.ActivityTutorialsBinding
 import io.b306.fitune.databinding.FragmentRecommendDialogBinding
+import io.b306.fitune.model.ExerciseData
 import io.b306.fitune.room.ExerciseRecommendRepository
 import io.b306.fitune.room.FituneDatabase
 import io.b306.fitune.viewmodel.ExerciseRecommendViewModel
 import io.b306.fitune.viewmodel.ExerciseRecommendViewModelFactory
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import java.util.UUID
 
 class ExerciseProgressActivity : AppCompatActivity() {
@@ -52,6 +56,8 @@ class ExerciseProgressActivity : AppCompatActivity() {
     private var remainTimeCount =0
     private var targetBPM = 0;
     private var targetTime = 0;
+
+    private var exerciseData: ExerciseData? = null
 
     private fun startTimer() {
         if (!timerRunning) {
@@ -96,8 +102,25 @@ class ExerciseProgressActivity : AppCompatActivity() {
         }
         findDevice()
 
+        // 버전에 따른 메소드 지원
+        exerciseData = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra("EXTRA_EXERCISE_DATA", ExerciseData::class.java)
+        } else {
+            intent.getParcelableExtra("EXTRA_EXERCISE_DATA")
+        }
+
+
         exerciseTimer = findViewById(R.id.exerciseTimer)
         startTimeMillis = System.currentTimeMillis()
+
+        // 시작 시간을 Date 타입으로 바꾸기
+        val date = Date(startTimeMillis)
+        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+        // 시작 시간을 저장
+        exerciseData?.startTimeMillis = sdf.format(date)
+
+        Log.e("여기는액설사이즈프로그래스액티비티 정보", exerciseData.toString())
+
         startTimer()
 
         nowHeartRate.observe(this) { heartRate ->
@@ -144,6 +167,16 @@ class ExerciseProgressActivity : AppCompatActivity() {
                 binding.tvProgressRecommendTargetHeart.text = myInfo.targetBpm.toString() + "BPM"
             }
         })
+
+        binding.btnExerciseDone.setOnClickListener {
+            // 시작 시간을 Date 타입으로 바꾸기
+            val endDate = Date(System.currentTimeMillis())
+            val endSdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+            // 시작 시간을 저장
+            exerciseData?.endTimeMillis = endSdf.format(endDate)
+
+            Log.e("여기는액설사이즈프로그래스액티비티 정보22", exerciseData.toString())
+        }
     }
 
 
