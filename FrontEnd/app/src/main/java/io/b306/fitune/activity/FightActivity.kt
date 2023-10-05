@@ -12,9 +12,6 @@ import io.b306.fitune.R
 import io.b306.fitune.api.ApiObject
 import io.b306.fitune.api.BattleAddRequest
 import io.b306.fitune.databinding.ActivityFightBinding
-import io.b306.fitune.fragment.FightFindFragment
-import io.b306.fitune.fragment.FightNowResultFragment
-import io.b306.fitune.fragment.FightResultDetailDialogFragment
 import io.b306.fitune.room.FituneDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -95,25 +92,6 @@ class FightActivity : AppCompatActivity() {
             .asGif()
             .load(R.drawable.gif_fighting)
             .into(binding.ivFighting)
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            // 현재 액티비티를 종료
-            finish()
-
-
-            // FightFindFragment로 이동
-            val findFragment = FightFindFragment()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, findFragment)
-                .commit()
-
-            // FightNowResultFragment를 띄우는 코드 추가
-            val nowResultFragment = FightNowResultFragment()
-            supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, nowResultFragment)
-                .addToBackStack(null) // 백 스택에 추가 (선택 사항)
-                .commit()
-        }, 5100) // 4000 밀리초 후에 실행
 
     }
 
