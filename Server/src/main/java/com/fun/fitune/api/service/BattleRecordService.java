@@ -52,7 +52,7 @@ public class BattleRecordService {
         ExerciseRecord todayOtherRecord = exerciseRecordRepository.selectTodayRecord(other);
 
         int userScore = cellRepository.findByUser(user).orElseThrow().getCellLatestExp();
-        int otherScore = cellRepository.findByUser(user).orElseThrow().getCellLatestExp();
+        int otherScore = cellRepository.findByUser(other).orElseThrow().getCellLatestExp();
 
         if (userScore > otherScore) return userSeq;
         else if (otherScore > userScore) return otherSeq;
