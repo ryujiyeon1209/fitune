@@ -40,4 +40,12 @@ interface MyInfoDao {
     // fun fetchEmployeeById(id: Int): Flow<MyInfoEntity>
     @Query("Select * from `myinfo_table` where id=1")
     suspend fun getMyInfo(): MyInfoEntity?
+
+    // 내 userSeq 가져오기
+    @Query("SELECT userSeq FROM `myinfo_table` LIMIT 1")
+    suspend fun getUserSeq(): Int
+
+    // 내 이름 가져오기
+    @Query("SELECT nickname FROM `myinfo_table` LIMIT 1")
+    suspend fun getUserNickname(): String
 }

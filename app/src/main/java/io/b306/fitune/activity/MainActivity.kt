@@ -7,6 +7,7 @@ import androidx.activity.OnBackPressedCallback
 import io.b306.fitune.R
 import io.b306.fitune.databinding.ActivityMainBinding
 import io.b306.fitune.fragment.ExerciseHistoryFragment
+import io.b306.fitune.fragment.FightResultFragment
 import io.b306.fitune.fragment.MainFragment
 import io.b306.fitune.fragment.MyPageFragment
 
@@ -27,6 +28,15 @@ class MainActivity : AppCompatActivity() {
 
         // 처음에 navbar의 home 버튼을 default 값으로 클릭된 상태 설정
         binding.navigation.selectedItemId = R.id.navigation_home
+
+        // 인텐트에서 데이터 확인
+        if (intent.getBooleanExtra("SHOW_FIGHT_RESULT", false)) {
+            // FightResultFragment 띄우기
+            val fragment = FightResultFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fm_container, fragment)
+                .commit()
+        }
 
         // 하단 navbar의 클릭에 따라 보여지는 페이지 달라짐
         binding.navigation.setOnItemSelectedListener { item ->
@@ -58,6 +68,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // 뒤로가기 버튼
         onBackPressedDispatcher.addCallback(this@MainActivity, onBackPressedCallback)
 
     }

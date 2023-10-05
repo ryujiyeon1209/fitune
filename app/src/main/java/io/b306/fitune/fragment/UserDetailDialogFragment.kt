@@ -30,7 +30,6 @@ class UserDetailDialogFragment : DialogFragment() {
 
         user?.let {
             binding.tvClickUserName.text = it.cellName
-//            binding.ivUserProfile.setImageResource(it.userImageResource)
             binding.tvUserHeight.text = "${it.height}cm"
             binding.tvUserWeight.text = "${it.weight}kg"
             binding.tvUserBpm.text = "${it.bpm}bpm"
