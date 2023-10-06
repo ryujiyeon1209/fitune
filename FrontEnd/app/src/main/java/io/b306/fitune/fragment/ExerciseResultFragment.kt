@@ -39,9 +39,9 @@ class ExerciseResultFragment : Fragment() {
     // userSeq
     private var userSeq : Int = 0
 
-    // room 에 저장할 운동 시간
-    private var startTimeKst: String = ""
-    private var endTimeKst: String = ""
+    // room 에 저장할 운동 시간 - 한국시간으로 바꾸기 (실제 휴대폰 쓰니까 사용 x)
+//    private var startTimeKst: String = ""
+//    private var endTimeKst: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -94,22 +94,22 @@ class ExerciseResultFragment : Fragment() {
                 minutes,
                 seconds
             )
-
-            // 한국 시간으로 바꾸기
-            val originalFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
-            val startTimeDate = exerciseData?.startTimeMillis?.let { originalFormat.parse(it) }
-            val endTimeDate = exerciseData?.endTimeMillis?.let { originalFormat.parse(it) }
-
-            // 9시간을 밀리초로 환산
-            val nineHoursInMillis = 9 * 60 * 60 * 1000
-
-            // Date에 9시간을 더하기
-            val adjustedStartTime = startTimeDate?.let { Date(it.time + nineHoursInMillis) }
-            val adjustedEndTime = endTimeDate?.let { Date(it.time + nineHoursInMillis) }
-
-            // 다시 String 형태로 변환하여 저장 혹은 다른 작업을 진행
-            startTimeKst = adjustedStartTime?.let { originalFormat.format(it) }.toString()
-            endTimeKst = adjustedEndTime?.let { originalFormat.format(it) }.toString()
+//
+//            // 한국 시간으로 바꾸기
+//            val originalFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+//            val startTimeDate = exerciseData?.startTimeMillis?.let { originalFormat.parse(it) }
+//            val endTimeDate = exerciseData?.endTimeMillis?.let { originalFormat.parse(it) }
+//
+//            // 9시간을 밀리초로 환산
+//            val nineHoursInMillis = 9 * 60 * 60 * 1000
+//
+//            // Date에 9시간을 더하기
+//            val adjustedStartTime = startTimeDate?.let { Date(it.time + nineHoursInMillis) }
+//            val adjustedEndTime = endTimeDate?.let { Date(it.time + nineHoursInMillis) }
+//
+//            // 다시 String 형태로 변환하여 저장 혹은 다른 작업을 진행
+//            startTimeKst = adjustedStartTime?.let { originalFormat.format(it) }.toString()
+//            endTimeKst = adjustedEndTime?.let { originalFormat.format(it) }.toString()
 
         }
 
@@ -189,8 +189,8 @@ class ExerciseResultFragment : Fragment() {
                             ExerciseRecordEntity(
                                 // 필요한 정보 입력
                                 exerciseRecordSeq = it.exerciseSeq,
-                                exerciseStart = startTimeKst,
-                                exerciseEnd = endTimeKst,
+                                exerciseStart = it.startTimeMillis,
+                                exerciseEnd = it.endTimeMillis,
                                 exerciseReco = true,
                                 exerciseAvgBpm = it.avgHeartRate,
                                 exerciseMaxBpm = it.maxHeartRate,
@@ -202,6 +202,10 @@ class ExerciseResultFragment : Fragment() {
                         if (exerciseRecord != null) {
                             exerciseRecordDao.insert(exerciseRecord)
                         }
+                        val newFragment = ExerciseHistoryFragment()
+                        activity?.supportFragmentManager?.beginTransaction()
+                            ?.replace(R.id.fm_container, newFragment)
+                            ?.commit()
                     } else {
                         // API 호출 오류 처리
                     }

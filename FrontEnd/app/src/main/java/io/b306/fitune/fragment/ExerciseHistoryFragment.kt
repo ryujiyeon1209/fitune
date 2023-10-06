@@ -164,7 +164,7 @@
                         // TODO: 가져온 selectedRecord의 다른 정보들을 UI에 표시
                         binding.tvHistoryTotalTime.text = "$startTime - $endTime"
                         binding.ivHistoryType.setImageResource(imageResId)
-                        binding.tvHistoryExerciseTime.text = differenceInMinutes.toString()
+                        binding.tvHistoryExerciseTime.text = "$differenceInMinutes 분"
                         binding.tvHistoryAvgHeart.text = selectedRecord.exerciseAvgBpm.toString()
                         binding.tvHistoryMaxHeart.text = selectedRecord.exerciseMaxBpm.toString()
                         binding.ivHistoryWeather.setImageResource(weatherImageResource)
