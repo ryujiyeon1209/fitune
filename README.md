@@ -68,53 +68,54 @@
 ## 📢 주요 기능 📢
 
 
-### 💪튜토리얼
+### 💪튜토리얼 
+> **운동 강도 추천을 위해 회원가입 후 안정 심박수, 선호 운동, 활동 심박수를 측정합니다 (저전력 블루투스 통신 - Bluetooth Low Energy)**
 
-**1️⃣ 안정심박수 측정**
-**2️⃣ 활동심박수 측정**
-**3️⃣ 세포 이름 생성**
+**1️⃣ 안정심박수 측정** <br/>
+**2️⃣ 활동심박수 측정** <br/>
+**3️⃣ 세포 이름 생성** <br/>
+<br/>
+<img src="https://github.com/ryujiyeon1209/fitune/assets/122500615/2799b347-7479-4e11-b567-a42cfff18d1f" width="300" height="500"/>
 
-
-![ezgif com-video-to-gif](https://github.com/ryujiyeon1209/fitune/assets/122500615/2799b347-7479-4e11-b567-a42cfff18d1f)
 <br/><br/>
 
 ### 💪홈
+>  **포춘쿠키를 클릭해 오늘의 운동 종목, 운동 강도를 추천 받을 수 있습니다.**
 
-**1️⃣ 맞춤 운동 추천**
+**1️⃣ 맞춤 운동 추천** <br/>
 **2️⃣ 세포 육성**
-
-![ezgif com-video-to-gif (2)](https://github.com/ryujiyeon1209/fitune/assets/122500615/ff9fa11a-f3d2-430a-8d91-68e460cb79d8)
+<br/><br/>
+<img src="https://github.com/ryujiyeon1209/fitune/assets/122500615/ff9fa11a-f3d2-430a-8d91-68e460cb79d8" width="300" height="500"/>
 <br/><br/>
 
 ### 💪운동 진행, 종료, 기록
+> **운동을 진행한 후, 운동 시간과 심박수 등의 정보를 기록할 수 있습니다.**
 
-
-**1️⃣ 운동 진행**
-**2️⃣ 운동 기록 저장**
-**3️⃣ 운동 기록**
-
-![ezgif com-video-to-gif (3)](https://github.com/ryujiyeon1209/fitune/assets/122500615/211caeaf-7217-4bba-8586-1e81078cf7be)
+**1️⃣ 운동 진행** <br/>
+**2️⃣ 운동 기록 저장** <br/>
+**3️⃣ 운동 기록** 
+<br/><br/>
+<img src="https://github.com/ryujiyeon1209/fitune/assets/122500615/211caeaf-7217-4bba-8586-1e81078cf7be" width="300" height="500"/>
 <br/><br/>
 
-
 ### 💪대결하기
+> **운동을 종료한 후, 자신과 비슷한 평균심박수를 가진 사용자와 대결을 펼칠 수 있습니다.**
 
-
-**1️⃣ 대결 상대 찾기**
+**1️⃣ 대결 상대 찾기**<br/>
 **2️⃣ 대결**
+<br/><br/>
 
-
-![ezgif com-video-to-gif (4)](https://github.com/ryujiyeon1209/fitune/assets/122500615/4ac655b2-53f8-429f-80e1-30d6af5540ce)
+<img src="https://github.com/ryujiyeon1209/fitune/assets/122500615/4ac655b2-53f8-429f-80e1-30d6af5540ce" width="300" height="500"/>
 <br/><br/>
 
 ### 💪마이페이지
+> 마이페이지에서 운동 기록을 조회할 수 있으며, 프로필 정보를 수정할 수 있습니다.** 
+
+**1️⃣ 프로필 정보**<br/>
+**2️⃣ 선호 장르 및 출석 현황**<br/><br/>
 
 
-**1️⃣ 프로필 정보**
-**2️⃣ 선호 장르 및 출석 현황**
-
-
-![ezgif com-video-to-gif (5)](https://github.com/ryujiyeon1209/fitune/assets/122500615/a8439d3c-8726-4554-8e08-2e5eaf4ef8f1)
+<img src="https://github.com/ryujiyeon1209/fitune/assets/122500615/a8439d3c-8726-4554-8e08-2e5eaf4ef8f1" width="300" height="500"/>
 <br/><br/>
 
 ## [💾 ERD 💾](https://github.com/TaeHeumPark/Fitune/blob/main)
